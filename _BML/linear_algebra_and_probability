@@ -1,3 +1,23 @@
+---
+layout: distill
+title: Linear Algebra and Probability
+description: A short summary of all of the linear algebra and probability needed in order to understand the contents of the BML course
+date: 2022-10-28
+
+
+# Optionally, you can add a table of contents to your post.
+# NOTES:
+#   - make sure that TOC names match the actual section names
+#     for hyperlinks within the post to work correctly.
+#   - we may want to automate TOC generation in the future using
+#     jekyll-toc plugin (https://github.com/toshimaru/jekyll-toc).
+toc:
+  - name: Linear Algebra
+  - name: Derivatives
+  - name: Probability
+
+---
+
 # Linear Algebra
 
 In the course we will use linear algebra rather intensively, so the main
@@ -6,7 +26,7 @@ throughout the course and go over all of the relevant definitions. That
 said, this section is a refresher of linear algebra, not a course in
 linear algebra, so we won’t go around proving anything.
 
-# Vectors
+## Vectors
 
 As a reminder, a vector is a list of numbers which define a point in
 space:
@@ -67,7 +87,7 @@ us to measure the distance from other vectors. The ℓ<sub>2</sub>
 distance between *x* and *y* is defined as:
 $$\\\|x-y\\\|\_{2}=\sqrt{\left(x-y\right)^{T}\left(x-y\right)}$$
 
-# Matrices
+## Matrices
 
 A matrix is a list of vectors (or a table of numbers) which define a
 linear transformation of vectors:
@@ -410,7 +430,7 @@ both *A*<sup>*T*</sup>*A* and *A**A*<sup>*T*</sup> (you can define
 *B* = *A*<sup>*T*</sup> and then you are looking at the matrix
 *B*<sup>*T*</sup>*B*) are PSD matrices.
 
-## Derivatives
+# Derivatives
 
 Many algorithms include a cost/loss function which we will try to
 optimize as much as we can. Many times the optimization will be
