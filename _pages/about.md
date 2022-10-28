@@ -17,7 +17,7 @@ social: true  # includes social icons at the bottom of the page
 
 I am a [Hebrew University of Jerusalem](https://www.cs.huji.ac.il/) Ph.D. candidate at [Yair Weiss'](https://www.cs.huji.ac.il/~yweiss/) lab for computer vision.
 
-I'm currenctly researching generative models in computer vision, specifically how (and if) they can be used for tasks other than generating data. Currently I am also the TA for HUJI's course for Bayesian Machine Learning, which Yair Weiss and I have built together.
+I research generative models in computer vision, specifically how (and if) they can be used for tasks other than generating data. Currently I am also the TA for HUJI's course on Bayesian Machine Learning, which Yair Weiss and I have built together.
 
 <!-- Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
 
