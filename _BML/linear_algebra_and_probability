@@ -1,0 +1,748 @@
+# Linear Algebra
+
+In the course we will use linear algebra rather intensively, so the main
+purpose of this document is to go over core concepts we’ll see
+throughout the course and go over all of the relevant definitions. That
+said, this section is a refresher of linear algebra, not a course in
+linear algebra, so we won’t go around proving anything.
+
+# Vectors
+
+As a reminder, a vector is a list of numbers which define a point in
+space:
+*x* ∈ ℝ<sup>*d*</sup>   *x* = \[*x*<sub>1</sub>,*x*<sub>2</sub>,...,*x*<sub>*d*</sub>\]<sup>*T*</sup>
+Here the ℝ indicates that all of the elements in the vector are real and
+the superscript ℝ<sup>*d*</sup> tells us that there are *d* numbers in
+the vector. The inner product of two vectors is defined as:
+$$\left\langle x,y\right\rangle \equiv x^{T}y\stackrel{\Delta}{=}\sum\_{i=1}^{d}x\_{i}y\_{i}$$
+(the sign “≡” is to show that the first way of writing the inner product
+and the second one mean the same thing in this context). For any three
+(real) vectors *x*, *y*, *z* ∈ ℝ<sup>*d*</sup> and a scalar *a* ∈ ℝ, the
+inner product has the following properties:
+
+-   Linearity:
+    ⟨*a**x*+*z*,*y*⟩ ≡ (*a**x*+*z*)<sup>*T*</sup>*y* = *a*(*x*<sup>*T*</sup>*y*) + *z*<sup>*T*</sup>*y*
+
+-   Symmetry: *x*<sup>*T*</sup>*y* = *y*<sup>*T*</sup>*x*
+
+-   Positive-definite: *x*<sup>*T*</sup>*x* ≥ 0 and
+    *x*<sup>*T*</sup>*x* = 0 ⇔ *x* = 0
+
+Where *x* = 0 means that ∀*i* ∈ \[*d*\] *x*<sub>*i*</sub> = 0.
+Geometrically, the inner product is the projection of one vector onto
+another, which will be a very useful intuition to keep in mind and
+raises another important definition. Two vectors
+*x*, *y* ∈ ℝ<sup>*d*</sup> such that
+*x*<sup>*T*</sup>*y* = 0
+are said to be orthogonal.
+
+The inner product is just one way of multiplying the vectors and in this
+course we will also use the *outer product* of 2 vectors:
+$$x\in\mathbb{R}^{d},y\in\mathbb{R}^{m}\quad xy^{T}=\left\[\begin{array}{cccc}
+x\_{1}y\_{1} & x\_{1}y\_{2} & \cdots & x\_{1}y\_{m}\\\\
+x\_{2}y\_{1} & x\_{2}y\_{2} & \cdots & x\_{2}y\_{m}\\\\
+\vdots &  &  & \vdots\\\\
+x\_{d}y\_{1} & x\_{d}y\_{2} & \cdots & x\_{d}y\_{m}
+\end{array}\right\]\in\mathbb{R}^{d\times m}$$
+As you can see, the outcome of an outer product is a matrix, instead of
+a scalar.
+
+Another important quality of vectors are *norms*, which are metrics for
+their distance from the origin. The most commonly used norm is the
+Euclidean norm, also called the ℓ<sub>2</sub> norm defined as:
+$$\\\|x\\\|\_{2}\stackrel{\Delta}{=}\sqrt{x^{T}x}=\sqrt{\sum\_{i}x\_{i}^{2}}$$
+Sometimes we will write the Euclidean distance simply as ∥ ⋅ ∥ instead
+of ∥ ⋅ ∥<sub>2</sub> - this is because it is by far the most common norm
+we will see and is usually much simpler to use than other norms. Another
+norm that is used quite often is the ℓ<sub>1</sub> norm, defined as:
+$$\\\|x\\\|\_{1}\stackrel{\Delta}{=}\sum\_{i}\left\|x\_{i}\right\|$$
+We can also generalize these norms to any *p* ≥ 1 - the ℓ<sub>*p*</sub>
+norm is defined as:
+$$\\\|x\\\|\_{p}\stackrel{\Delta}{=}\left(\sum\_{i}\left\|x\_{i}\right\|^{p}\right)^{1/p}$$
+The last norm that we will talk about for now is the ℓ<sub>∞</sub> norm.
+As the name suggests, this is the ℓ<sub>*p*</sub> norm when *p* → ∞:
+$$\\\|x\\\|\_{\infty}\stackrel{\Delta}{=}\max\_{i}\left\|x\_{i}\right\|$$
+Apart from just measuring the distance from the origin, norms also allow
+us to measure the distance from other vectors. The ℓ<sub>2</sub>
+distance between *x* and *y* is defined as:
+$$\\\|x-y\\\|\_{2}=\sqrt{\left(x-y\right)^{T}\left(x-y\right)}$$
+
+# Matrices
+
+A matrix is a list of vectors (or a table of numbers) which define a
+linear transformation of vectors:
+$$A\in\mathbb{R}^{n\times m}\quad A=\left\[\begin{array}{cccc}
+a\_{11} & a\_{12} & \cdots & a\_{1m}\\\\
+a\_{21} & a\_{22} & \cdots & a\_{2m}\\\\
+\vdots & \vdots & \vdots & \vdots\\\\
+a\_{n1} & a\_{n2} & \cdots & a\_{nm}
+\end{array}\right\]$$
+and the notation *A* ∈ ℝ<sup>*n* × *m*</sup> means that the matrix *A*
+holds *n* × *m* different real items.
+
+The multiplication of a matrix *A* ∈ ℝ<sup>*n* × *m*</sup> with a vector
+*x* ∈ ℝ<sup>*m*</sup> (notice the dimensions) is defined as:
+\[*A**x*\]<sub>*j*</sub> = ∑<sub>*i*</sub>*a*<sub>*j**i*</sub>*x*<sub>*i*</sub>
+where \[*A**x*\]<sub>*j*</sub> is the *j*-th index of the resulting
+vector from the multiplication. If we defined *a*<sub>*i*</sub> to be
+the *i*th row of the matrix, such that:
+$$A=\left\[\begin{array}{ccc}
+- & a\_{1} & -\\\\
+- & a\_{2} & -\\\\
+ & \vdots\\\\
+- & a\_{n} & -
+\end{array}\right\]$$
+then we can write the product of a vector with a matrix more cleanly as:
+$$Ax=\left\[\begin{array}{c}
+a\_{1}^{T}x\\\\
+a\_{2}^{T}x\\\\
+\vdots\\\\
+a\_{n}^{T}x
+\end{array}\right\]\in\mathbb{R}^{n}$$
+
+The multiplication of a matrix *A* ∈ ℝ<sup>*n* × *m*</sup> with a matrix
+*B* ∈ ℝ<sup>*m* × *k*</sup> has the following elements:
+*C*<sub>*i**j*</sub> = \[*A**B*\]<sub>*i**j*</sub> = ∑<sub>ℓ</sub>*a*<sub>*i*ℓ</sub>*b*<sub>ℓ*j*</sub>
+where *C* ∈ ℝ<sup>*n* × *k*</sup>.
+
+There are a few common families of matrices that we will use, so it will
+be useful to give them names:
+
+-   Matrices with the same number of rows and columns are called
+    *square* matrices
+
+-   Matrices where we can change the order of the indices
+    *A*<sub>*i**j*</sub> = *A*<sub>*j**i*</sub> ⇒ *A*<sup>*T*</sup> = *A*
+    are called *symmetric* matrices
+
+-   Matrices with non-zero values only on the diagonal
+    *A*<sub>*i**i*</sub> are called *diagonal matrices* and when the
+    whole diagonal is equal to 1, these matrices are denoted as *I*. We
+    can think of *I* as the identity transformation - for any vector *x*
+    we get *I**x* = *x* and for any matrix *A* we get *I**A* = *A*
+
+-   A matrix *A* that has a corresponding matrix *B* such that
+    *A**B* = *B**A* = *I* is called an *invertible* matrix, and *B* is
+    called the *inverse* of *A*. If *A* is invertible, it’s inverse is
+    unique - because of this we will write the inverse as
+    *A*<sup>−1</sup>. Also, note that from the definition that
+    *A**A*<sup>−1</sup> = *A*<sup>−1</sup>*A* = *I* that *A* must be
+    square in order to be invertible at all
+
+-   An orthogonal matrix *U* is a matrix whose transpose is it’s
+    inverse, i.e. *U**U*<sup>*T*</sup> = *U*<sup>*T*</sup>*U* = *I*
+
+Let’s say we have a diagonal matrix *A* such that every value on the
+diagonal is non-zero:
+$$A=\left\[\begin{array}{ccc}
+\alpha\_{1} & 0 & 0\\\\
+0 & \ddots & 0\\\\
+0 & 0 & \alpha\_{n}
+\end{array}\right\]$$
+We want to find *A*<sup>−1</sup>. In general, it will be hard to find
+the inverse by simple multiplication, but in this case notice that we
+can rewrite *A* as:
+*A* = ∑<sub>*i*</sub>*e*<sub>*i*</sub>*e*<sub>*i*</sub><sup>*T*</sup>*α*<sub>*i*</sub>
+where *e*<sub>*i*</sub> are the vectors
+$e\_{i}=\left\[0,...,0,\overbrace{1}^{i\text{th index}},0,...0\right\]^{T}$.
+Equivalently, we see that
+*I* = ∑<sub>*i*</sub>*e*<sub>*i*</sub>*e*<sub>*i*</sub><sup>*T*</sup>.
+By simply choosing
+$A^{-1}=\sum\_{i}e\_{i}e\_{i}^{T}\frac{1}{\alpha\_{i}}$, we see that:
+$$\begin{aligned}
+AA^{-1} & =\sum\_{i}e\_{i}e\_{i}^{T}\alpha\_{i}\sum\_{j}e\_{j}e\_{j}^{T}\frac{1}{\alpha\_{j}}\\\\
+ & =\sum\_{i,j}e\_{i}e\_{i}^{T}e\_{j}e\_{j}^{T}\frac{\alpha\_{i}}{\alpha\_{j}}
+\end{aligned}$$
+however, note that for any *i* ≠ *j*
+*e*<sub>*i*</sub><sup>*T*</sup>*e*<sub>*j*</sub> = 0, so:
+$$AA^{-1}=\sum\_{i}e\_{i}e\_{i}^{T}\frac{\alpha\_{i}}{\alpha\_{i}}=\sum\_{i}e\_{i}e\_{i}^{T}=I$$
+Finally, we see that:
+$$A^{-1}=\left\[\begin{array}{ccc}
+\alpha\_{1}^{-1} & 0 & 0\\\\
+0 & \ddots & 0\\\\
+0 & 0 & \alpha\_{n}^{-1}
+\end{array}\right\]$$
+
+Suppose we want to find the inverse of the matrix:
+$$M=\left\[\begin{array}{cc}
+A & 0\\\\
+C & D
+\end{array}\right\]$$
+where *A* ∈ ℝ<sup>*n* × *n*</sup>, *C* ∈ ℝ<sup>*m* × *n*</sup> and
+*D* ∈ ℝ<sup>*m* × *m*</sup>, so that
+*M* ∈ ℝ<sup>*n* + *m* × *n* + *m*</sup>. Here we have defined *M* by
+it’s blocks and will find the inverse with respect to these blocks. So
+we have to find a matrix such that:
+$$\left\[\begin{array}{cc}
+A & 0\\\\
+C & D
+\end{array}\right\]\left\[\begin{array}{cc}
+T\_{1} & T\_{2}\\\\
+T\_{3} & T\_{4}
+\end{array}\right\]=I$$
+The important thing to notice is that we are still multiplying matrices
+by their rules, that means that we multiply \[*A*  0\] by
+\[*T*<sub>1</sub>  *T*<sub>3</sub>\], \[*A*  0\] by
+\[*T*<sub>2</sub>  *T*<sub>4</sub>\] and so on:
+$$\left\[\begin{array}{cc}
+AT\_{1}+0T\_{3} & \\:\cdot\\\\
+\cdot & \\:\cdot
+\end{array}\right\]=\left\[\begin{array}{cc}
+A & \\:0\\\\
+\cdot & \\:\cdot
+\end{array}\right\]\left\[\begin{array}{cc}
+T\_{1} & \\:\cdot\\\\
+T\_{3} & \\:\cdot
+\end{array}\right\]$$
+so the result will be:
+$$\left\[\begin{array}{cc}
+A & 0\\\\
+C & D
+\end{array}\right\]\left\[\begin{array}{cc}
+T\_{1} & T\_{2}\\\\
+T\_{3} & T\_{4}
+\end{array}\right\]=\left\[\begin{array}{cc}
+AT\_{1}+0T\_{3} & \\;AT\_{2}+0T\_{4}\\\\
+CT\_{1}+DT\_{3} & \\;CT\_{2}+DT\_{4}
+\end{array}\right\]$$
+The top left corner (*A**T*<sub>1</sub> + 0*T*<sub>3</sub>) must be
+equal to the identity, which only happens if
+*T*<sub>1</sub> = *A*<sup>−1</sup>. The top right corner must be zero
+and this only happens if *T*<sub>2</sub> = 0. Let’s write this
+intermediate result:
+$$\left\[\begin{array}{cc}
+A & 0\\\\
+C & D
+\end{array}\right\]\left\[\begin{array}{cc}
+A^{-1} & 0\\\\
+T\_{3} & T\_{4}
+\end{array}\right\]=\left\[\begin{array}{cc}
+I & \\;0\\\\
+CA^{-1}+DT\_{3} & \\;DT\_{4}
+\end{array}\right\]$$
+Now, in the same manner as above, we see from the bottom right corner
+that *T*<sub>4</sub> = *D*<sup>−1</sup>, which means we are left with
+finding *T*<sub>3</sub> such that:
+*C**A*<sup>−1</sup> + *D**T*<sub>3</sub> = 0
+This will only happen if
+*T*<sub>3</sub> =  − *D*<sup>−1</sup>*C**A*<sup>−1</sup>. So the inverse
+of *M* is given by:
+$$M=\left\[\begin{array}{cc}
+A & 0\\\\
+C & D
+\end{array}\right\]\Rightarrow M^{-1}=\left\[\begin{array}{cc}
+A^{-1} & 0\\\\
+-D^{-1}CA^{-1} & \\;D^{-1}
+\end{array}\right\]$$
+In these derivations, we implicitly assumed that *A* and *D* are
+non-singular. If they are singular, then *M* will not be invertible.  
+
+The above example is a special case of the following rule:
+$$M=\left\[\begin{array}{cc}
+A & B\\\\
+C & D
+\end{array}\right\]\Rightarrow M^{-1}=\left\[\begin{array}{cc}
+A^{-1}+A^{-1}BL^{-1}CA^{-1} & \quad-A^{-1}BL^{-1}\\\\
+-L^{-1}CA^{-1} & \quad L^{-1}
+\end{array}\right\]$$
+where *L* = *D* − *C**A*<sup>−1</sup>*B*. In this case, the assumption
+is that *A* and *L* are non-singular. This inversion will become useful
+in the future, when we talk about the Gaussian distribution.
+
+## Eigenvalues and Eigenvectors
+
+Every matrix has *characteristic* *directions* (or *characteristic
+vectors*) - the directions that “matter most” to the matrix. If *A* is a
+square matrix, then we call these characteristic directions the
+*eigenvectors* of *A*. A vector *u* ≠ 0 is an eigenvector of *A* if:
+*A**u* = *λ**u*
+where *λ* is a scalar that is called the *eigenvalue* corresponding to
+the eigenvector *u*. Notice that if *u* is an eigenvector of *A*, then
+so is *ũ* = *δ**u* for any *δ* ∈ ℝ:
+*A**ũ* = *A**δ**u* = *δ**A**u* = *δ**λ**u* = *λ**ũ*
+so the eigenvalues *u* are not unique, while the eigenvalues *λ* are
+unique.
+
+The directions of the eigenvectors *are* unique (as long as the rank of
+*A* is full, which for the purpose of this course means that *A* is
+invertible) and if the matrix is also symmetric, the eigenvectors are
+always orthogonal to each other. This means that for an *n* × *n*
+symmetric matrix with full rank, there are exactly *n* such directions.
+So as long as *A* is invertible and symmetric, then the *n* eigenvectors
+form a basis and we can rewrite the product of a matrix with a vector
+as:
+*A**x* = *A*∑<sub>*i*</sub>⟨*u*<sub>*i*</sub>,*x*⟩ ⋅ *u*<sub>*i*</sub> = ∑<sub>*i*</sub>*λ*<sub>*i*</sub>⟨*u*<sub>*i*</sub>,*x*⟩*u*<sub>*i*</sub>
+(I wrote ⟨*u*<sub>*i*</sub>,*x*⟩ instead of
+*u*<sub>*i*</sub><sup>*T*</sup>*x* just to make this form easier to
+read, but either way of writing is valid).
+
+These eigenvectors also allow us to rewrite the form of *A* directly
+using the eigenvectors by noticing the following relationship:
+$$\begin{aligned}
+Ax & =\sum\_{i}\lambda\_{i}u\_{i}^{T}xu\_{i}\nonumber \\\\
+ & =\sum\_{i}\lambda\_{i}u\_{i}u\_{i}^{T}x\nonumber \\\\
+\Leftrightarrow A & =\sum\_{i}\lambda\_{i}u\_{i}u\_{i}^{T}
+\end{aligned}$$
+In vector form, this means any symmetrical matrix *A* can be decomposed
+as:
+*A* = *U**L**U*<sup>*T*</sup>
+where *U**U*<sup>*T*</sup> = *U*<sup>*T*</sup>*U* = *I* and *L* is a
+diagonal matrix made up of the eigenvalues of *A*. Furthermore, the rows
+in *U* are the eigenvectors corresponding to the eigenvalues in *L*.
+This is called the *eigenvalue decomposition* (EVD) of a symmetrical
+matrix. Notice that if *A* is invertible, we can also easily find the
+decomposition of *A*<sup>−1</sup>:
+*I* = *A**A*<sup>−1</sup> ⇒ *A*<sup>−1</sup> = *U**L*<sup>−1</sup>*U*<sup>*T*</sup>
+
+## Singular Value Decomposition
+
+In a similar way to the eigenvectors and values from above, there is a
+generalization to all matrices *A* ∈ ℝ<sup>*m* × *n*</sup>. The
+*singular value decomposition* (SVD) of a matrix *A* always exists and
+is defined as:
+*A* = *U**Σ**V*<sup>*T*</sup>
+where *U* ∈ ℝ<sup>*m* × *m*</sup> is an orthogonal matrix,
+*Σ* ∈ ℝ<sup>*m* × *n*</sup> is a diagonal matrix (the diagonal
+*Σ*<sub>*i**i*</sub> is non-zero, everything else is a zero) and
+*V* ∈ ℝ<sup>*n* × *n*</sup> is also an orthogonal matrix. The terms
+*σ*<sub>*i*</sub> = *Σ*<sub>*i**i*</sub> are called the *singular
+values* of *A*, are unique to *A* and are always non-negative. The SVD
+is directly connected to the EVD in the following manner:
+$$\begin{aligned}
+AA^{T} & =U\Sigma V^{T}V\Sigma U^{T}=U\Sigma^{2}U^{T}\\\\
+A^{T}A & =V\Sigma U^{T}U\Sigma V^{T}=V\Sigma^{2}V^{T}
+\end{aligned}$$
+and now we can clearly see that *U* are the eigenvectors of
+*A**A*<sup>*T*</sup>and *V* are the eigenvectors of
+*A*<sup>*T*</sup>*A*.
+
+## Determinant and Trace
+
+The *determinant* of a square matrix *A* with eigenvalues
+*λ*<sub>1</sub>, *λ*<sub>2</sub>, ..., *λ*<sub>*n*</sub> is defined as:
+$$\text{det}\left(A\right)\equiv\left\|A\right\|\stackrel{\Delta}{=}\prod\_{i}\lambda\_{i}$$
+(note that the **determinant doesn’t have to be positive** even though
+we write \|*A*\|!). We can think of the determinant as a measure for how
+much the space is stretched by the transformation that *A* implies. If
+\|*A*\| = 0, *A* will be called *singular* and will not be invertible.
+The term singular originates from the fact that if one of the
+eigenvalues of the matrix is equal to zero, then there is a direction
+from which all points are transformed into the origin by the matrix. In
+turn, there can be no inverse transformation that will move the points
+from the origin back to their original positions, which is why a
+singular matrix is not invertible. Two useful properties of determinants
+are:
+
+-   $\left\|A^{-1}\right\|=\frac{1}{\left\|A\right\|}$
+
+-   If *A* and *B* are square matrices, then \|*A**B*\| = \|*A*\|\|*B*\|
+
+The *trace* of a square matrix *A* is defined as:
+$$\text{trace}\left\[A\right\]\stackrel{\Delta}{=}\sum\_{i}A\_{ii}$$
+if the eigenvalues of *A* are
+*λ*<sub>1</sub>, *λ*<sub>2</sub>, ..., *λ*<sub>*n*</sub> (as before),
+then:
+trace\[*A*\] = ∑<sub>*i*</sub>*λ*<sub>*i*</sub>
+In addition, trace has the following properties:
+
+-   trace\[*α**A*+*B*\] = *α*trace\[*A*\] + trace\[*B*\]
+
+-   trace\[*A**B**C*\] = trace\[*C**A**B*\] = trace\[*B**C**A*\]
+
+## Positive Semi-Definite Matrices
+
+** 1**. Positive Semi-Definite Matrix
+
+A square, symmetrical, matrix *A* ∈ ℝ<sup>*n* × *n*</sup> is called
+positive semi-definite (PSD) if:
+∀*x* ∈ ℝ<sup>*n*</sup>   *x*<sup>*T*</sup>*A**x* ≥ 0
+and *positive definite* (PD) if:
+∀*x* ≠ 0 ∈ ℝ<sup>*n*</sup>   *x*<sup>*T*</sup>*A**x* \> 0
+
+There are a few useful characteristics that PD and PSD matrices have,
+including:
+
+1.  A matrix *A* is PD if and only if it’s eigenvalues
+    *λ*<sub>1</sub>, ..., *λ*<sub>*n*</sub> are all positive
+    (∀*i* *λ*<sub>*i*</sub> \> 0). This also means that a PD matrix is
+    invertible since\|*A*\| = ∏<sub>*i*</sub>*λ*<sub>*i*</sub> \> 0
+
+2.  A matrix *A* is PSD if and only if it’s eigenvalues
+    *λ*<sub>1</sub>, ..., *λ*<sub>*n*</sub> are all non-negative
+    (∀*i* *λ*<sub>*i*</sub> ≥ 0)
+
+3.  A matrix *A* is PD if and only if it can be decomposed as
+    *A* = *R*<sup>*T*</sup>*R* such that *R* is triangular and
+    invertible. This decomposition is unique, in the sense that there
+    exists only one triangular and invertible matrix *R* such that
+    *A* = *R*<sup>*T*</sup>*R*. This decomposition is called the
+    *Cholesky decomposition*
+
+4.  A matrix *A* is PSD if and only if it can be decomposed as
+    *A* = *R*<sup>*T*</sup>*R*
+
+Also, notice that any PD matrix is also PSD, but the opposite isn’t
+true.
+
+Suppose we have a matrix *A* ∈ ℝ<sup>*n* × *m*</sup>. We will show that
+*A*<sup>*T*</sup>*A* is PSD for *any* (real) matrix *A*. We need to show
+that for any vector *x*:
+*x*<sup>*T*</sup>*A*<sup>*T*</sup>*A**x* ≥ 0
+We begin by noticing that *A*<sup>*T*</sup>*A* is symmetrical since:
+$$\begin{aligned}
+\left(A^{T}A\right)^{T}=A^{T}A
+\end{aligned}$$
+from the definition of transpose (we transpose and change the order).
+Now, notice we can write the above as an inner product between two
+vectors:
+$$\begin{aligned}
+x^{T}A^{T}Ax & =\left(Ax\right)^{T}Ax\nonumber \\\\
+ & =\left\langle Ax,Ax\right\rangle \nonumber \\\\
+ & =\\\|Ax\\\|^{2}
+\end{aligned}$$
+A norm of a vector is always non-negative, so we see that
+*x*<sup>*T*</sup>*A*<sup>*T*</sup>*A**x* ≥ 0, which means that
+*A*<sup>*T*</sup>*A* is a PSD matrix, which is exactly what we wanted to
+show.
+
+From now on it will be a good idea to remember that for any matrix *A*,
+both *A*<sup>*T*</sup>*A* and *A**A*<sup>*T*</sup> (you can define
+*B* = *A*<sup>*T*</sup> and then you are looking at the matrix
+*B*<sup>*T*</sup>*B*) are PSD matrices.
+
+## Derivatives
+
+Many algorithms include a cost/loss function which we will try to
+optimize as much as we can. Many times the optimization will be
+equivalent to finding the minima of the cost function. The simplest
+(analytical) method to do so when the function is convex/concave, or has
+a single minima/maxima, is by differentiating the function and equating
+to 0.
+
+The chain rule for 1D functions is:
+$$\frac{\partial f\left(g\left(x\right)\right)}{\partial x}=\frac{\partial f\left(g\left(x\right)\right)}{\partial g\left(x\right)}\frac{\partial g\left(x\right)}{\partial x}$$
+which you are (hopefully) already comfortable with. However, during this
+course we will use a lot functions of the form
+*f* : ℝ<sup>*n*</sup> → ℝ, so we will need to first remind ourselves how
+to treat the derivatives of these functions.
+
+### Jacobian
+
+The *Jacobian* of a differentiable function
+*f* : ℝ<sup>*n*</sup> → ℝ<sup>*m*</sup> is a matrix with dimensions
+*m* × *n* and we define it as:
+$$\left\[J\_{x}\left\[f\left(x\right)\right\]\right\]\_{ij}\stackrel{\Delta}{=}\frac{\partial\left\[f\left(x\right)\right\]\_{i}}{\partial x\_{j}}$$
+In this sense, the Jacobian is a sort of generalization of the
+derivative in higher dimensions. If the function is of the form
+*g* : ℝ<sup>*n*</sup> → ℝ, the transpose of the Jacobian will be a
+vector that is called the *gradient*:
+$$J\_{x}\left\[g\left(x\right)\right\]^{T}\equiv\nabla g\left(x\right)\stackrel{\Delta}{=}\left\[\frac{\partial g\left(x\right)}{\partial x\_{1}},\\;\frac{\partial g\left(x\right)}{\partial x\_{2}},\\:...,\\:\frac{\partial g\left(x\right)}{\partial x\_{n}}\right\]^{T}$$
+
+We will often use a different notation for high-order derivatives, that
+is closer to the 1D definition of derivatives. In our notation, we will
+use the transpose of the Jacobian:
+$$\frac{\partial f\left(x\right)}{\partial x}\stackrel{\Delta}{=}J\_{x}\left\[f\left(x\right)\right\]^{T}$$
+In other words, if *f* : ℝ<sup>*n*</sup> → ℝ<sup>*m*</sup>, then
+$\frac{\partial f\left(x\right)}{\partial x}$ is an *n* × *m* matrix.
+This definition aligns with the definition of the gradient such that:
+$$\frac{\partial g\left(x\right)}{\partial x}\equiv\nabla g\left(x\right)$$
+and will make differentiating a bit easier to understand later on.
+
+Let’s look at the function
+*g*(*x*) = ∥*x*∥<sup>2</sup> = ∑<sub>*i*</sub>*x*<sub>*i*</sub><sup>2</sup>.
+The elements of the gradient of this function will be:
+$$\left\[\nabla g\left(x\right)\right\]\_{i}=\frac{\partial\sum\_{i}x\_{i}^{2}}{\partial x\_{i}}=\frac{\partial x\_{i}^{2}}{\partial x\_{i}}=2x\_{i}$$
+so the whole gradient will be:
+$$\frac{\partial g\left(x\right)}{\partial x}=2x$$
+(I’m switching notations constantly on purpose - this is to get you
+accustomed with the fact that both ways to write the gradient mean the
+same thing, one of them just reminds us that the gradient is a vector
+and not a number).
+
+### Chain Rule
+
+Many times we want to find the gradient of *g*(*f*(*x*)) where
+*f* : ℝ<sup>*n*</sup> → ℝ<sup>*m*</sup> and *g* : ℝ<sup>*m*</sup> → ℝ
+(in this case we are deriving a *scalar* *g*(*f*(*x*)) by the *vector*
+*x*). In this case, the chain rule is:
+$$\frac{\partial g\left(f\left(x\right)\right)}{\partial x}=\underbrace{J\_{x}\left\[f\left(x\right)\right\]^{T}}\_{n\times m}\underbrace{\nabla\_{f\left(x\right)}g\left(f\left(x\right)\right)}\_{m\times1}\label{eq:multivar-chain-rule}$$
+As you can see, the derivative
+$\frac{\partial g\left(f\left(x\right)\right)}{\partial x}$ will be a
+vector in ℝ<sup>*n*</sup>, which makes sense since the vector we are
+differentiating by, *x*, is in ℝ<sup>*n*</sup>.
+
+This notation makes the chain rule look more intimidating than it is, by
+using the notation of normal derivatives we get:
+$$\frac{\partial g\left(f\left(x\right)\right)}{\partial x}=\frac{\partial f\left(x\right)}{\partial x}\frac{\partial g\left(f\left(x\right)\right)}{\partial f\left(x\right)}$$
+which looks exactly like the normal chain rule. However, the distinction
+that is easy to see in the more “formal” notation in
+<a href="#eq:multivar-chain-rule" data-reference-type="ref"
+data-reference="eq:multivar-chain-rule">[eq:multivar-chain-rule]</a> is
+that ∇<sub>*f*(*x*)</sub>*g*(*f*(*x*)) is a *vector* and
+*J*<sub>*x*</sub>\[*f*(*x*)\] is a *matrix*; this is important to
+remember, as in this case the order of multiplication *is* important,
+unlike when the function is 1 dimensional.
+
+Let’s build on the previous example by looking at the function
+*g*(*x*) = ∥*A**x*∥<sup>2</sup>, where *A* ∈ ℝ<sup>*m* × *n*</sup> and
+*x* ∈ ℝ<sup>*n*</sup>. In this case, *g*(*y*) = ∥*y*∥<sup>2</sup> and
+*f*(*x*) = *A**x*. Using the chain rule, we have:
+$$\frac{\partial g\left(f\left(x\right)\right)}{\partial x}=J\_{x}\left\[f\left(x\right)\right\]^{T}\nabla g\left(y\right)$$
+We already know that ∇*g*(*y*) = 2*y*, so all that remains is to find
+*J*<sub>*x*</sub>\[*f*(*x*)\]:
+$$\frac{\partial\left(Ax\right)\_{j}}{\partial x\_{i}}=\frac{\partial\sum\_{k}A\_{jk}x\_{k}}{\partial x\_{i}}=A\_{ji}$$
+so we see that
+\[*J*<sub>*x*</sub>\[*A**x*\]\]<sub>*i**j*</sub> = *A*<sub>*i**j*</sub>,
+i.e.:
+$$\frac{\partial Ax}{\partial x}=A^{T}$$
+Using the chain rule, we get:
+$$\frac{\partial\\\|Ax\\\|^{2}}{\partial x}=2A^{T}Ax$$
+
+# Probability
+
+Almost all of the material we will see in this course will be
+probabilistic in nature; we will almost always want to model the
+variance of the solution and not just find the most optimal solution. To
+really understand everything that happens, we must have a good
+understanding of probability. The following section will be a refresher
+for some of the key concepts in probability[1] which we will use
+throughout the course.
+
+## Discrete Probabilities
+
+In general, we define a discrete probability to be a function
+*P* : *Ω* → \[0,1\] such that ∑<sub>*ω* ∈ *Ω*</sub>*P*(*ω*) = 1. A
+random variable is a variable that can take any value from *Ω*. From now
+on, we will denote the probability that a random variable *X* takes on
+the value *x* as:
+$$P\left(x\right)\stackrel{\Delta}{=}P\left(X=x\right)$$
+This will greatly shorten the amount we need to write in the future.
+
+Usually there won’t be only one variable of interest, so we need to find
+a way to introduce a probability over the interaction of several random
+variables. The probability that two random variables *X* and *Y* will
+take on specific values is called the *joint probability* and is notated
+by:
+$$P\left(x,y\right)\stackrel{\Delta}{=}P\left(X=x,Y=y\right)$$
+Because of the structure of the probability function, we can always move
+from the joint probability to one of the *marginal probabilities* by
+summing out the other variable:
+*P*(*x*) = ∑<sub>*y*</sub>*P*(*x*,*y*)
+Of course, if *Y* takes a specific value, then this may effect *X* in
+some manner. We notate this *conditional probability* as *P*(*x*\|*y*);
+this new function is also a probability function, i.e.
+∑<sub>*x*</sub>*P*(*x*\|*y*) = 1
+We can think of this behavior on the side of *y* as a “re-weighting” of
+specific values that *X* may take. The joint probability can be written
+in terms of this re-weighting as:
+*P*(*x*,*y*) = *P*(*x*\|*y*)*P*(*y*)
+If the value of *X* doesn’t depend on the value of *Y* at all (and
+vice-versa) we will say that the two variables are *independent*. In
+this case the joint probability takes the form of:
+*P*(*x*,*y*) = *P*(*x*)*P*(*y*)
+which is a direct result from the rule given by
+<a href="#eq:factorized-joint" data-reference-type="ref"
+data-reference="eq:factorized-joint">[eq:factorized-joint]</a>. We
+define the conditional probability according to *Bayes’ law*:
+$$P\left(y\|x\right)=\frac{P\left(x,y\right)}{P\left(x\right)}=\frac{P\left(x\|y\right)P\left(y\right)}{P\left(x\right)}$$
+
+Finally, if we have a random variable *X* and a random variable *Y* that
+partitions the space, then we can rewrite the probability for *X* under
+the conditionals of *Y* - this is also called the *law of total
+probability*:
+*P*(*x*) = ∑<sub>*y*</sub>*P*(*x*\|*y*)*P*(*y*)
+
+## Continuous Probabilities
+
+While it is of course important to understand the rules of probability
+in the discrete case, most of the course we will be dealing with
+*continuous random variables*; these random variables can take any value
+in ℝ or a section of it. If we simply try to scale the definition we saw
+before to the continuous case, then for any non-zero probability over
+any bounded section *Γ* of ℝ, we have:
+∑<sub>*x* ∈ *Γ*</sub>*P*(*x*) ≥ ∑<sub>*x* ∈ *Γ*</sub>min<sub>*y* ∈ *Γ*</sub>*P*(*y*) → ∞
+since there are an infinite number of points in the section *Γ*.
+Clearly, we can’t use the same reasoning to describe probabilities over
+continuous variables. Instead, for any section \[*a*,*b*\] ⊆ ℝ, we will
+define:
+$$P\left(a\le X\le b\right)\stackrel{\Delta}{=}\intop\_{a}^{b}p\left(x\right)dx$$
+where *p*(*x*) is called the *probability density function* (PDF) of the
+variable *X*. Under this logic, the only restrictions on *p*(⋅) are that
+for any *x* ∈ ℝ *p*(*x*) ≥ 0 and:
+$$\intop\_{-\infty}^{\infty}p\left(x\right)dx=1$$
+After defining the PDF, all of the rules we have defined earlier apply,
+only using integrals instead of sums.
+
+## Expectation
+
+One of the most useful statistics involving probabilities we will need
+in this course is that of finding the weighted average of functions. The
+average of some function *f*(*x*) under a probability function *p*(*x*)
+is called the *expectation* of *f*(*x*) and is denoted as 𝔼\[*f*\]. For
+a discrete distribution it is given by:
+$$\mathbb{E}\left\[f\left(x\right)\right\]\defin\sum\_{x}p\left(x\right)f\left(x\right)$$
+This has a very clear interpretation, since *p*(*x*) sums up to 1: it is
+the averaging of *f*, weighted by the relative probabilities of the
+variable *x*. For continuous variables, we exchange the sum with an
+integral to get:
+$$\mathbb{E}\left\[f\left(x\right)\right\]\defin\intop\_{-\infty}^{\infty}p\left(x\right)f\left(x\right)dx$$
+By definition, the expectation is a *linear operator*, i.e.:
+𝔼\[*a**x*+*y*\] = *a*𝔼\[*x*\] + 𝔼\[*y*\]
+
+In either case, if we are given a finite number of points, *N*, sampled
+independently and identically from the distribution, then the
+expectation can be approximated as:
+$$\mathbb{E}\left\[f\left(x\right)\right\]\approx\frac{1}{N}\sum\_{i}f\left(x\_{i}\right)$$
+At the limit *N* → ∞, this approximation is exact.
+
+The mean of the distribution *p*(*x*) is simply the expected value of
+*x* itself, i.e.:
+$$\expec x=\intop\_{-\infty}^{\infty}xp\left(x\right)dx$$
+We can of course give the same treatment to joint probabilities:
+$$\mathbb{E}\_{x,y}\left\[f\left(x,y\right)\right\]=\intop\_{-\infty}^{\infty}\intop\_{-\infty}^{\infty}f\left(x,y\right)p\left(x,y\right)dxdy$$
+Moreover, we can look at the averages according to only one of the
+marginals of the distribution, i.e.:
+$$\mathbb{E}\_{x}\left\[f\left(x,y\right)\right\]=\intop\_{-\infty}^{\infty}f\left(x,y\right)p\left(x\right)dx$$
+here we have added the subscript *x* to denote that we are averaging
+over *x* and not *y*. In this case, the expectation will be a function
+of *y*, as it is still a free variable. We can also consider
+*conditional expectations*, that is the weighted average of function
+over the conditional expectations:
+$$\mathbb{E}\left\[f\left(x\right)\|y\right\]=\intop\_{-\infty}^{\infty}f\left(x\right)p\left(x\|y\right)dx$$
+
+## Variance and Covariance
+
+Many times we would also like to measure how much variability there is
+to the values of the function *f*(⋅). The *variance* of *f*(⋅), defined
+as:
+$$\text{var}\left\[f\left(x\right)\right\]\defin\mathbb{E}\left\[\left(f\left(x\right)-\mathbb{E}\left\[f\left(x\right)\right\]\right)^{2}\right\]=\mathbb{E}\left\[f\left(x\right)^{2}\right\]-\mathbb{E}\left\[f\left(x\right)\right\]^{2}$$
+measures exactly that. Of course, we can also consider the variance of
+the variable itself:
+var\[*x*\] = 𝔼\[*x*<sup>2</sup>\] − 𝔼\[*x*\]<sup>2</sup>
+Another measure that we will see during the course is the *standard
+deviation*. The standard deviation of a random variable is defined as:
+$$\sigma\_{x}\defin\sqrt{\var x}$$
+
+When we have many dependent variables, we may also want to see how much
+each random variable is effected by the other variables. The
+*covariance* measures this and is defined by:
+$$\begin{aligned}
+\text{cov}\left\[x,y\right\] & \defin\mathbb{E}\left\[\left(x-\mathbb{E}\left\[x\right\]\right)\left(y-\mathbb{E}\left\[y\right\]\right)\right\]=\mathbb{E}\left\[xy\right\]-\mathbb{E}\left\[x\right\]\mathbb{E}\left\[y\right\]
+\end{aligned}$$
+Directly from the definition, we can see that the covariance of a random
+variable with itself is simply its variance:
+$$\cov{x,x}=\expec{x^{2}}-\expec x^{2}=\var x$$
+
+## Random Vectors
+
+In many applications we will have many random variables that somehow
+depend on each other - *x*<sub>1</sub>, ..., *x*<sub>*n*</sub>. Usually,
+it will by much easier to group them together into a vector
+**x** = (*x*<sub>1</sub>,...,*x*<sub>*n*</sub>)<sup>*T*</sup> than to
+consider them individually. In this case, we will also write out the PDF
+as a function of a vector, so that:
+*p* : ℝ<sup>*n*</sup> → ℝ<sub>+</sub>
+and we will simply write *p*(**x**) instead of
+*p*(*x*<sub>1</sub>,*x*<sub>2</sub>,...,*x*<sub>*n*</sub>). Of course,
+all of the attributes we have introduced above are also available to
+random vectors. The only real difference from before is the notation.
+The expectation of a random vector is defined to also be a vector, where
+each coordinate is the expectation of the random variable from the same
+coordinate:
+$$\mathbb{E}\left\[\boldsymbol{x}\right\]\in\mathbb{R}^{n}\hfill\mathbb{E}\left\[\boldsymbol{x}\right\]\_{i}=\mathbb{E}\left\[x\_{i}\right\]$$
+
+This definition of random vectors allows us to define the *covariance
+matrix*. For two random vectors
+**x** = (*x*<sub>1</sub>,...,*x*<sub>*n*</sub>)<sup>*T*</sup> and
+**y** = (*y*<sub>1</sub>,...,*y*<sub>*m*</sub>)<sup>*T*</sup>, we define
+the covariance matrix as:
+$$\cov{\boldsymbol{x},\boldsymbol{y}}=\expec{\left(\boldsymbol{x-}\expec{\boldsymbol{x}}\right)\left(\boldsymbol{y}-\expec{\boldsymbol{y}}\right)^{T}}=\expec{\boldsymbol{xy}^{T}}-\expec{\boldsymbol{x}}\expec{\boldsymbol{y}^{T}}$$
+the result is a matrix of dimension *n* × *m* (yes, **x** and **y**
+don’t have to have the same dimension), with the elements:
+$$\cov{\boldsymbol{x},\boldsymbol{y}}\_{ij}=\cov{x\_{i},y\_{j}}$$
+as expected. For notational convenience, we may use the definition:
+$$\cov{\boldsymbol{x}}\stackrel{\Delta}{=}\cov{\boldsymbol{x},\boldsymbol{x}}$$
+which is the matrix of the covariances between different variables in
+the random vector **x**.
+
+The covariance matrix of a single variable **x** is a PSD matrix, as we
+can see by writing the covariance explicitly:
+$$\cov{\boldsymbol{x}}=\expec{\boldsymbol{xx}^{T}}-\mathbb{E}\left\[\boldsymbol{x}\right\]\mathbb{E}\left\[\boldsymbol{x}^{T}\right\]=\expec{\left(\boldsymbol{x-}\expec{\boldsymbol{x}}\right)\left(\boldsymbol{x-}\expec{\boldsymbol{x}}\right)^{T}}$$
+That is, the covariance is the result of a matrix times it’s transpose,
+which is a family of matrices we have shown to be PSD.
+
+## Change of Variable
+
+As defined so far, every random variable *X* comes with it’s own PDF,
+*p*<sub>*x*</sub>(⋅). When we have two different random variables *X*
+and *Y*, we will have two *different* pdfs *p*<sub>*x*</sub>(⋅) and
+*p*<sub>*y*</sub>(⋅). Sometimes it will be helpful to move from one PDF
+to the other, if the density of one variable depends on the other.
+However, it isn’t clear how we can do this without violating the
+elementary conditions that PDFs must satisfy. We can bypass this by
+working with the *cumulative distribution function* (CDF) of the random
+variable, instead of the PDF, defined as:
+$$P\_{y}\left(y\right)\stackrel{\Delta}{=}P\left(Y\le y\right)=\intop\_{-\infty}^{y}p\_{y}\left(\tilde{y}\right)d\tilde{y}$$
+As is maybe obvious, we can get back to the PDF by deriving the CDF. If
+we have a function *f* : *X* → *Y* that maps between the random
+variables, then[2]:
+*P*(*Y*≤*y*) = *P*(*f*(*X*)≤*y*) = *P*(*X*∈{*x* \| *f*(*x*)≤*y*})
+If *f*(⋅) is invertible, we can further simplify this:
+*P*(*f*(*x*)≤*y*) = *P*(*X*≤*f*<sup>−1</sup>(*y*)) = *P*<sub>*x*</sub>(*f*<sup>−1</sup>(*y*))
+Differentiating, we move back to the PDF:
+$$p\_{y}\left(y\right)\stackrel{\Delta}{=}\frac{\partial}{\partial y}P\_{y}\left(y\right)=\frac{\partial}{\partial y}P\_{x}\left(f^{-1}\left(y\right)\right)=\frac{\partial f^{-1}\left(y\right)}{\partial y}\frac{\partial}{\partial f^{-1}\left(y\right)}P\_{x}\left(f^{-1}\left(y\right)\right)=\frac{\partial f^{-1}\left(y\right)}{\partial y}p\_{x}\left(f^{-1}\left(y\right)\right)$$
+In general, since the PDF is non-negative, we will take the absolute
+value of the derivative to be sure of the result:
+$$p\_{y}\left(y\right)=\left\|\frac{\partial f^{-1}\left(y\right)}{\partial y}\right\|p\_{x}\left(f^{-1}\left(y\right)\right)$$
+The derivative term is a re-normalization of the PDF from the *Y* space
+to the *X* space, where ∂*x* = ∂*f*<sup>−1</sup>(*y*) and ∂*y* are
+measures of the volume of the *X* and *Y* spaces respectively - the term
+in the derivative can then generally be thought of as re-normalizing the
+PDF so that it is measured in units of volume of the *X* space instead
+of units of volume in the *Y* space.
+
+The same story unfolds in the multivariate case, with the only catch
+that now we have to use the Jacobian of the transformation and not a
+simple derivative. Using the same analogy as before (I know this isn’t a
+proof, but that will be harder and not particularly useful), while the
+Jacobian measures the *change* of the function in each of it’s
+directions, the determinant of the Jacobian measures the *change in
+volume* before and after the function (the same as above). With this
+knowledge, given a function *f* : **x** → **y**, the change of variable
+will be:
+*p*<sub>*y*</sub>(**y**) = *p*<sub>*x*</sub>(*f*<sup>−1</sup>(**y**))\|*J*<sub>*y*</sub>\[*f*<sup>−1</sup>(**y**)\]\|
+
+Let’s build an example for the change of variable rule. Let *x* be a
+uniform random variable in the range \[0, *α*\]; in other words:
+$$\begin{aligned}
+p\_{x}\left(x\right) & =\begin{cases}
+\frac{1}{\alpha} & x\in\left\[0,\\;\alpha\right\]\\\\
+0 & \text{otherwise}
+\end{cases}
+\end{aligned}$$
+Also, we will define *z* = *x*<sup>2</sup> and want to find
+*p*<sub>*z*</sub>(⋅) in terms of *p*<sub>*x*</sub>(⋅).
+
+Notice that in the range 0 ≤ *x* ≤ *α* - the range where
+*p*<sub>*x*</sub>(⋅) is non-zero (also called the *support* of
+*p*<sub>*x*</sub>(⋅))- the function:
+*z* = *f*(*x*) = *x*<sup>2</sup>
+is invertible, which means that we can use the change of variable rule.
+The inverse function in the same range is given by:
+$$x=f^{-1}\left(z\right)=\sqrt{z}$$
+The derivative of the inverse function is the following:
+$$\frac{\partial f^{-1}\left(z\right)}{\partial z}=\frac{1}{2}\cdot\frac{1}{\sqrt{z}}$$
+so the PDF of *z* can be rewritten in terms of the PDF of *x* as
+follows:
+$$p\_{z}\left(z\right)=\frac{1}{2}\cdot\frac{1}{\sqrt{z}}p\_{x}\left(\sqrt{z}\right)=\begin{cases}
+\frac{1}{2\alpha}\cdot\frac{1}{\sqrt{z}} & 0\le\sqrt{z}\le\alpha\\\\
+0 & \text{otherwise}
+\end{cases}$$
+
+[1] See Bishop 1.2 and Murphy 2.2, although they also assume that most
+of the content is known ahead of time
+
+[2] See the
+[Wikipedia](https://en.wikipedia.org/wiki/Probability_density_function#Function_of_random_variables_and_change_of_variables_in_the_probability_density_function)
+page for the change of variables for a slightly more organized
+explanation of what’s happening here
