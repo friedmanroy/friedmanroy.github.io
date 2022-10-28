@@ -20,9 +20,12 @@ toc:
 
 # Linear Algebra
 
+
 Almost all of the relevant material in Bayesian machine learning happens in a high dimensional space. In order to be comfortable with operations in many dimensions, it's crucial to have a good understanding of linear algebra and the notation conventions. This is the purpose of this section.  
 
+
 ## Vectors
+
 
 A vector is a list of numbers which define a point in space:
 $$
@@ -38,9 +41,13 @@ $$
 
 (the sign "$\equiv$ " is to show that the first way of writing the inner product and the second one mean the same thing in this context). For any three (real) vectors $x,y,z\in\mathbb{R}^d$ and a scalar $a\in\mathbb{R}$, the inner product has the following properties:
 
+
 * Linearity: $\left\langle ax+z,\ y\right\rangle \equiv \left(ax+z\right)^Ty=a(x^Ty)+z^Ty$
+
 * Symmetry: $x^Ty=y^Tx$
+
 * Positive-definite: $x^Tx\ge0$ and $x^Tx=0\Leftrightarrow x=0$
+
 
 Where $x=0$ means that $\forall i\in [d]\ \ x_i=0$. Geometrically, the inner product is the projection of one vector onto another, which will be a very useful intuition to keep in mind and raises another important definition. Two vectors $x,y\in\mathbb{R}^d$ such that:
 $$
@@ -96,7 +103,9 @@ $$
 \end{equation}
 $$
 
+
 ## Matrices
+
 
 A matrix is a list of vectors (or a table of numbers) which define a linear transformation of vectors:
 $$
@@ -176,12 +185,17 @@ where $C\in\mathbb{R}^{n\times k}$.
 There are a few common families of matrices that we will use, so it will be useful to give them names:
 
 * Matrices with the same number of rows and columns are called _square_ matrices
+
 * Matrices where we can change the order of the indices $A_{ij}=A_{ji}\Rightarrow A^{T}=A$ are called _symmetric_ matrices
+
 * Matrices with non-zero values only on the diagonal $A_{ii}$ are called _diagonal matrices_ and when the whole diagonal is equal to 1, these matrices are denoted as $I$. We can think of $I$ as the identity transformation - for any vector $x$ we get $Ix=x$ and for any matrix $A$ we get $IA=A$
+
 * A matrix $A$ that has a corresponding matrix $B$ such that $AB=BA=I$ is called an _invertible_ matrix, and $B$ is called the _inverse_ of $A$. If $A$ is invertible, it's inverse is unique - because of this we will write the inverse as $A^{-1}$. Also, note that from the definition that $AA^{-1}=A^{-1}A=I$ that $A$ must be square in order to be invertible at all
+
 * An orthogonal matrix $U$ is a matrix whose transpose is it's inverse, i.e. $UU^{T}=U^{T}U=I$
 
 ----
+
 **Example: Blockwise Inversion**
 
 Suppose we want to find the inverse of the matrix:
@@ -352,9 +366,11 @@ A^{-1}+A^{-1}BL^{-1}CA^{-1} & \quad-A^{-1}BL^{-1}\\
 
 where $L=D-CA^{-1}B$. In this case, the assumption is that $A$ and $L$ are non-singular. 
 
+
 ## Eigenvalues and Eigenvectors
 
-Every matrix has _characteristic_ _directions_ (or _characteristic vectors_) - the directions that "matter most'' to the matrix. If $A$ is a square matrix, then we call these characteristic directions the _eigenvectors_ of $A$. A vector $u\neq0$ is an eigenvector of $A$ if:
+
+Every matrix has _characteristic directions_ (or _characteristic vectors_) - the directions that "matter most'' to the matrix. If $A$ is a square matrix, then we call these characteristic directions the _eigenvectors_ of $A$. A vector $u\neq0$ is an eigenvector of $A$ if:
 
 $$\begin{equation}
 
