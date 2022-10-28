@@ -93,8 +93,8 @@ instagram_id: # your instagram id
 facebook_id: # your facebook id
 discord_id: # your discord id (18-digit unique numerical identifier)
 
-contact_note: >
-  Feel free to reach out to me on roy.friedman@mail.huji.ac.il
+# contact_note: >
+#   Feel free to reach out to me on roy.friedman@mail.huji.ac.il
 
 # -----------------------------------------------------------------------------
 # Analytics and search engine verification
@@ -120,7 +120,7 @@ pagination:
   enabled: true
 
 # Comments
-disqus_shortname: friedroy # put your disqus shortname
+# disqus_shortname: friedroy # put your disqus shortname
 # https://help.disqus.com/en/articles/1717111-what-s-a-shortname
 
 # External sources.
@@ -140,9 +140,9 @@ collections:
       layout: post
     output: true
     permalink: /news/:path/
-  projects:
+  BML:
     output: true
-    permalink: /projects/:path/
+    permalink: /BML/:path/
 
 news_scrollable: true # adds a vertical scroll bar if there are more than 3 news items
 news_limit: 5 # leave blank to include all the news in the `_news` folder
