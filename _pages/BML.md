@@ -2,7 +2,7 @@
 layout: page
 title: BML
 permalink: /BML/
-description: Recitation from Bayesian Machine Learning
+description: Summaries of material from Bayesian Machine Learning
 nav: true
 nav_order: 2
 horizontal: false
