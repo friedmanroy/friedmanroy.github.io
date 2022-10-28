@@ -7,3 +7,11 @@ nav: true
 nav_order: 2
 horizontal: false
 ---
+
+{% for summary in site.BML %}
+  <h2>
+    <a href="{{ summary.url }}">
+      {{ summary.title }}
+    </a>
+  </h2>
+{% endfor %}
