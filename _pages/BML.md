@@ -6,6 +6,11 @@ description: Summaries of material from the Bayesian Machine Learning course tau
 nav: true
 nav_order: 2
 horizontal: false
+pagination:
+  enabled: true
+  per_page: 20
+  sort_field: date
+  sort_reverse: false
 ---
 
 <!-- {% for summary in site.BML %}
@@ -39,5 +44,5 @@ horizontal: false
 
     {% endfor %}
   </ul>
-
+{% include pagination.html %}
 </div>
