@@ -3,6 +3,29 @@ layout: distill
 title: Linear Algebra and Probability
 description: All of the material in linear algebra and probability needed to understand Bayesian machine learning.
 
+authors:
+  - name: Roy Friedman
+    affiliations:
+      name: Hebrew University
+
+toc:
+  - name: Linear Algebra
+       - name: Vectors
+       - name: Matrices
+       - name: Eigenvalues and Eigenvectors
+       - name: Singular Value Decomposition
+       - name: Determinant and Trace
+       - name: Positive Semi-Definite Matrices
+  - name: Derivatives
+	   - name: Jacobian
+	   - name: Chain Rule
+  - name: Probability
+	   - name: Discrete Probabilities
+	   - name: Continuous Probabilities
+	   - name: Expectation
+	   - name: Variance and Covariance
+	   - name: Random Vectors
+	   - name: Change of Variable
 ---
 
 # Linear Algebra
@@ -366,14 +389,14 @@ and now we can clearly see that $U$ are the eigenvectors of $AA^{T}$and $V$ are 
 
 ## Determinant and Trace
 
-The \emph{determinant} of a square matrix $A$ with eigenvalues $\lambda_{1},\lambda_{2},...,\lambda_{n}$ is defined as:
+The _determinant_ of a square matrix $A$ with eigenvalues $\lambda_{1},\lambda_{2},...,\lambda_{n}$ is defined as:
 
 $$\begin{equation}
 \text{det}\left(A\right)\equiv\left|A\right|\stackrel{\Delta}{=}\prod_{i}\lambda_{i}
 \end{equation}
 $$
 
-(note that the **determinant doesn't have to be positive** even though we write $\left|A\right|$!). We can think of the determinant as a measure for how much the space is stretched by the transformation that $A$ implies. If $\left|A\right|=0$, $A$ will be called _singular_ and will not be invertible. The term singular originates from the fact that if one of the eigenvalues of the matrix is equal to zero, then there is a direction from which all points are transformed into the origin by the matrix. In turn, there can be no inverse transformation that will move the points from the origin back to their original positions, which is why a singular matrix is not invertible. Two useful properties of determinants are:
+(note that the **determinant doesn't have to be positive** even though we write $\left|A\right|$ !). We can think of the determinant as a measure for how much the space is stretched by the transformation that $A$ implies. If $\left|A\right|=0$, $A$ will be called _singular_ and will not be invertible. The term singular originates from the fact that if one of the eigenvalues of the matrix is equal to zero, then there is a direction from which all points are transformed into the origin by the matrix. In turn, there can be no inverse transformation that will move the points from the origin back to their original positions, which is why a singular matrix is not invertible. Two useful properties of determinants are:
 
 * $\left|A^{-1}\right|=\frac{1}{\left|A\right|}$
 
@@ -464,7 +487,7 @@ From now on it will be a good idea to remember that for any matrix $A$, both $A^
 ----
 
 
-## Derivatives
+# Derivatives
 
 Many algorithms include a cost/loss function which we will try to optimize as much as we can. Many times the optimization will be equivalent to finding the minima of the cost function. The simplest (analytical) method to do so when the function is convex/concave, or has a single minima/maxima, is by differentiating the function and equating to 0.
 
@@ -479,7 +502,7 @@ $$
 which you are (hopefully) already comfortable with. However, during this course we will use a lot functions of the form $f:\mathbb{R}^{n}\rightarrow\mathbb{R}$, so we will need to first remind ourselves how to treat the derivatives of these functions.
 
 
-### Jacobian
+## Jacobian
 The _Jacobian_ of a differentiable function $f:\mathbb{R}^{n}\rightarrow\mathbb{R}^{m}$ is a matrix with dimensions $m\times n$ and we define it as:
 
 $$
@@ -532,7 +555,7 @@ $$
 
 ----
 
-### Chain Rule
+## Chain Rule
 
 Many times we want to find the gradient of $g\left(f\left(x\right)\right)$ where $f:\mathbb{R}^{n}\rightarrow\mathbb{R}^{m}$ and $g:\mathbb{R}^{m}\rightarrow\mathbb{R}$ (in this case we are differentiating a _scalar_ $g\left(f\left(x\right)\right)$ by the _vector_ $x$). In this case, the chain rule is:
 
