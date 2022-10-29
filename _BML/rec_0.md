@@ -2,6 +2,11 @@
 layout: distill
 title: Linear Algebra and Probability
 description: All of the material in linear algebra and probability needed to understand Bayesian machine learning.
+
+authors:
+  - name: Roy Friedman
+    affiliations:
+      name: Hebrew University
 ---
 
 # Linear Algebra
