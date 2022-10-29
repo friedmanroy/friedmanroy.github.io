@@ -2,24 +2,20 @@
 layout: page
 title: BML
 permalink: /BML/
-description: Summaries of material from the Bayesian Machine Learning course taught in the Hebrew University
 nav: true
 nav_order: 2
 horizontal: false
 pagination:
   enabled: true
   per_page: 20
-  sort_field: date
+  sort_field: place
   sort_reverse: false
 ---
 
-<!-- {% for summary in site.BML %}
-  <h2>
-    <a href="{{ summary.url }}">
-      {{ summary.title }}
-    </a>
-  </h2>
-{% endfor %} -->
+
+The following posts contain the summaries of lessons in the Bayesian Machine Learning course taught at the Hebrew University. These summaries don't contain all of the material, but are pretty comprehensive all on their own.
+
+---
 
 <div class="post">
 
