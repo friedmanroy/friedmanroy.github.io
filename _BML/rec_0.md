@@ -1,11 +1,7 @@
 ---
-layout: distill
+layout: post
 title: Linear Algebra and Probability
 description: All of the material in linear algebra and probability needed to understand Bayesian machine learning.
-
-toc:
-  - name: Linear Algebra
-  - name: Probability
 ---
 
 # Linear Algebra
@@ -33,134 +29,113 @@ $$
 * Positive-definite: $x^Tx\ge0$ and $x^Tx=0\Leftrightarrow x=0$
 
 Where $x=0$ means that $\forall i\in [d]\ \ x_i=0$. Geometrically, the inner product is the projection of one vector onto another, which will be a very useful intuition to keep in mind and raises another important definition. Two vectors $x,y\in\mathbb{R}^d$ such that:
+
 $$
 \begin{equation}
 x^Ty=0
 \end{equation}
 $$
+
 are said to be orthogonal.
 
 The inner product is just one way of multiplying the vectors and in this course we will also use the _outer product_ of 2 vectors:
+
 $$
 \begin{equation}
-
 x\in\mathbb{R}^{d},y\in\mathbb{R}^{m}\quad xy^{T}=\left[\begin{array}{cccc}
-
 x_{1}y_{1} & x_{1}y_{2} & \cdots & x_{1}y_{m}\\
-
 x_{2}y_{1} & x_{2}y_{2} & \cdots & x_{2}y_{m}\\
-
 \vdots & & & \vdots\\
-
 x_{d}y_{1} & x_{d}y_{2} & \cdots & x_{d}y_{m}
-
 \end{array}\right]\in\mathbb{R}^{d\times m}
-
 \end{equation}
 $$
+
 As you can see, the outcome of an outer product is a matrix, instead of a scalar.
 
 Another important quality of vectors are _norms_, which are metrics for their distance from the origin. The most commonly used norm is the Euclidean norm, also called the $\ell_2$ norm, defined as:
+
 $$
 \begin{equation}
-
 \|x\|_{2}\stackrel{\Delta}{=}\sqrt{x^{T}x}=\sqrt{\sum_{i}x_{i}^{2}}
-
 \end{equation}
 $$
+
 Sometimes we will write the Euclidean distance simply as $\|\cdot\|$ instead of adding the subscript "2" - this is because it is by far the most common norm we will see and is usually much simpler to use than other norms. Another norm that is used quite often is the $\ell_1$ norm, defined as:
+
 $$
 \begin{equation}
-
 \|x\|_{1}\stackrel{\Delta}{=}\sum_{i}\left|x_{i}\right|
-
 \end{equation}
 $$
 
 Apart from just measuring the distance from the origin, norms also allow us to measure the distance from other vectors. The $\ell_2$ distance between $x$ and $y$ is defined as:
+
 $$
 \begin{equation}
-
 \|x-y\|_{2}=\sqrt{\left(x-y\right)^{T}\left(x-y\right)}
-
 \end{equation}
 $$
 
 ## Matrices
 
 A matrix is a list of vectors (or a table of numbers) which define a linear transformation of vectors:
+
 $$
 \begin{equation}
-
 A\in\mathbb{R}^{n\times m}\quad A=\left[\begin{array}{cccc}
-
 a_{11} & a_{12} & \cdots & a_{1m}\\
-
 a_{21} & a_{22} & \cdots & a_{2m}\\
-
 \vdots & \vdots & \vdots & \vdots\\
-
 a_{n1} & a_{n2} & \cdots & a_{nm}
-
 \end{array}\right]
-
 \end{equation}
 $$
+
 and the notation $A\in\mathbb{R}^{n\times m}$ means that the matrix $A$ holds $n\times m$ different real items.
 
 The multiplication of a matrix $A\in\mathbb{R}^{n\times m}$ with a vector $x\in\mathbb{R}^m$ (notice the dimensions) is defined as:
+
 $$
 \begin{equation}
-
 \left[Ax\right]_{j}=\sum_{i}a_{ji}x_{i}
-
 \end{equation}
 $$
+
 where $\left[Ax\right]_{j}$ is the $j$-th index of the resulting vector from the multiplication. If we define $a_i$ to be the $i$-th row of the matrix, such that:
+
 $$
 \begin{equation}
-
 A=\left[\begin{array}{ccc}
-
 - & a_{1} & -\\
-
 - & a_{2} & -\\
-
 & \vdots\\
-
 - & a_{n} & -
-
 \end{array}\right]
-
 \end{equation}
 $$
+
 then we can write the product of a vector with a matrix more cleanly as:
+
 $$
 \begin{equation}
-
 Ax=\left[\begin{array}{c}
-
 a_{1}^{T}x\\
-
 a_{2}^{T}x\\
-
 \vdots\\
-
 a_{n}^{T}x
-
 \end{array}\right]\in\mathbb{R}^{n}
-
 \end{equation}
 $$
 
 The multiplication of a matrix $A\in\mathbb{R}^{n\times m}$ with a matrix $B\in\mathbb{R}^{m\times k}$ has the following elements:
+
 $$
 \begin{equation}
-
 C_{ij}=\left[AB\right]_{ij}=\sum_{\ell}a_{i\ell}b_{\ell j}
-
 \end{equation}
 $$
+
 where $C\in\mathbb{R}^{n\times k}$.
 
 There are a few common families of matrices that we will use, so it will be useful to give them names:
