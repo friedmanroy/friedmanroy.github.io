@@ -1,12 +1,17 @@
 ---
 layout: distill
 title: Linear Algebra and Probability
-description: All of the material in linear algebra and probability needed to understand Bayesian machine learning.
+description: Almost all of the material in linear algebra and probability needed to understand research in Bayesian machine learning.
 
 authors:
   - name: Roy Friedman
     affiliations:
       name: Hebrew University
+
+toc:
+  - name: Linear Algebra
+  - name: Derivatives
+  - name: Probability
 ---
 
 # Linear Algebra
@@ -955,6 +960,6 @@ $$
 ----
 
 
-[^1]: See Bishop 1.2 and Murphy 2.2, although they also assume that most of the content is known ahead of time.
+[^1]: See [Bishop 1.2](https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf) and [Murphy 2.2](https://probml.github.io/pml-book/book0.html), although they also assume that most of the content is known ahead of time.
 
 [^2]: See the [Wikipedia](https://en.wikipedia.org/wiki/Probability_density_function#Function_of_random_variables_and_change_of_variables_in_the_probability_density_function) page for the change of variables for a slightly more organized explanation of what's happening here.
