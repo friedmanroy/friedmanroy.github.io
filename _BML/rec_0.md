@@ -953,4 +953,4 @@ $$
 
 [^1]: See Bishop 1.2 and Murphy 2.2, although they also assume that most of the content is known ahead of time.
 
-[^2]: See the [Wikipedia](https://en.wikipedia.org/wiki/Probability_density_function\#Function_of_random_variables_and_change_of_variables_in_the_probability_density_function) page for the change of variables for a slightly more organized explanation of what's happening here.
+[^2]: See the [Wikipedia](https://en.wikipedia.org/wiki/Probability_density_function#Function_of_random_variables_and_change_of_variables_in_the_probability_density_function) page for the change of variables for a slightly more organized explanation of what's happening here.
