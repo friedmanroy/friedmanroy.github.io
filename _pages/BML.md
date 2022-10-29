@@ -30,7 +30,7 @@ The following posts contain the summaries of lessons in the Bayesian Machine Lea
 
       <p>{{ post.description }}</p>
       <p class="post-meta">
-        {{ read_time }} min read &nbsp; &middot; &nbsp;
+        {{ read_time }} min read &nbsp;
       </p>
 
     </li>
