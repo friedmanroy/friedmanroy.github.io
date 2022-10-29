@@ -12,6 +12,8 @@ toc:
   - name: Linear Algebra
   - name: Derivatives
   - name: Probability
+
+place: 20
 ---
 
 # Linear Algebra
