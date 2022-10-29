@@ -16,16 +16,16 @@ toc:
        - name: Singular Value Decomposition
        - name: Determinant and Trace
        - name: Positive Semi-Definite Matrices
-  - name: Derivatives
-	   - name: Jacobian
-	   - name: Chain Rule
+  - name: Derivatives.  
+       - name: Jacobian
+       - name: Chain Rule
   - name: Probability
-	   - name: Discrete Probabilities
-	   - name: Continuous Probabilities
-	   - name: Expectation
-	   - name: Variance and Covariance
-	   - name: Random Vectors
-	   - name: Change of Variable
+       - name: Discrete Probabilities
+       - name: Continuous Probabilities
+       - name: Expectation
+       - name: Variance and Covariance
+       - name: Random Vectors
+       - name: Change of Variable
 ---
 
 # Linear Algebra
