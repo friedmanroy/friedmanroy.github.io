@@ -372,11 +372,11 @@ $$\begin{equation}
 \end{equation}
 $$
 
-(note that the **determinant doesn't have to be positive** even though we write $\textbar A\textbar$ !). We can think of the determinant as a measure for how much the space is stretched by the transformation that $A$ implies. If $\textbar A\textbar=0$ , $A$ will be called _singular_ and will not be invertible. The term singular originates from the fact that if one of the eigenvalues of the matrix is equal to zero, then there is a direction from which all points are transformed into the origin by the matrix. In turn, there can be no inverse transformation that will move the points from the origin back to their original positions, which is why a singular matrix is not invertible. Two useful properties of determinants are:
+(note that the **determinant doesn't have to be positive** even though we write $\mid A\mid$ !). We can think of the determinant as a measure for how much the space is stretched by the transformation that $A$ implies. If $\mid A\mid=0$ , $A$ will be called _singular_ and will not be invertible. The term singular originates from the fact that if one of the eigenvalues of the matrix is equal to zero, then there is a direction from which all points are transformed into the origin by the matrix. In turn, there can be no inverse transformation that will move the points from the origin back to their original positions, which is why a singular matrix is not invertible. Two useful properties of determinants are:
 
-* $\textbar A^{-1}\textbar=\frac{1}{\textbar A\textbar}$
+* $\mid A^{-1}\mid=\frac{1}{\mid A\mid}$
 
-* If $A$ and $B$ are square matrices, then $\textbar AB\textbar=\textbar A\textbar \textbar B\textbar$
+* If $A$ and $B$ are square matrices, then $\mid AB\mid=\mid A\mid \mid B\mid$
 
 
 The _trace_ of a square matrix $A$ is defined as:
