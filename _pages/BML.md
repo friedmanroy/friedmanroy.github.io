@@ -5,11 +5,6 @@ permalink: /BML/
 nav: true
 nav_order: 2
 horizontal: false
-pagination:
-  enabled: true
-  per_page: 20
-  sort_field: place
-  sort_reverse: false
 ---
 
 
@@ -42,5 +37,4 @@ The following posts contain the summaries of lessons in the Bayesian Machine Lea
 
     {% endfor %}
   </ul>
-{% include pagination.html %}
 </div>
