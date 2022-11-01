@@ -438,8 +438,8 @@ then $p\left(x\right)$ and $p\left(x\mid y\right)$ will be Gaussians^[3], and we
 Once you fully understand why each method works, it will become quite clear when you should use each of them.
 
 
-[1]: See [Bishop 2.3](https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf) for a _much_ more extensive introduction to the Gaussian distribution
+[^1]: See [Bishop 2.3](https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf) for a _much_ more extensive introduction to the Gaussian distribution
 
-[2]: We can also do this when $A$ is not invertible, in which case we will need to use the pseudo-inverse of $A$ such that $AA^{\dagger}=I$ . 
+[^2]: We can also do this when $A$ is not invertible, in which case we will need to use the pseudo-inverse of $A$ such that $AA^{\dagger}=I$ . 
 
-[3]: This is a slightly more general statement than what we showed here, but you can verify the validity for yourself in these cases as well
+[^3]: This is a slightly more general statement than what we showed here, but you can verify the validity for yourself in these cases as well
