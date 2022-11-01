@@ -14,7 +14,7 @@ toc:
 place: 2
 ---
 
-The distribution that is seen most often in ML (and statistics) is the Gaussian distribution, also called the _normal distribution_. The reason this distribution is so commonly used is because of two reasons: it is empirically observed in the wild many times and, perhaps more importantly, it is mathematically very simple to use the Gaussian distribution (we will see exactly how later on). This post will delve into the definition and properties of the Gaussian distribution.
+The distribution that is seen most often in ML (and statistics) is the Gaussian distribution, also called the _normal distribution_. The reason this distribution is so commonly used is because of two reasons: it is empirically observed in the wild many times and, perhaps more importantly, it is mathematically very simple to use the Gaussian distribution (we will see exactly how later on). This post will delve into the definition and properties of the Gaussian distribution[^1].
 
 # Definition
 
@@ -45,9 +45,9 @@ The conditioning sign (or semi-colon) in $\mathcal{N}\left(x\,\mid \,\mu,\sigma^
 
 <p align="center">
 <img  
-src="https://github.com/friedmanroy/friedmanroy.github.io/assets/bml_figs/rec_1/1D_vis.png"  
+src="https://friedmanroy.github.io/assets/bml_figs/rec_1/1D_vis.png"  
 alt="Visualization of a 1D Gaussian"  
-style="display: inline-block; margin: 0 auto; max-width: 300px">
+style="display: inline-block; margin: 0 auto; ">
 </p>
 <div class="caption">
     Figure 1: examples of 1D Gaussian distributions with different means ( $\mu$ ) and standard deviations ( $\sigma$ ).
@@ -70,9 +70,9 @@ the _multivariate normal_ (MVN) distribution.
 
 <p align="center">
 <img  
-src="https://github.com/friedmanroy/friedmanroy.github.io/assets/bml_figs/rec_1/2D_vis.png"  
+src="https://friedmanroy.github.io/assets/bml_figs/rec_1/2D_vis.png"  
 alt="Visualization of a 2D Gaussian"  
-style="display: inline-block; margin: 0 auto; max-width: 300px">
+style="display: inline-block; margin: 0 auto;">
 </p>
 <div class="caption">
     Figure 2: example of a 2D Gaussian distribution. On the left is the heatmap of the distribution - darker means higher density. On the right is the contour at $\Delta=1$ overlayed on top of samples from the distribution. The contours of the distribution are ellipses aligned and scaled according to the eigenvectors and eigenvalues of the covariance matrix.
@@ -258,10 +258,188 @@ p\left(x_{a}\mid x_{b}\right) & =\mathcal{N}\left(x_{a}\,\mid \,\mu_{a\mid b},\S
 \Sigma_{a\mid b} & =\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba}\nonumber 
 \end{align}
 $$
-Note that in this case, the conditional distribution is much easier to describe in terms of the precision matrix instead of the covariance matrix. When implementing the code for this, it may be simpler to save the precision matrix (as well as the covariance matrix) in memory to easily compute the conditional distribution.
+Note that in this case, the conditional distribution is much easier to describe in terms of the precision matrix instead of the covariance matrix. 
+
+When implementing the code for this, it may be simpler to save the precision matrix (as well as the covariance matrix) in memory to easily compute the conditional distribution.
 
 
-![](/assets/bml_figs/rec_1/cond_vis.png "Conditional of a 2D Gaussian")
+<p align="center">
+<img  
+src="https://friedmanroy.github.io/assets/bml_figs/rec_1/cond_vis.png"  
+alt="Visualization of a 1D Gaussian"  
+style="display: inline-block; margin: 0 auto; ">
+</p>
 <div class="caption">
     Figure 3: visualization of the conditional of a bivariate Gaussian; plots of $p\left(x_{a}\mid x_{b}\right)$ for various values of $x_{b}$ . Notice how the variance doesn't change for different values of $x_{b}$ , only the mean of the conditional.
 </div>
+
+# Completing the Squares
+
+While the derivative trick is very useful, we can't always use it, since we might lose information that we want to keep when differentiating. In such cases, we can use a different trick - completing the squares. 
+
+"Completing the squares" means that we want to turn a quadratic _function_ into the quadratic _form_ (plus some residuals). Suppose we have the following expression:
+$$
+\begin{equation}
+f\left(x\right)=x^{T}Ax+2x^{T}b+c
+\end{equation}
+$$
+In this case, completing the squares means we would like to bring $f\left(x\right)$ to the form:
+$$
+\begin{equation}
+f\left(x\right)=\underbrace{\left(x+\boxed{?}\right)^{T}\boxed{\boxed{?}}\left(x+\boxed{?}\right)}_{\text{depends on }x}+\underbrace{g\left(A,b,c\right)}_{\text{const w.r.t }x}
+\end{equation}
+$$
+where $\boxed{?}$ stands in for some vector and $\boxed{\boxed{?}}$ stands in for some matrix. For the case presented above, we can do so in the following manner (assuming $A$ is invertible^[2]):
+$$
+\begin{align}
+\label{eq:quad-full}
+f\left(x\right) & =x^{T}Ax+2x^{T}b+c\\
+ & =x^{T}Ax+2x^{T}AA^{-1}b+c\\
+ & =x^{T}Ax+2x^{T}AA^{-1}b-b^{T}A^{-1}AA^{-1}b+b^{T}A^{-1}AA^{-1}b+c\\
+ & =\left(x+A^{-1}b\right)^{T}A\left(x+A^{-1}b\right)-\underbrace{b^{T}A^{-1}b+c}_{\text{const w.r.t }x}
+\end{align}
+$$
+
+Having written down the full quadratic form in \eqref{eq:quad-full}, we can now understand which terms we lose when we use the derivative trick. When we differentiate $f\left(\cdot\right)$ with respect to $x$ , we willingly drop all of the terms that are constant with respect to $x$ - in this case, we would lose all information regarding $g\left(A,b,c\right)$ . 
+
+For example, suppose we want to find:
+$$
+\begin{equation}
+p\left(y\right)\propto\intop\exp\left[-\frac{1}{2}\left(x^{T}\Gamma x+2x^{T}h\left(y\right)\right)\right]dx
+\end{equation}
+$$
+If we use the derivative trick to find the form of the Gaussian in the exponent, we would lose all information regarding $y$ ! This information is obviously important - we want to find $p\left(y\right)$ , after all. Instead, plugging into the formula from \eqref{eq:quad-full}, we have:
+$$
+\begin{align}
+\intop\exp\left[-\frac{1}{2}\left(x^{T}\Gamma x+2x^{T}h\left(y\right)\right)\right]dx & =\intop\exp\left[-\frac{1}{2}\left(x-\Gamma^{-1}h\left(y\right)\right)^{T}\Gamma\left(x-\Gamma^{-1}h\left(y\right)\right)+\frac{1}{2}h\left(y\right)^{T}\Gamma^{-1}h\left(y\right)\right]dx\\
+ & \propto e^{\frac{1}{2}h\left(y\right)^{T}\Gamma^{-1}h\left(y\right)}\intop\mathcal{N}\left(x\,\mid \,\Gamma^{-1}h\left(y\right),\Gamma^{-1}\right)dx\\
+ & =e^{\frac{1}{2}h\left(y\right)^{T}\Gamma^{-1}h\left(y\right)}\propto p\left(y\right)
+\end{align}
+$$
+
+---
+
+## Marginal Distribution of a Gaussian
+
+Another important property of the Gaussian distribution is that its marginals are also Gaussian, which is what we will show here.
+
+Again, we consider a Gaussian variable separated into 2 parts:
+$$
+\left(\begin{matrix}x_{a}\\
+x_{b}
+\end{matrix}\right)\sim\mathcal{N}\left(\left(\begin{matrix}\mu_{a}\\
+\mu_{b}
+\end{matrix}\right),\left(\begin{matrix}\Sigma_{aa} & \Sigma_{ab}\\
+\Sigma_{ba} & \Sigma_{bb}
+\end{matrix}\right)\right)
+$$
+and we will again define $\Lambda=\Sigma^{-1}$ . We want to find $p\left(x_{a}\right)$ .
+
+
+Our battle plan is to first find all of the dependence on $x_{b}$ ,
+and to integrate it out. If we can do this without losing track of
+$x_{a}$ , we will be able to find the marginal distribution and win.
+Notice that the Mahalanobis distance is quadratic in $x_{b}$ (as
+usual), so the final form we will get to will be something like:
+
+$$
+p\left(x_{a}\right)=f\left(x_{a}\right)\intop\mathcal{N}\left(x_{b}\,\mid \,\mu_{x_{b}},\Sigma_{x_{b}}\right)dx_{b}=f\left(x_{a}\right)
+$$
+
+So, let's try to open up the Mahalanobis distance (the part in the
+exponent) and separate it into two groups: terms that contain $x_{b}$
+and those that don't. 
+
+
+We begin by defining $y=x-\mu$ , which in this case will allow us
+to write the Mahalanobis distance as:
+$$
+\begin{align}
+\Delta & =\frac{1}{2}\left(\begin{matrix}y_{a}\\
+y_{b}
+\end{matrix}\right)^{T}\left(\begin{matrix}\Lambda_{a} & B\\
+B^{T} & \Lambda_{b}
+\end{matrix}\right)\left(\begin{matrix}y_{a}\\
+y_{b}
+\end{matrix}\right)\nonumber \\
+ & =\frac{1}{2}\left(\begin{matrix}y_{a}\\
+y_{b}
+\end{matrix}\right)^{T}\left(\begin{matrix}\Lambda_{a}y_{a}+By_{b}\\
+B^{T}y_{a}+\Lambda_{b}y_{b}
+\end{matrix}\right)\nonumber \\
+ & =\frac{1}{2}y_{a}^{T}\Lambda_{a}y_{a}+\underbrace{\frac{1}{2}\left[2y_{b}^{T}By_{a}+y_{b}^{T}\Lambda_{b}y_{b}\right]}_{\left(*\right)}
+\end{align}
+$$
+Note that if we find the marginal of $y_{a}$ , we effectively find the marginal of $x_{a}$ , only we don't have to keep track of $\mu_{a}$ and $\mu_{b}$ ! We now need to complete the squares in $\left(*\right)$ to find the complete dependence on $y_{b}$ :
+$$
+\begin{align}
+2y_{b}^{T}By_{a}+y_{b}^{T}\Lambda_{b}y_{b} & =y_{b}^{T}\Lambda_{b}y_{b}+2y_{b}^{T}By_{a}\nonumber \\
+ & =y_{b}^{T}\Lambda_{b}y_{b}+2y_{b}^{T}\Lambda_{b}\Lambda_{b}^{-1}By_{a}\nonumber \\
+ & =y_{b}^{T}\Lambda_{b}y_{b}+2y_{b}^{T}\Lambda_{b}\Lambda_{b}^{-1}By_{a}+y_{a}^{T}B^{T}\Lambda_{b}^{-1}\Lambda_{b}\Lambda_{b}^{-1}By_{a}-y_{a}^{T}B^{T}\Lambda_{b}^{-1}\Lambda_{b}\Lambda_{b}^{-1}By_{a}\nonumber \\
+ & =\left(y_{b}+\Lambda_{b}^{-1}By_{a}\right)^{T}\Lambda_{b}\left(y_{b}+\Lambda_{b}^{-1}By_{a}\right)-y_{a}^{T}B^{T}\Lambda_{b}^{-1}By_{a}
+\end{align}
+$$
+
+We add this back to the full Mahalanobis distance to get:
+$$
+\begin{equation}
+\Delta=\frac{1}{2}y_{a}^{T}\left(\Lambda_{a}-B^{T}\Lambda_{b}^{-1}B\right)y_{a}+\frac{1}{2}\left(y_{b}+\Lambda_{b}^{-1}By_{a}\right)^{T}\Lambda_{b}\left(y_{b}+\Lambda_{b}^{-1}By_{a}\right)
+\end{equation}
+$$
+
+So our distribution is:
+
+$$
+\begin{align}
+p\left(y_{a}\right) & \propto\exp\left[-\frac{1}{2}y_{a}^{T}\left(\Lambda_{a}-B^{T}\Lambda_{b}^{-1}B\right)y_{a}\right]\intop\exp\left[-\frac{1}{2}\left(y_{b}+\Lambda_{b}^{-1}By_{a}\right)^{T}\Lambda_{b}\left(y_{b}+\Lambda_{b}^{-1}By_{a}\right)\right]dy_{b}\nonumber \\
+ & \propto\exp\left[-\frac{1}{2}y_{a}^{T}\left(\Lambda_{a}-B^{T}\Lambda_{b}^{-1}B\right)y_{a}\right]
+\end{align}
+$$
+
+which is definitely Gaussian! We were allowed to do the second move because the integral will be the normalization term of the Gaussian, which is a function of $\Lambda_{b}$ - which is constant with respect to $y_{a}$ (and so is eaten up by the $\propto$ sign).
+
+Finally, we see that:
+$$
+\begin{equation}
+y_{a}\sim\mathcal{N}\left(0,\left(\Lambda_{a}-B^{T}\Lambda_{b}^{-1}B\right)^{-1}\right)\Rightarrow x_{a}\sim\mathcal{N}\left(\mu_{a},\left(\Lambda_{a}-B^{T}\Lambda_{b}^{-1}B\right)^{-1}\right)
+\end{equation}
+$$
+
+and all that remains is to find what the covariance is equal to in terms of $\Sigma$ . To do this, we use the same identity we saw in the previous example:
+$$
+\begin{equation}
+\Sigma_{aa}=\left(\Lambda_{aa}-B^{T}\Lambda_{b}^{-1}B\right)^{-1}
+\end{equation}
+$$
+
+So, the marginal is:
+$$
+\begin{equation}
+x_{a}\sim\mathcal{N}\left(\mu_{a},\Sigma_{aa}\right)
+\end{equation}
+$$
+which really makes you wonder why we did all of that hard work.
+
+# Extras 
+
+We saw the so called "derivative trick" and how completing the squares can also be of help, but it might not be obvious when to use each approach. First, remember that whenever we see a distribution of the form:
+$$
+\begin{equation}
+p\left(x,y\right)\propto\exp\left[-x^{T}\Gamma x+b\left(y\right)^{T}x+g\left(y\right)\right]
+\end{equation}
+$$
+
+then $p\left(x\right)$ and $p\left(x\mid y\right)$ will be Gaussians^[3], and we will usually want to find the "Gaussian form" we know and love. Once we figured that out, we can try to ask "how can we find the Gaussian form?", and the answer will usually be one of the following methods:
+
+* If we don't care about $p\left(y\right)$ or $p\left(y\mid x\right)$ at all, i.e. we want to specifically find $p\left(x\right)$ or $p\left(x\mid y\right)$ , then we can use the derivative trick
+* If we need to know $p\left(y\right)$ or $p\left(y\mid x\right)$ explicitly as well as $p\left(x\right)$ or $p\left(x\mid y\right)$ , then completing the squares is usually the easiest way
+* When all else fails, but we know that what we are looking for is Gaussian, we can calculate the expectations and covariance explicitly, since a Gaussian is completely defined by these two values
+
+Once you fully understand why each method works, it will become quite clear when you should use each of them.
+
+
+[1]: See [Bishop 2.3](https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf) for a _much_ more extensive introduction to the Gaussian distribution
+
+[2]: We can also do this when $A$ is not invertible, in which case we will need to use the pseudo-inverse of $A$ such that $AA^{\dagger}=I$ . 
+
+[3]: This is a slightly more general statement than what we showed here, but you can verify the validity for yourself in these cases as well
