@@ -44,7 +44,13 @@ $$
 
 The conditioning sign (or semi-colon) in $\mathcal{N}\left(x\,\mid \,\mu,\sigma^{2}\right)$ is to show that $x$ is the variable that we are interested in, while $\mu$ and $\sigma$ are the parameters that define the distribution (so, given a $\mu$ and a $\sigma$, we know the PDF of $x$ ). 
 
+
 ![](/assets/bml_figs/rec_1/1D_vis.png "1D of a Gaussian")
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/bml_figs/rec_1/1D_vis.png" class="img-fluid z-depth-1" %}
+    </div>
+</div>
 <div class="caption">
     Figure 1: examples of 1D Gaussian distributions with different means ( $\mu$ ) and standard deviations ( $\sigma$ ).
 </div>
@@ -55,7 +61,7 @@ is defined as:
 
 $$
 \begin{equation}
-\mathcal{N}\left(x\,\mid \,\mu,\Sigma\right)=\frac{1}{\sqrt{\left(2\pi\right)^{d}\left\mid \Sigma\right\mid }}\exp\left[-\frac{1}{2}\left(x-\mu\right)^{T}\Sigma^{-1}\left(x-\mu\right)\right]
+\mathcal{N}\left(x\,\mid \,\mu,\Sigma\right)=\frac{1}{\sqrt{\left(2\pi\right)^{d}\mid \Sigma\mid }}\exp\left[-\frac{1}{2}\left(x-\mu\right)^{T}\Sigma^{-1}\left(x-\mu\right)\right]
 \end{equation}
 $$
 
@@ -63,7 +69,9 @@ and in this case $\mu$ is also a vector and $\Sigma$ is a symmetrical $n\times n
 the _multivariate normal_ (MVN) distribution.
 
 <div class="row mt-3">
-![](/assets/bml_figs/rec_1/2D_vis.png "Visualization of a 2D Gaussian")
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/bml_figs/rec_1/2D_vis.png" class="img-fluid z-depth-1" %}
+    </div>
 </div>
 <div class="caption">
     Figure 2: example of a 2D Gaussian distribution. On the left is the heatmap of the distribution - darker means higher density. On the right is the contour at $\Delta=1$ overlayed on top of samples from the distribution. The contours of the distribution are ellipses aligned and scaled according to the eigenvectors and eigenvalues of the covariance matrix.
