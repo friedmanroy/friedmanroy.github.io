@@ -29,9 +29,7 @@ Notice that this distribution can be completely described by the two parameters 
 
 $$
 \begin{equation}
-
 x\sim\mathcal{N}\left(\mu,\sigma^{2}\right)
-
 \end{equation}
 $$
 to indicate that $x$ is a Gaussian random variable, with the two parameters $\mu$ and $\sigma$ . In the same manner, we denote the PDF by:
@@ -45,12 +43,10 @@ $$
 The conditioning sign (or semi-colon) in $\mathcal{N}\left(x\,\mid \,\mu,\sigma^{2}\right)$ is to show that $x$ is the variable that we are interested in, while $\mu$ and $\sigma$ are the parameters that define the distribution (so, given a $\mu$ and a $\sigma$, we know the PDF of $x$ ). 
 
 
-![](/assets/bml_figs/rec_1/1D_vis.png "1D of a Gaussian")
-<div class="row mt-3">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/bml_figs/rec_1/1D_vis.png" class="img-fluid z-depth-1" %}
-    </div>
-</div>
+<img  
+src="assets/bml_figs/rec_1/1D_vis.png"  
+alt="Visualization of a 1D Gaussian"  
+style="display: inline-block; margin: 0 auto; max-width: 300px">
 <div class="caption">
     Figure 1: examples of 1D Gaussian distributions with different means ( $\mu$ ) and standard deviations ( $\sigma$ ).
 </div>
@@ -68,11 +64,11 @@ $$
 and in this case $\mu$ is also a vector and $\Sigma$ is a symmetrical $n\times n$ matrix. The term $D_{M}\left(x\,\mid \,\mu,\Sigma\right)^{2}=\left(x-\mu\right)^{T}\Sigma^{-1}\left(x-\mu\right)$ is often called the _Mahalanobis distance_ and is denoted with $\Delta$. The multivariate version for the Gaussian distribution is also called
 the _multivariate normal_ (MVN) distribution.
 
-<div class="row mt-3">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/bml_figs/rec_1/2D_vis.png" class="img-fluid z-depth-1" %}
-    </div>
-</div>
+
+<img  
+src="assets/bml_figs/rec_1/2D_vis.png"  
+alt="Visualization of a 2D Gaussian"  
+style="display: inline-block; margin: 0 auto; max-width: 300px">
 <div class="caption">
     Figure 2: example of a 2D Gaussian distribution. On the left is the heatmap of the distribution - darker means higher density. On the right is the contour at $\Delta=1$ overlayed on top of samples from the distribution. The contours of the distribution are ellipses aligned and scaled according to the eigenvectors and eigenvalues of the covariance matrix.
 </div>
