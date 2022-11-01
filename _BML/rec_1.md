@@ -38,11 +38,11 @@ to indicate that $x$ is a Gaussian random variable, with the two parameters $\mu
 
 $$
 \begin{equation}
-p\left(x\right)=\mathcal{N}\left(x\,|\,\mu,\sigma^{2}\right)\qquad{\scriptstyle \left(\equiv\mathcal{N}\left(x\,;\,\mu,\sigma^{2}\right)\right)}
+p\left(x\right)=\mathcal{N}\left(x\,\mid \,\mu,\sigma^{2}\right)\qquad{\scriptstyle \left(\equiv\mathcal{N}\left(x\,;\,\mu,\sigma^{2}\right)\right)}
 \end{equation}
 $$
 
-The conditioning sign (or semi-colon) in $\mathcal{N}\left(x\,|\,\mu,\sigma^{2}\right)$ is to show that $x$ is the variable that we are interested in, while $\mu$ and $\sigma$ are the parameters that define the distribution (so, given a $\mu$ and a $\sigma$, we know the PDF of $x$ ). 
+The conditioning sign (or semi-colon) in $\mathcal{N}\left(x\,\mid \,\mu,\sigma^{2}\right)$ is to show that $x$ is the variable that we are interested in, while $\mu$ and $\sigma$ are the parameters that define the distribution (so, given a $\mu$ and a $\sigma$, we know the PDF of $x$ ). 
 
 ![](/assets/bml_figs/rec_1/1D_vis.png "1D of a Gaussian")
 <div class="caption">
@@ -55,14 +55,16 @@ is defined as:
 
 $$
 \begin{equation}
-\mathcal{N}\left(x\,|\,\mu,\Sigma\right)=\frac{1}{\sqrt{\left(2\pi\right)^{d}\left|\Sigma\right|}}\exp\left[-\frac{1}{2}\left(x-\mu\right)^{T}\Sigma^{-1}\left(x-\mu\right)\right]
+\mathcal{N}\left(x\,\mid \,\mu,\Sigma\right)=\frac{1}{\sqrt{\left(2\pi\right)^{d}\left\mid \Sigma\right\mid }}\exp\left[-\frac{1}{2}\left(x-\mu\right)^{T}\Sigma^{-1}\left(x-\mu\right)\right]
 \end{equation}
 $$
 
-and in this case $\mu$ is also a vector and $\Sigma$ is a symmetrical $n\times n$ matrix. The term $D_{M}\left(x\,|\,\mu,\Sigma\right)^{2}=\left(x-\mu\right)^{T}\Sigma^{-1}\left(x-\mu\right)$ is often called the _Mahalanobis distance_ and is denoted with $\Delta$. The multivariate version for the Gaussian distribution is also called
+and in this case $\mu$ is also a vector and $\Sigma$ is a symmetrical $n\times n$ matrix. The term $D_{M}\left(x\,\mid \,\mu,\Sigma\right)^{2}=\left(x-\mu\right)^{T}\Sigma^{-1}\left(x-\mu\right)$ is often called the _Mahalanobis distance_ and is denoted with $\Delta$. The multivariate version for the Gaussian distribution is also called
 the _multivariate normal_ (MVN) distribution.
 
+<div class="row mt-3">
 ![](/assets/bml_figs/rec_1/2D_vis.png "Visualization of a 2D Gaussian")
+</div>
 <div class="caption">
     Figure 2: example of a 2D Gaussian distribution. On the left is the heatmap of the distribution - darker means higher density. On the right is the contour at $\Delta=1$ overlayed on top of samples from the distribution. The contours of the distribution are ellipses aligned and scaled according to the eigenvectors and eigenvalues of the covariance matrix.
 </div>
@@ -98,7 +100,7 @@ This allows us to rewrite the Mahalanobis distance as follows:
 $$
 \begin{align}
 \label{eq:gauss-ellipse}
-\Delta & \equiv D_{M}\left(x\,|\,\mu,\Sigma\right)^{2}\\
+\Delta & \equiv D_{M}\left(x\,\mid \,\mu,\Sigma\right)^{2}\\
  & =\sum_{i}\frac{1}{\lambda_{i}}\left(x-\mu\right)^{T}u_{i}u_{i}^{T}\left(x-\mu\right)\\
  & =\sum_{i}\frac{\left(u_{i}^{T}\left(x-\mu\right)\right)^{2}}{\lambda_{i}}\equiv\sum_{i}\frac{y_{i}^{2}}{\lambda_{i}}
 \end{align}
@@ -172,14 +174,14 @@ $$
 $$
 Note that $\Lambda_{aa}\neq\Sigma_{aa}^{-1}$ ! Later we will find out how each part of $\Lambda$ relates to each part of $\Sigma$ .
 
-Let's start by finding an expression for the conditional distribution $p\left(x_{a}|x_{b}\right)$ . We can find this distribution by evaluating the distribution of $p\left(x_{a},x_{b}\right)$ while fixing $x_{b}$ to a certain value and re-normalizing (the conditional distribution is a legal distribution). We will start by rewriting the quadratic term and it's parts:
+Let's start by finding an expression for the conditional distribution $p\left(x_{a}\mid x_{b}\right)$ . We can find this distribution by evaluating the distribution of $p\left(x_{a},x_{b}\right)$ while fixing $x_{b}$ to a certain value and re-normalizing (the conditional distribution is a legal distribution). We will start by rewriting the quadratic term and it's parts:
 $$
 \begin{align}
 -\frac{1}{2}\left(x-\mu\right)^{T}\Lambda\left(x-\mu\right)=-\frac{1}{2}\left[\left(x_{a}-\mu_{a}\right)^{T}\Lambda_{aa}\left(x_{a}-\mu_{a}\right)\right. & +\left(x_{a}-\mu_{a}\right)^{T}\Lambda_{ab}\left(x_{b}-\mu_{b}\right)\nonumber \\
 +\left(x_{b}-\mu_{b}\right)^{T}\Lambda_{ba}\left(x_{a}-\mu_{a}\right) & \left.+\left(x_{b}-\mu_{b}\right)^{T}\Lambda_{bb}\left(x_{b}-\mu_{b}\right)\right]
 \end{align}
 $$
-This is still a quadratic expression w.r.t. $x_{a}$ , so the conditional distribution $p\left(x_{a}|x_{b}\right)$ will also be Gaussian. Because the form of the Gaussian is not very flexible, as long as we find what the quadratic term is equal (the one in the exponent), the normalization will work itself out (since the conditional is also a distribution that must integrate up to 1). 
+This is still a quadratic expression w.r.t. $x_{a}$ , so the conditional distribution $p\left(x_{a}\mid x_{b}\right)$ will also be Gaussian. Because the form of the Gaussian is not very flexible, as long as we find what the quadratic term is equal (the one in the exponent), the normalization will work itself out (since the conditional is also a distribution that must integrate up to 1). 
 
 We can now use the derivative trick! Defining:
 $$
@@ -199,19 +201,19 @@ $$
 \begin{split}\frac{\partial^{2}\Delta}{\partial x_{a}\partial x_{a}^{T}} & =\Lambda_{aa}\end{split}
 \end{equation}
 $$
-So we know that the covariance is equal to $\Sigma_{a|b}=\Lambda_{aa}^{-1}$ . Using this new found knowledge, we can find the mean, if we can rewrite equation \eqref{eq:mean-form-1} as $\Lambda_{aa}\left(x_{a}-\mu_{a|b}\right)$ for some $\mu_{a|b}$ . Let's try to do this. Recall that $\Lambda_{aa}$ is invertible, so we can write:
+So we know that the covariance is equal to $\Sigma_{a\mid b}=\Lambda_{aa}^{-1}$ . Using this new found knowledge, we can find the mean, if we can rewrite equation \eqref{eq:mean-form-1} as $\Lambda_{aa}\left(x_{a}-\mu_{a\mid b}\right)$ for some $\mu_{a\mid b}$ . Let's try to do this. Recall that $\Lambda_{aa}$ is invertible, so we can write:
 $$
 \begin{align}
 \Lambda_{aa}\left(x_{a}-\mu_{a}\right)+\Lambda_{ab}\left(x_{b}-\mu_{b}\right) & =\Lambda_{aa}\left(x_{a}-\mu_{a}+\Lambda_{aa}^{-1}\Lambda_{ab}\left(x_{b}-\mu_{b}\right)\right)\nonumber \\
  & =\Lambda_{aa}\left[x_{a}-\left(\mu_{a}-\Lambda_{aa}^{-1}\Lambda_{ab}\left(x_{b}-\mu_{b}\right)\right)\right]\nonumber \\
- & \stackrel{\Delta}{=}\Lambda_{aa}\left(x_{a}-\mu_{a|b}\right)
+ & \stackrel{\Delta}{=}\Lambda_{aa}\left(x_{a}-\mu_{a\mid b}\right)
 \end{align}
 $$
 Which means that the conditional distribution is parameterized by:
 $$
 \begin{align}
-\mu_{a|b} & =\mu_{a}-\Lambda_{aa}^{-1}\Lambda_{ab}\left(x_{b}-\mu_{b}\right)\\
-\Sigma_{a|b} & =\Lambda_{aa}^{-1}
+\mu_{a\mid b} & =\mu_{a}-\Lambda_{aa}^{-1}\Lambda_{ab}\left(x_{b}-\mu_{b}\right)\\
+\Sigma_{a\mid b} & =\Lambda_{aa}^{-1}
 \end{align}
 $$
 
@@ -237,9 +239,9 @@ $$
 Finally, we have the expressions needed to describe the conditional distribution:
 $$
 \begin{align}
-p\left(x_{a}|x_{b}\right) & =\mathcal{N}\left(x_{a}\,|\,\mu_{a|b},\Sigma_{a|b}\right)\\
-\mu_{a|b} & =\mu_{a}+\Sigma_{ab}\Sigma_{bb}^{-1}\left(x_{b}-\mu_{b}\right)\nonumber \\
-\Sigma_{a|b} & =\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba}\nonumber 
+p\left(x_{a}\mid x_{b}\right) & =\mathcal{N}\left(x_{a}\,\mid \,\mu_{a\mid b},\Sigma_{a\mid b}\right)\\
+\mu_{a\mid b} & =\mu_{a}+\Sigma_{ab}\Sigma_{bb}^{-1}\left(x_{b}-\mu_{b}\right)\nonumber \\
+\Sigma_{a\mid b} & =\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba}\nonumber 
 \end{align}
 $$
 Note that in this case, the conditional distribution is much easier to describe in terms of the precision matrix instead of the covariance matrix. When implementing the code for this, it may be simpler to save the precision matrix (as well as the covariance matrix) in memory to easily compute the conditional distribution.
@@ -247,5 +249,5 @@ Note that in this case, the conditional distribution is much easier to describe 
 
 ![](/assets/bml_figs/rec_1/cond_vis.png "Conditional of a 2D Gaussian")
 <div class="caption">
-    Figure 3: visualization of the conditional of a bivariate Gaussian; plots of $p\left(x_{a}|x_{b}\right)$ for various values of $x_{b}$ . Notice how the variance doesn't change for different values of $x_{b}$ , only the mean of the conditional.
+    Figure 3: visualization of the conditional of a bivariate Gaussian; plots of $p\left(x_{a}\mid x_{b}\right)$ for various values of $x_{b}$ . Notice how the variance doesn't change for different values of $x_{b}$ , only the mean of the conditional.
 </div>
