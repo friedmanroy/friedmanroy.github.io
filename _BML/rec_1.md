@@ -43,14 +43,17 @@ $$
 The conditioning sign (or semi-colon) in $\mathcal{N}\left(x\,\mid \,\mu,\sigma^{2}\right)$ is to show that $x$ is the variable that we are interested in, while $\mu$ and $\sigma$ are the parameters that define the distribution (so, given a $\mu$ and a $\sigma$, we know the PDF of $x$ ). 
 
 
+<p align="center">
 <img  
-src="assets/bml_figs/rec_1/1D_vis.png"  
+src="https://github.com/friedmanroy/friedmanroy.github.io/assets/bml_figs/rec_1/1D_vis.png"  
 alt="Visualization of a 1D Gaussian"  
 style="display: inline-block; margin: 0 auto; max-width: 300px">
+</p>
 <div class="caption">
     Figure 1: examples of 1D Gaussian distributions with different means ( $\mu$ ) and standard deviations ( $\sigma$ ).
 </div>
 
+---
 
 The multivariate version for a $d$ -dimensional random vector $x\in\mathbb{R}^{d}$
 is defined as:
@@ -65,10 +68,12 @@ and in this case $\mu$ is also a vector and $\Sigma$ is a symmetrical $n\times n
 the _multivariate normal_ (MVN) distribution.
 
 
+<p align="center">
 <img  
-src="assets/bml_figs/rec_1/2D_vis.png"  
+src="https://github.com/friedmanroy/friedmanroy.github.io/assets/bml_figs/rec_1/2D_vis.png"  
 alt="Visualization of a 2D Gaussian"  
 style="display: inline-block; margin: 0 auto; max-width: 300px">
+</p>
 <div class="caption">
     Figure 2: example of a 2D Gaussian distribution. On the left is the heatmap of the distribution - darker means higher density. On the right is the contour at $\Delta=1$ overlayed on top of samples from the distribution. The contours of the distribution are ellipses aligned and scaled according to the eigenvectors and eigenvalues of the covariance matrix.
 </div>
@@ -88,7 +93,9 @@ $$
 \Sigma u_{i}=\lambda_{i}u_{i}
 \end{equation}
 $$
-Recall that the eigenvectors are orthogonal to each other, and we can choose eigenvectors that are normalized, so for all $i\neq j$ we have $u_{i}^{T}u_{j}=0$ and $u_{i}^{T}u_{i}=1$ . We can rewrite this decomposition (using the basis defined by the eigenvectors) as:
+Recall that the eigenvectors are orthogonal to each other, and we can choose eigenvectors that are normalized, so for all $i\neq j$ we have $u_{i}^{T}u_{j}=0$ and $u_{i}^{T}u_{i}=1$ . 
+
+We can rewrite this decomposition (using the basis defined by the eigenvectors) as:
 $$
 \begin{align}
 \Sigma & =\sum_{i}\lambda_{i}u_{i}u_{i}^{T}
@@ -111,6 +118,7 @@ $$
 $$
 where we defined $y_{i}=u_{i}^{T}\left(x-\mu\right)$ . Notice that the density will be constant on the surfaces where $\Delta$ is constant. The shape described by \eqref{eq:gauss-ellipse} is an _ellipse_ with radii equal to $\lambda_{i}^{1/2}$ , centered around $\mu$ .
 
+
 This is really clear in the 2D case:
 $$
 \begin{equation}
@@ -118,6 +126,7 @@ $$
 \end{equation}
 $$
 So in 2D, all of the _contour lines_ (which are lines that have the same density along the PDF) will always be ellipses; in the multivariate case they will be ellipsoids (which is an ellipse in more dimensions, kind of). Figure 2 (right) shows this explicitly - the Gaussian is centered around the mean $\mu$ , the contour of $\Delta=1$ is an ellipse with axes aligned and scaled by the eigenvectors and square root of the eigenvalues of the covariance matrix.
+
 
 # The Derivative Trick
 
@@ -128,6 +137,7 @@ p\left(x\right)\propto\exp\left[-x^{T}\Gamma x+b^{T}x+c\right]
 \end{equation}
 $$
 is Gaussian (even though it doesn't seem like it at first). In this course, we will see distributions with a form similar to the above, but will want to find the actual parameters ( $\mu$ and $\Sigma$ ) that define the Gaussian, instead of leaving it as it is written above.
+
 
 However, we can go even further:
 $$
