@@ -289,7 +289,7 @@ $$
 f\left(x\right)=\underbrace{\left(x+\boxed{?}\right)^{T}\boxed{\boxed{?}}\left(x+\boxed{?}\right)}_{\text{depends on }x}+\underbrace{g\left(A,b,c\right)}_{\text{const w.r.t }x}
 \end{equation}
 $$
-where $\boxed{?}$ stands in for some vector and $\boxed{\boxed{?}}$ stands in for some matrix. For the case presented above, we can do so in the following manner (assuming $A$ is invertible^[2]):
+where $\boxed{?}$ stands in for some vector and $\boxed{\boxed{?}}$ stands in for some matrix. For the case presented above, we can do so in the following manner (assuming $A$ is invertible[^2]):
 $$
 \begin{align}
 \label{eq:quad-full}
@@ -429,7 +429,7 @@ p\left(x,y\right)\propto\exp\left[-x^{T}\Gamma x+b\left(y\right)^{T}x+g\left(y\r
 \end{equation}
 $$
 
-then $p\left(x\right)$ and $p\left(x\mid y\right)$ will be Gaussians^[3], and we will usually want to find the "Gaussian form" we know and love. Once we figured that out, we can try to ask "how can we find the Gaussian form?", and the answer will usually be one of the following methods:
+then $p\left(x\right)$ and $p\left(x\mid y\right)$ will be Gaussians[^3], and we will usually want to find the "Gaussian form" we know and love. Once we figured that out, we can try to ask "how can we find the Gaussian form?", and the answer will usually be one of the following methods:
 
 * If we don't care about $p\left(y\right)$ or $p\left(y\mid x\right)$ at all, i.e. we want to specifically find $p\left(x\right)$ or $p\left(x\mid y\right)$ , then we can use the derivative trick
 * If we need to know $p\left(y\right)$ or $p\left(y\mid x\right)$ explicitly as well as $p\left(x\right)$ or $p\left(x\mid y\right)$ , then completing the squares is usually the easiest way
