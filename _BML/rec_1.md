@@ -1,6 +1,6 @@
 ---
 layout: distill
-title: 2 Gaussian Distribution
+title: Gaussian Distribution
 description: The Gaussian distribution is hands-down the most-used distribution in machine learning. This post will go through key aspects of the normal distribution and its representations.
 
 authors:
@@ -9,7 +9,11 @@ authors:
       name: Hebrew University
 
 toc:
-  - name: 
+  - name: Definition
+  - name: Geometry of the Gaussian Distribution
+  - name: The Derivative Trick
+  - name: Completing the Squares
+  - name: Extras
 
 place: 2
 ---
@@ -273,6 +277,7 @@ style="display: inline-block; margin: 0 auto; ">
     Figure 3: visualization of the conditional of a bivariate Gaussian; plots of $p\left(x_{a}\mid x_{b}\right)$ for various values of $x_{b}$ . Notice how the variance doesn't change for different values of $x_{b}$ , only the mean of the conditional.
 </div>
 
+
 # Completing the Squares
 
 While the derivative trick is very useful, we can't always use it, since we might lose information that we want to keep when differentiating. In such cases, we can use a different trick - completing the squares. 
@@ -436,6 +441,8 @@ then $p\left(x\right)$ and $p\left(x\mid y\right)$ will be Gaussians[^3], and we
 * When all else fails, but we know that what we are looking for is Gaussian, we can calculate the expectations and covariance explicitly, since a Gaussian is completely defined by these two values
 
 Once you fully understand why each method works, it will become quite clear when you should use each of them.
+
+---
 
 
 [^1]: See [Bishop 2.3](https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf) for a _much_ more extensive introduction to the Gaussian distribution
