@@ -63,7 +63,7 @@ $$
 \hat{\theta}_{ML}\stackrel{\Delta}{=}\arg\max_{\theta}L\left(\theta\right)
 \end{equation}
 $$
-after all, if $\theta$ maximizes the likelihood, it is the most likely set of parameters to describe the distribution[^1]. This estimate is called the _maximum likelihood estimate_ (MLE) of the distribution and we will denote it by  $\hat{\theta}_{ML}$  (the  $\hat{}$  is to remember that it is an estimate and the  $_{ML}$  is to remember that it maximizes the likelihood). 
+after all, if $\theta$ maximizes the likelihood, it is the most likely set of parameters to describe the distribution[^1]. This estimate is called the _maximum likelihood estimate_ (MLE) of the distribution and we will denote it by  $\hat{\theta}\_{ML}$  (the  $\hat{}$  is to remember that it is an estimate and the  $\_{ML}$  is to remember that it maximizes the likelihood). 
 
 Also, usually the log-likelihood is maximized instead of the likelihood, defined as:
 $$
@@ -135,7 +135,7 @@ $$
  & =\arg\max_{\theta}p\left(\mathcal{D}\mid\theta\right)=\hat{\theta}_{ML}
 \end{align}
 $$
-So we see that the frequentist estimate $\hat{\theta}_{ML}$ is a special case of the Bayesian estimate  $\hat{\theta}_{MAP}$ !
+So we see that the frequentist estimate $\hat{\theta}\_{ML}$ is a special case of the Bayesian estimate  $\hat{\theta}\_{MAP}$ !
 
 Actually, we did something extremely fishy when we said that $p\left(\theta\right)$ is "uniform" - this isn't possible in many cases! A uniform probability over all of the real line $\mathbb{R}$ is impossible... so how can we even talk about this so called "uninformative prior"? While this is true, as long as the posterior $p\left(\theta\mid\mathcal{D}\right)$ is well defined, the MAP and MMSE estimates will still exist. In this special case, the frequentist and Bayesian world views collide, and it will be useful to keep this fact in mind.
 
