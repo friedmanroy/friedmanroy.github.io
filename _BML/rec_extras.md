@@ -1,6 +1,6 @@
 ---
 layout: distill
-title: Extras: Linear Algebra and Probability
+title: Extras - Linear Algebra and Probability
 description: Almost all of the material in linear algebra and probability needed to understand research in Bayesian machine learning.
 
 authors:
