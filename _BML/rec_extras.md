@@ -1,6 +1,6 @@
 ---
 layout: distill
-title: Linear Algebra and Probability
+title: Extras: Linear Algebra and Probability
 description: Almost all of the material in linear algebra and probability needed to understand research in Bayesian machine learning.
 
 authors:
@@ -12,8 +12,6 @@ toc:
   - name: Linear Algebra
   - name: Derivatives
   - name: Probability
-
-place: 20
 ---
 
 # Linear Algebra

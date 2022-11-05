@@ -1,6 +1,6 @@
 ---
 layout: distill
-title: Gaussian Distribution
+title: 1 - Gaussian Distribution
 description: The Gaussian distribution is hands-down the most-used distribution in machine learning. This post will go through key aspects of the normal distribution and its representations.
 
 authors:
@@ -15,7 +15,6 @@ toc:
   - name: Completing the Squares
   - name: Extras
 
-place: 2
 ---
 
 The distribution that is seen most often in ML (and statistics) is the Gaussian distribution, also called the _normal distribution_. The reason this distribution is so commonly used is because of two reasons: it is empirically observed in the wild many times and, perhaps more importantly, it is mathematically very simple to use the Gaussian distribution (we will see exactly how later on). This post will delve into the definition and properties of the Gaussian distribution[^1].

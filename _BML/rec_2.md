@@ -1,6 +1,6 @@
 ---
 layout: distill
-title: A Note on the Bayesian Philosophy
+title: 2 - The Bayesian Philosophy
 description: A high-level description of the frequentist and Bayesian approaches, their differences, and some of their shared qualities.
 
 authors:

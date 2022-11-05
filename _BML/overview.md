@@ -3,7 +3,6 @@ layout: post
 title: Overview
 description: Overview of the Bayesian machine learning course and material introduced in each part.
 
-place: 1
 ---
 
 There is a lot of interest in machine learning all over the world, in all of its forms and while there is a lot of work out there to do with  Bayesian machine learning,  it is sometimes considered a daunting subject (probably because of the math). This leads to many introductory courses in ML to take completely different directions, without even mentioning what "Bayesian ML" even is.
