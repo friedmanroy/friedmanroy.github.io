@@ -140,5 +140,6 @@ So we see that the frequentist estimate $\hat{\theta}\_{ML}$ is a special case o
 Actually, we did something extremely fishy when we said that $p\left(\theta\right)$ is "uniform" - this isn't possible in many cases! A uniform probability over all of the real line $\mathbb{R}$ is impossible... so how can we even talk about this so called "uninformative prior"? While this is true, as long as the posterior $p\left(\theta\mid\mathcal{D}\right)$ is well defined, the MAP and MMSE estimates will still exist. In this special case, the frequentist and Bayesian world views collide, and it will be useful to keep this fact in mind.
 
 
+---
 
 [^1]:  A more formal reason to use MLE is that it minimizes the KL-divergence with respect to the true model - see the [Wikipedia page for MLE](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation#Relation_to_minimizing_Kullback%E2%80%93Leibler_divergence_and_cross_entropy).
