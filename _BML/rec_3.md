@@ -1,6 +1,7 @@
 ---
 layout: distill
 title: 3 - Estimating the Gaussian Distribution
+description: The math of estimating the parameters of a Gaussian using MLE as well as Bayesian inference, with some intuition regarding the effects of sample size and prior selection.
 
 authors:
   - name: Roy Friedman
@@ -342,14 +343,17 @@ $$
 Bayesian machine learning is often described in terms of "known priors". However, many times we don't actually have an explicit prior we can choose, which is the main criticism against the Bayesian approach. The problem is that when there isn't a good prior, researchers amount to choosing arbitrary distributions for their priors. 
 
 
+
+<div class="fake-img l-page"
 <p align="center">
 <img  
 src="https://friedmanroy.github.io/assets/bml_figs/rec_3/high_dim_fitting.png"  
 alt="Estimating the mean of an MVN in high dimensions under different  priors"  
 style="display: inline-block; margin: 0 auto; ">
 </p>
+</div>
 <div class="caption">
-    Figure 2: estimating the mean of a 30-dimensional Gaussian under different priors; to generate the data $\mu=0$ was used, while the near prior mean was $\mu\_{0}=1$ and the far prior mean was $\mu\_{0}=10$. The shaded areas are the areas of the posterior with total probability of 95%. This simple example shows that the prior can positively or negatively affect the performance of the estimation.
+    Figure 2: estimating the mean of a 30-dimensional Gaussian under different priors; to generate the data $\mu=0$ was used, while the near prior mean was $\mu_{0}=1$ and the far prior mean was $\mu_{0}=10$. The shaded areas are the areas of the posterior with total probability of 95%. This simple example shows that the prior can positively or negatively affect the performance of the estimation.
 </div>
 
 
