@@ -63,7 +63,7 @@ $$
 \hat{\theta}_{ML}\stackrel{\Delta}{=}\arg\max_{\theta}L\left(\theta\right)
 \end{equation}
 $$
-after all, if $\theta$ maximizes the likelihood, it is the most likely set of parameters to describe the distribution[^1]. This estimate is called the _maximum likelihood estimate_ (MLE) of the distribution and we will denote it by $\hat{\theta}_{ML}$ (the  $\hat{}$  is to remember that it is an estimate and the $_{ML}$ is to remember that it maximizes the likelihood). 
+after all, if $\theta$ maximizes the likelihood, it is the most likely set of parameters to describe the distribution[^1]. This estimate is called the _maximum likelihood estimate_ (MLE) of the distribution and we will denote it by $\hat{\theta}_{ML}$ (the  $\hat{}$  is to remember that it is an estimate and the  $_{ML}$  is to remember that it maximizes the likelihood). 
 
 Also, usually the log-likelihood is maximized instead of the likelihood, defined as:
 $$
@@ -79,23 +79,23 @@ The result is the same (since the logarithm is a strictly monotonically increasi
 
 The Bayesian philosophy assumes that we have some knowledge about the distribution the points were drawn from ahead of time, i.e. we assume that the parameters themselves have some distribution $p\left(\theta\right)$ . This distribution is usually called the _prior distribution_, because we assume we have some prior knowledge. This means that there is no single true value for $\theta$ , rather that a distribution of $\theta$s could have given rise to the data. That is, unlike the frequentist view where $\theta$ _is by definition not probabilistic_, under the Bayesian view we assume that there is some distribution over $\theta$ s.
 
-In this new outlook, instead of trying to find the $\theta$ that generated the data, we will try to update our knowledge regarding which values $\theta$ could have had to create the data. We will want to find is the _posterior distribution_ $p\left(\theta|\mathcal{D}\right)$ , so called because we update our beliefs _after_ the fact (in Latin "post" means "after", while "prior" means "before"). Using Bayes' law, we can describe this using the prior and likelihood distributions:
+In this new outlook, instead of trying to find the $\theta$ that generated the data, we will try to update our knowledge regarding which values $\theta$ could have had to create the data. We will want to find is the _posterior distribution_ $p\left(\theta\mid\mathcal{D}\right)$ , so called because we update our beliefs _after_ the fact (in Latin "post" means "after", while "prior" means "before"). Using Bayes' law, we can describe this using the prior and likelihood distributions:
 $$
 \begin{equation}
-\overbrace{p\left(\theta|\mathcal{D}\right)}^{\text{posterior}}=\frac{\overbrace{p\left(\mathcal{D}|\theta\right)}^{\text{likelihood}}\overbrace{p\left(\theta\right)}^{\text{prior}}}{p\left(\mathcal{D}\right)}\propto\overbrace{p\left(\mathcal{D}|\theta\right)}^{\text{likelihood}}\overbrace{p\left(\theta\right)}^{\text{prior}}
+\overbrace{p\left(\theta\mid\mathcal{D}\right)}^{\text{posterior}}=\frac{\overbrace{p\left(\mathcal{D}\mid\theta\right)}^{\text{likelihood}}\overbrace{p\left(\theta\right)}^{\text{prior}}}{p\left(\mathcal{D}\right)}\propto\overbrace{p\left(\mathcal{D}\mid\theta\right)}^{\text{likelihood}}\overbrace{p\left(\theta\right)}^{\text{prior}}
 \end{equation}
 $$
-Usually we assume that the data set is held constant, so $p\left(\mathcal{D}\right)$ does not affect the calculation of the posterior probability, which is why it is usually disregarded (or swallowed up by the $\propto$ sign). The likelihood term here $p\left(\mathcal{D}|\theta\right)$ is actually exactly the same as the frequentist likelihood $p\left(\mathcal{D}\;;\theta\right)$ , only now we can properly condition on $\theta$ . 
+Usually we assume that the data set is held constant, so $p\left(\mathcal{D}\right)$ does not affect the calculation of the posterior probability, which is why it is usually disregarded (or swallowed up by the $\propto$ sign). The likelihood term here $p\left(\mathcal{D}\mid\theta\right)$ is actually exactly the same as the frequentist likelihood $p\left(\mathcal{D}\;;\theta\right)$ , only now we can properly condition on $\theta$ . 
 
 As mentioned, the posterior distribution is an updated version of our beliefs, and gives a new distribution over which values of $\theta$ are likely. That said, we can also extract point estimates (single estimates) of $\theta$ from the posterior:
 
-1. The _maximum a-posteriori_ (MAP) estimate is defined as: $\hat{\theta}_{MAP}\stackrel{\Delta}{=}\arg\max_{\theta}p\left(\theta|\mathcal{D}\right)=\arg\max_{\theta}p\left(\theta\right)p\left(\mathcal{D}|\theta\right)$
-2. The _minimum mean squared error_ (MMSE) estimate is defined as: $\hat{\theta}_{MMSE}\stackrel{\Delta}{=}\mathbb{E}\left[\theta|\mathcal{D}\right]$ . As the name suggests, the MMSE is the optimal estimator under a mean squared error loss (assuming our prior is correct)
+1. The _maximum a-posteriori_ (MAP) estimate is defined as: $\hat{\theta}_{MAP}\stackrel{\Delta}{=}\arg\max_{\theta}p\left(\theta\mid\mathcal{D}\right)=\arg\max_{\theta}p\left(\theta\right)p\left(\mathcal{D}\mid\theta\right)$
+2. The _minimum mean squared error_ (MMSE) estimate is defined as: $\hat{\theta}_{MMSE}\stackrel{\Delta}{=}\mathbb{E}\left[\theta\mid\mathcal{D}\right]$ . As the name suggests, the MMSE is the optimal estimator under a mean squared error loss (assuming our prior is correct)
 
 Finally, many times we are not interested in the posterior over parameter values $\theta$ , but actually only care about the predictions. In this case, we can define the _posterior predictive distribution_ (PPD) defined as:
 $$
 \begin{equation}
-p\left(d^{*}|\ \mathcal{D}\right)\stackrel{\Delta}{=}\intop p\left(d^{*}|\ \theta\right)p\left(\theta|\,\mathcal{D}\right)d\theta
+p\left(d^{*}\mid\ \mathcal{D}\right)\stackrel{\Delta}{=}\intop p\left(d^{*}\mid\ \theta\right)p\left(\theta\mid\,\mathcal{D}\right)d\theta
 \end{equation}
 $$
 where $d^{*}$ is a newly observed data point.
@@ -110,7 +110,7 @@ Additionally, the Bayesian approach allows us to inject prior knowledge of the p
 
 The biggest flaw (and strength!) of Bayesian ML is the prior distribution $p\left(\theta\right)$ . Since the prior can _heavily_ affect the solution, it is imperative that it is chosen to correctly reflect the space of solutions. But many times we have no prior knowledge over solutions; for instance, how can we know what the distribution over the parameters of a neural network should look like? This is a very ambiguous decision that has to be made, and many times it is not obvious how to make it. In practice, this means the prior is often arbitrarily chosen and doesn't necessarily reflect the distribution over parameters we want. 
 
-An additional difficulty of Bayesian methods is the actual calculation of the posterior $p\left(\theta|\,\mathcal{D}\right)$ . While the learning "algorithm" in Bayesian ML is conceptually straightforward, many times the posterior is intractable. In which case approximations or point estimates must be used. These approximations, many times, are based on MCMC samples from the posterior or variational methods, whose quality is difficult to verify.
+An additional difficulty of Bayesian methods is the actual calculation of the posterior $p\left(\theta\mid\,\mathcal{D}\right)$ . While the learning "algorithm" in Bayesian ML is conceptually straightforward, many times the posterior is intractable. In which case approximations or point estimates must be used. These approximations, many times, are based on MCMC samples from the posterior or variational methods, whose quality is difficult to verify.
 
 However, both of the above flaws are usually shared with methods in classic ML. Typically, the loss used in such methods is heuristically chosen - much like the prior in Bayesian approaches. Further, while it can be shown that the solution is reached when the loss is minimized, it is usually difficult (if not impossible) to show that the algorithm has actually reached a minimum.
 
@@ -127,14 +127,14 @@ $$
 then in this case the MAP estimate is:
 $$
 \begin{align}
-\hat{\theta}_{MAP} & =\arg\max_{\theta}p\left(\theta\right)p\left(\mathcal{D}|\theta\right)\nonumber \\
- & =\arg\max_{\theta}p\left(\mathcal{D}|\theta\right)\times\text{const}\nonumber \\
- & =\arg\max_{\theta}p\left(\mathcal{D}|\theta\right)=\hat{\theta}_{ML}
+\hat{\theta}_{MAP} & =\arg\max_{\theta}p\left(\theta\right)p\left(\mathcal{D}\mid\theta\right)\nonumber \\
+ & =\arg\max_{\theta}p\left(\mathcal{D}\mid\theta\right)\times\text{const}\nonumber \\
+ & =\arg\max_{\theta}p\left(\mathcal{D}\mid\theta\right)=\hat{\theta}_{ML}
 \end{align}
 $$
 So we see that the frequentist estimate $\hat{\theta}_{ML}$ is a special case of the Bayesian estimate $\hat{\theta}_{MAP}$ !
 
-Actually, we did something extremely fishy when we said that $p\left(\theta\right)$ is "uniform" - this isn't possible in many cases! A uniform probability over all of the real line $\mathbb{R}$ is impossible... so how can we even talk about this so called "uninformative prior"? While this is true, as long as the posterior $p\left(\theta|\mathcal{D}\right)$ is well defined, the MAP and MMSE estimates will still exist. In this special case, the frequentist and Bayesian world views collide, and it will be useful to keep this fact in mind.
+Actually, we did something extremely fishy when we said that $p\left(\theta\right)$ is "uniform" - this isn't possible in many cases! A uniform probability over all of the real line $\mathbb{R}$ is impossible... so how can we even talk about this so called "uninformative prior"? While this is true, as long as the posterior $p\left(\theta\mid\mathcal{D}\right)$ is well defined, the MAP and MMSE estimates will still exist. In this special case, the frequentist and Bayesian world views collide, and it will be useful to keep this fact in mind.
 
 
 
