@@ -174,7 +174,7 @@ $$
  & =\left(\frac{N}{\sigma^{2}}+\frac{1}{\sigma_{0}^{2}}\right)\left(\mu-\left(\frac{N}{\sigma^{2}}+\frac{1}{\sigma_{0}^{2}}\right)^{-1}\left(\frac{N}{\sigma^{2}}\mu_{\text{ML}}+\frac{1}{\sigma_{0}^{2}}\mu_{0}\right)\right)
 \end{align}
 $$
-where $\mu_{\text{ML}}=\frac{1}{N}\sum_{i}x_{i}$ is the ML estimate for $\mu$ , as we showed in [section for the MLE of the mean](mu-MLE) . 
+where $\mu_{\text{ML}}=\frac{1}{N}\sum_{i}x_{i}$ is the ML estimate for $\mu$ , as we showed in [section for the MLE of the mean](#mu-MLE) . 
 
 
 Defining: 
@@ -344,7 +344,7 @@ Bayesian machine learning is often described in terms of "known priors". However
 
 
 
-<div class="fake-img l-page"
+<div class="fake-img l-page">
 <p align="center">
 <img  
 src="https://friedmanroy.github.io/assets/bml_figs/rec_3/high_dim_fitting.png"  
