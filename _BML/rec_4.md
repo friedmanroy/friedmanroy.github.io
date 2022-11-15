@@ -189,7 +189,7 @@ The geometrical interpretation of the above is that $H\hat{\theta}_{ML}$ is the 
 <img  
 src="https://friedmanroy.github.io/assets/bml_figs/rec_4/least_squares.png"  
 style="display: inline-block; margin: 0 auto; "
-width=30%>
+width="30%">
 </p>
 </div>
 <div class="caption">
