@@ -23,7 +23,7 @@ $$
 where we want to predict the value of $y$ (sometimes called the response), and the $\theta$ s are the parameters of our model (sometimes called the regression coefficients). The problem of finding the $\theta$ s that estimate $y$ the best is known as _linear regression_[^1].
 
 
-The weight $\theta_{0}$ is called the _bias term_, which allows the model to learn the intercept (so that $y$ doesn't have to be 0 at $x=0$ ). We can rewrite everything in vector form by defining $x\stackrel{\Delta}{=}\left[1,x_{1},\cdots,x_{d}\right]^{T}$ and $\boldsymbol{\theta\stackrel{\Delta}{=}\left[\theta_{0},\theta_{1},\cdots,\theta_{d}\right]$ :
+The weight $\theta_{0}$ is called the _bias term_, which allows the model to learn the intercept (so that $y$ doesn't have to be 0 at $x=0$ ). We can rewrite everything in vector form by defining $x\stackrel{\Delta}{=}\left[1,x_{1},\cdots,x_{d}\right]^{T}$ and $\theta\stackrel{\Delta}{=}\left[\theta_{0},\theta_{1},\cdots,\theta_{d}\right]$ :
 $$
 \begin{equation}
 y=\boldsymbol{x}^{T}\boldsymbol{\theta}
@@ -201,9 +201,11 @@ While very simple, the ML solution for linear regression is prone to problems. S
 ## Ridge Regression
 
 As we add more and more basis functions, we will start overfitting at some point - something we would really like to avoid. _Regularization_ seeks to reduce the amount of overfitting by adding some restrictions to the values that the weights can take. Usually this is done by adding a penalty term for $\theta$ to what we are trying to minimize, like so:
+
 $$
 L_{R}=\frac{1}{2}\mid\mid y-H\theta\mid\mid ^{2}+\lambda E_{R}\left(\theta\right)
 $$
+
 where $\lambda$ is the _regularization coefficient_ that controls the relative weight between the least squares expression and the regularization penalty $E_{R}$ . The simplest form of regularization is given by the norm of the weights:
 $$
 \begin{equation}
