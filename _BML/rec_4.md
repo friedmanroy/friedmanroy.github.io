@@ -23,7 +23,7 @@ $$
 where we want to predict the value of $y$ (sometimes called the response), and the $\theta$ s are the parameters of our model (sometimes called the regression coefficients). The problem of finding the $\theta$ s that estimate $y$ the best is known as _linear regression_[^1].
 
 
-The weight $\theta_{0}$ is called the _bias term_, which allows the model to learn the intercept (so that $y$ doesn't have to be 0 at $x=0$ ). We can rewrite everything in vector form by defining $\boldsymbol{x}\stackrel{\Delta}{=}\left[1,x_{1},\cdots,x_{d}\right]^{T}$ and $\boldsymbol{\theta}\stackrel{\Delta}{=}\left[\theta_{0},\theta_{1},\cdots,\theta_{d}\right]$ :
+The weight $\theta_{0}$ is called the _bias term_, which allows the model to learn the intercept (so that $y$ doesn't have to be 0 at $x=0$ ). We can rewrite everything in vector form by defining $x\stackrel{\Delta}{=}\left[1,x_{1},\cdots,x_{d}\right]^{T}$ and $\boldsymbol{\theta\stackrel{\Delta}{=}\left[\theta_{0},\theta_{1},\cdots,\theta_{d}\right]$ :
 $$
 \begin{equation}
 y=\boldsymbol{x}^{T}\boldsymbol{\theta}
@@ -49,7 +49,7 @@ $$
 \boldsymbol{y}=H\boldsymbol{\theta}
 \end{equation}
 $$
-(from now on we will stop writing vectors in bold, so that $\boldsymbol{y}\equiv y$ and $\boldsymbol{\theta}\equiv\theta$ , for ease of notation, but remember that all the variables are vectors). The matrix $H$ is sometimes called the _observation matrix_ or the _design matrix_. 
+(from now on we will stop writing vectors in bold for ease of notation, but remember that all the variables are vectors). The matrix $H$ is sometimes called the _observation matrix_ or the _design matrix_. 
 
 
 In the real world we usually encounter noise when sampling the function values $y$ , which we will explicitly model by adding a noise term:
@@ -102,12 +102,14 @@ and each $h_{i}\left(\cdot\right)$ is called a _basis function_ and has the form
 
 ### Common Basis Functions
 
-Polynomial basis functions (PBF) are the simplest kind of basis functions we will see in the course. In these basis functions, the features are powers of the input variables $x$ up to a certain degree. For instance, if $x=\left[\begin{array}{c}x_{1}\\x_{2}\end{array}\right]$ , then the features for a PBF of degree 2 are $1,\,x_{1},\,x_{2},\,x_{1}^{2},\,x_{1}x_{2},\,x_{2}^{2}$ . For degree 3, we would add $x_{1}^{3},\,x_{1}^{2}x_{2},\,x_{1}x_{2}^{2},\,x_{2}^{3}$ and so on for any degree we want to use. These are called _polynomial_ basis functions since the form $\theta^{T}h\left(x\right)$ for degree $q$ describes a polynomial function of degree $q$ (polynomial in $x$ ).
+Polynomial basis functions (PBF) are the simplest kind of basis functions we will see in the course. In these basis functions, the features are powers of the input variables $x$ up to a certain degree. For instance, if:
+$$x=\left[\begin{array}{c}x_{1}\\x_{2}\end{array}\right]$$
+then the features for a PBF of degree 2 are $1,\,x_{1},\,x_{2},\,x_{1}^{2},\,x_{1}x_{2},\,x_{2}^{2}$ . For degree 3, we would add $x_{1}^{3},\,x_{1}^{2}x_{2},\,x_{1}x_{2}^{2},\,x_{2}^{3}$ and so on for any degree we want to use. These are called _polynomial_ basis functions since the form $\theta^{T}h\left(x\right)$ for degree $q$ describes a polynomial function of degree $q$ (polynomial in $x$ ).
 
 Another commonly used basis function is:
 $$
 \begin{equation}
-h_{j}\left(x\right)=\exp\left[-\frac{\\mid x-\mu_{j}\\mid ^{2}}{2s^{2}}\right]
+h_{j}\left(x\right)=\exp\left[-\frac{\mid\mid x-\mu_{j}\mid\mid ^{2}}{2s^{2}}\right]
 \end{equation}
 $$
 which is called, for obvious reasons, the _Gaussian basis function_. Note that while this basis function is related to the Gaussian distribution, it doesn't need to be a proper distribution. One way to use the Gaussian basis function is to decide, ahead of time, where $K$ different centers $\mu_{j}$ will be placed, and use the distances from each of them as the features. This has the obvious limitations that _we_ are the ones that chose where the centers should be placed, and so they may not be optimal for the data. An example use case of such basis functions is given in figure (2); notice how the learned function has hills and valleys corresponding to the locations of the basis functions.
@@ -134,14 +136,14 @@ In the classical formulation of linear regression, the ML estimate for $\theta$ 
 $$
 \begin{align}
 \ell\left(y\,\mid \,\theta\right) & =\sum_{i=1}^{N}\log\mathcal{N}\left(y_{i}\,\mid \,h\left(x_{i}\right)^{T}\theta,I\sigma^{2}\right)\nonumber \\
- & =-\frac{1}{2\sigma^{2}}\sum_{i=1}^{N}\\mid y_{i}-h\left(x_{i}\right)^{T}\theta\\mid ^{2}+\text{const}\\
- & =-\frac{1}{2\sigma^{2}}\\mid y-H\theta\\mid ^{2}+\text{const}
+ & =-\frac{1}{2\sigma^{2}}\sum_{i=1}^{N}\mid\mid y_{i}-h\left(x_{i}\right)^{T}\theta\mid\mid ^{2}+\text{const}\\
+ & =-\frac{1}{2\sigma^{2}}\mid\mid y-H\theta\mid\mid ^{2}+\text{const}
 \end{align}
 $$
 where we will ignore terms that are constant with respect to $\theta$ for now. Finding the maximum of this log-likelihood is often called _least squares_ as we are trying to minimize a sum of square functions over $\theta$ ; the function we are trying to maximize is the negative of the loss:
 $$
 \begin{equation}
-L=\frac{1}{2}\\mid y-H\theta\\mid ^{2}
+L=\frac{1}{2}\mid\mid y-H\theta\mid\mid ^{2}
 \end{equation}
 $$
 
@@ -170,6 +172,7 @@ Let's look at the $N$ dimensional vector $y=\left(y_{1},y_{2},...,y_{N}\right)^{
 3. $y$ is a combination of the above two scenarios, in which case we can rewrite it as a part that lies in the subspace plus an orthogonal part: $y=y_{\mathcal{S}}+y_{\perp}\stackrel{\Delta}{=} H\theta_{\mathcal{S}}+y_{\perp}$
 
 Plugging this into the least squares solution, the prediction $\hat{y}$ that we will make is:
+
 $$
 \begin{align*}
 \hat{y} & =H\hat{\theta}_{\text{ML}}=H\left(H^{T}H\right)^{-1}H^{T}y\\
@@ -181,7 +184,7 @@ $$
 
 The geometrical interpretation of the above is that $H\hat{\theta}_{ML}$ is the projection of $y$ onto $\mathcal{S}$ , the subspace that the basis functions in $H$ are able to span. You may find it easier to see this visually as in the figure below:
 
-<div class="fake-img l-page">
+<div class="fake-img l-body">
 <p align="center">
 <img  
 src="https://friedmanroy.github.io/assets/bml_figs/rec_4/least_squares.png"  
@@ -198,18 +201,18 @@ While very simple, the ML solution for linear regression is prone to problems. S
 
 As we add more and more basis functions, we will start overfitting at some point - something we would really like to avoid. _Regularization_ seeks to reduce the amount of overfitting by adding some restrictions to the values that the weights can take. Usually this is done by adding a penalty term for $\theta$ to what we are trying to minimize, like so:
 $$
-L_{R}=\frac{1}{2}\\mid y-H\theta\\mid ^{2}+\lambda E_{R}\left(\theta\right)
+L_{R}=\frac{1}{2}\mid\mid y-H\theta\mid\mid ^{2}+\lambda E_{R}\left(\theta\right)
 $$
 where $\lambda$ is the _regularization coefficient_ that controls the relative weight between the least squares expression and the regularization penalty $E_{R}$ . The simplest form of regularization is given by the norm of the weights:
 $$
 \begin{equation}
-E_{R}\left(\theta\right)=\frac{1}{2}\theta^{T}\theta=\frac{1}{2}\\mid \theta\\mid ^{2}
+E_{R}\left(\theta\right)=\frac{1}{2}\theta^{T}\theta=\frac{1}{2}\mid\mid \theta\mid\mid ^{2}
 \end{equation}
 $$
 Adding this term to the least squares objective the loss function becomes:
 $$
 \begin{equation}
-L_{R}=\frac{1}{2}\\mid y-H\theta\\mid ^{2}+\frac{\lambda}{2}\\mid \theta\\mid ^{2}
+L_{R}=\frac{1}{2}\mid\mid y-H\theta\mid\mid ^{2}+\frac{\lambda}{2}\mid\mid \theta\mid\mid ^{2}
 \end{equation}
 $$
 This is only one possible choice for regularization, but is useful since it's easy to find the optimal solution with this regularization. Minimizing $L_{R}$ with respect to $\theta$ , we get:
@@ -218,7 +221,7 @@ $$
 \hat{\theta}=\left(H^{T}H+I\lambda\right)^{-1}H^{T}y
 \end{equation}
 $$
-Linear regression with this regularization is often called _ridge regression_. This type of regularization obviously adds more constraints to the optimal values of $\theta$ since the weights are penalized based on their magnitude, unlike before. Another way to think about this is that $\lambda$ suggests a certain budget that the whole model gets for fitting the weights - if $\\mid y-H\theta\\mid ^{2}$ is constant and we change the value of $\lambda$ , then it directly controls the total magnitude of $\theta$ . 
+Linear regression with this regularization is often called _ridge regression_. This type of regularization obviously adds more constraints to the optimal values of $\theta$ since the weights are penalized based on their magnitude, unlike before. Another way to think about this is that $\lambda$ suggests a certain budget that the whole model gets for fitting the weights - if $\mid\mid y-H\theta\mid\mid ^{2}$ is constant and we change the value of $\lambda$ , then it directly controls the total magnitude of $\theta$ . 
 
 
 <div class="fake-img l-page">
