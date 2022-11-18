@@ -262,7 +262,7 @@ style="display: inline-block; margin: 0 auto; ">
     Figure 5: Bayesian linear regression with 10 Gaussian basis functions with means in equally spaced in the range $[-2.5,2.5]$. On the left is an example of the prior described by the model, as well as a few sampled functions from the prior. The posterior given some data points is shown on the right, as well as sampled functions from the newly defined distribution which describes plausible functions given the observed data points.
 </div>
 
-The posterior $p\left(\theta\mid y\right)$ in this case is also a Gaussian distribution given by:
+The posterior $p\left(\theta\mid y\right)$ in this case is also a Gaussian distribution given by[^4] :
 $$
 \begin{equation}
 p\left(\theta\,\mid \,y\right)=\mathcal{N}\left(y\,\mid \,\mu_{\theta\mid D},C_{\theta\mid D}\right)
@@ -312,74 +312,7 @@ In this sense, if we are very unsure about the prior ( $\alpha\gg1$ ) then the r
 
 ---
 
-## Woodbury Matrix Identity
-
-There is an equivalent way of writing the parameters of the posterior. To show this equivalent form, we will need to learn about the _Woodbury matrix identity_. The identity is given by:
-
-$$
-\begin{equation}
-\left(A+UCV\right)^{-1}=A^{-1}-A^{-1}U\left(C^{-1}+VA^{-1}U\right)^{-1}VA^{-1}\label{eq:woodbury}
-\end{equation}
-$$
-where we assumed that $A$ and $C$ are invertible, while $U$ and $V$ don't even have to be square. Before we continue to use this on the covariance of the posterior, we should talk about when to use this identity. Obviously, if all of the matrices $A$ and $C$ are square and have the same dimensions and we know nothing about their inverses, using this identity will not help us at all. However, many times we will be confronted with an equation similar to the left hand side of equation \eqref{eq:woodbury}, where we actually know what the inverse of $A$ is directly, or know that the inverses of $A$ and $C$ are rather simple to compute.
-
-### Example: Low Rank Matrices
-
-Let's look at an example. Suppose we want to find:
-$$
-\begin{equation}
-\left(I_{n}\beta+\frac{1}{\alpha}AA^{T}\right)^{-1}
-\end{equation}
-$$
-where $A\in\mathbb{R}^{n\times m}$ such that $n\gg m$; in this sense $AA^{T}$ is a _low rank_ matrix since its rank (at most $m$ ) is much smaller than the full rank ( $n$ ). In this case, inverting the bigger $n\times n$ matrix will be much less efficient than inverting a small $m\times m$ matrix. We can now put the identity to good use:
-$$
-\begin{align}
-\left(I_{n}\beta+\frac{1}{\alpha}AA^{T}\right)^{-1} & =\left(I_{n}\beta\right)^{-1}-\left(I_{n}\beta\right)^{-1}A\left(\left(I_{m}\frac{1}{\alpha}\right)^{-1}+A^{T}\left(I_{n}\beta\right)^{-1}A\right)^{-1}A^{T}\left(I_{n}\beta\right)^{-1}\nonumber \\
- & =\frac{1}{\beta}I_{n}-\frac{1}{\beta^{2}}A\left(I_{m}\alpha+\frac{1}{\beta}A^{T}A\right)^{-1}A^{T}\nonumber \\
- & =\frac{1}{\beta}I_{n}-\frac{1}{\beta}A\left(I_{m}\alpha\beta+A^{T}A\right)^{-1}A^{T}
-\end{align}
-$$
-Notice that the matrix $A^{T}A$ is an $m\times m$ matrix, so we end up only needing to invert $m\times m$ matrices, possibly avoiding many unneeded computations. 
-
-## Equivalent Form
-
-We now turn back to the covariance we found in equation \eqref{eq:post-cov}. Using the Woodbury identity:
-$$
-\begin{align}
-C_{\theta\mid D} & =\left(\Sigma_{\theta}^{-1}+\frac{1}{\sigma^{2}}H^{T}H\right)^{-1}\nonumber \\
- & =\Sigma_{\theta}-\Sigma_{\theta}H^{T}\left(\sigma^{2}I+H\Sigma_{\theta}H^{T}\right)^{-1}H\Sigma_{\theta}\\
- & \stackrel{\Delta}{=}\Sigma_{\theta}-\Sigma_{\theta}H^{T}M^{-1}H\Sigma_{\theta}
-\end{align}
-$$
-
-while this doesn't look particularly helpful, sometimes the number of samples (the first dimension of $H$ ) will be much smaller than the feature space (the dimension of $\Sigma_{\theta}$ ), in which case we will want to invert in the sample dimension. 
-
-It will also be helpful to look at the mean of the posterior in this notation:
-$$
-\begin{align}
-\mu_{\theta\mid D} & =C_{\theta\mid D}\left(H^{T}\frac{1}{\sigma^{2}}y+\Sigma_{\theta}^{-1}\mu_{\theta}\right)\nonumber \\
- & =\left(\Sigma_{\theta}-\Sigma_{\theta}H^{T}M^{-1}H\Sigma_{\theta}\right)\left(H^{T}\frac{1}{\sigma^{2}}y+\Sigma_{\theta}^{-1}\mu_{\theta}\right)\nonumber \\
- & =\left(I-\Sigma_{\theta}H^{T}M^{-1}H\right)\mu_{\theta}+\left(\Sigma_{\theta}H^{T}\frac{1}{\sigma^{2}}-\Sigma_{\theta}H^{T}M^{-1}H\Sigma_{\theta}\frac{1}{\sigma^{2}}H^{T}\right)y\nonumber \\
- & =\left(I-\Sigma_{\theta}H^{T}M^{-1}H\right)\mu_{\theta}+\frac{1}{\sigma^{2}}\Sigma_{\theta}H^{T}\left(I-M^{-1}H\Sigma_{\theta}H^{T}\right)y\nonumber \\
- & =\left(I-\Sigma_{\theta}H^{T}M^{-1}H\right)\mu_{\theta}+\frac{1}{\sigma^{2}}\Sigma_{\theta}H^{T}M^{-1}\left(M-H\Sigma_{\theta}H^{T}\right)x\nonumber \\
- & =\mu_{\theta}-\Sigma_{\theta}H^{T}M^{-1}H\mu_{\theta}+\frac{1}{\sigma^{2}}\Sigma_{\theta}H^{T}M^{-1}\left(\sigma^{2}I+H\Sigma_{\theta}H^{T}-H\Sigma_{\theta}H^{T}\right)y\nonumber \\
- & =\mu_{\theta}+\Sigma_{\theta}H^{T}M^{-1}\left(y-H\mu_{\theta}\right)
-\end{align}
-$$
-
-And now we have our equivalent form for the mean of the posterior as well as the covariance:
-$$
-\begin{align}
-\mu_{\theta\mid D} & =\mu_{\theta}+\Sigma_{\theta}H^{T}M^{-1}\left(y-H\mu_{\theta}\right)\\
-C_{\theta\mid D} & =\Sigma_{\theta}-\Sigma_{\theta}H^{T}M^{-1}H\Sigma_{\theta}
-\end{align}
-$$
-
-
-
-
----
-
 [^1]: Bishop 3.1; Murphy 7.3
 [^2]: The analysis that follows is a more fleshed out version of the same given in Bishop 3.1.2
 [^3]: Bishop 3.3; Murphy 7.6
+[^4]: The process to find the posterior distribution follows, pretty much, _exactly_ the same steps from the post about [estimating the parameters of a Gaussian](https://friedmanroy.github.io/BML/rec_3/) (the part about Bayesian inference for MVNs). It's a good exercise to try and show this yourself! 
