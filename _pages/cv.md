@@ -1,7 +1,7 @@
 ---
-layout: post
+layout: page
 title: CV
-nav: true
-nav_order: 3
+nav: True
+nav_order: 4
 redirect: /assets/pdf/RoyFriedman_CV.pdf
 ---
