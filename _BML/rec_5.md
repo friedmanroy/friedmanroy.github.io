@@ -1,7 +1,7 @@
 ---
 layout: distill
 title: 5 - Equivalent Form for Bayesian Linear Regression
-description: Follows the construction of an equivalent form for Bayesian LR
+description: The construction of an equivalent form for Bayesian linear regression, which is helpful when there are more features than data points.
 
 authors:
   - name: Roy Friedman
@@ -11,7 +11,7 @@ authors:
 toc:
   - name: Woodbury Matrix Inversion
   - name: Equivalent Form
-  - name: Regular vs Equivalent
+  - name: Regular vs. Equivalent
 ---
 
 In the [previous post](https://friedmanroy.github.io/BML/rec_4/), we saw that the posterior distribution of Bayesian linear regression is given by:
@@ -25,8 +25,8 @@ where:
 $$
 \begin{align}
 \mu_{\theta\mid D} & =C_{\theta\mid D}\left(H^{T}\frac{1}{\sigma^{2}}y+\Sigma_{\theta}^{-1}\mu_{\theta}\right)\\
-C_{\theta\mid D} & =\left(\Sigma_{\theta}^{-1}+\frac{1}{\sigma^{2}}H^{T}H\right)^{-1}
-\end{align}\label{eq:post-cov}
+C_{\theta\mid D} & =\left(\Sigma_{\theta}^{-1}+\frac{1}{\sigma^{2}}H^{T}H\right)^{-1}\label{eq:post-cov}
+\end{align}
 $$
 
 However, the posterior has an equivalent form which is sometimes used in literature. To find this equivalent form, we will need to talk about the _Woodbury matrix identity_.
