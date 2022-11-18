@@ -23,9 +23,9 @@ p\left(\theta\,\mid \,y\right)=\mathcal{N}\left(y\,\mid \,\mu_{\theta\mid D},C_{
 $$
 where:
 $$
-\begin{align}
+\begin{align}\label{eq:post-cov}
 \mu_{\theta\mid D} & =C_{\theta\mid D}\left(H^{T}\frac{1}{\sigma^{2}}y+\Sigma_{\theta}^{-1}\mu_{\theta}\right)\\
-C_{\theta\mid D} & =\left(\Sigma_{\theta}^{-1}+\frac{1}{\sigma^{2}}H^{T}H\right)^{-1}\label{eq:post-cov}
+C_{\theta\mid D} & =\left(\Sigma_{\theta}^{-1}+\frac{1}{\sigma^{2}}H^{T}H\right)^{-1}
 \end{align}
 $$
 
