@@ -1,9 +1,9 @@
 ---
 layout: page
 title: CV
-permalink: /assets/pdf/RoyFriedman_CV.pdf
 nav: True
 nav_order: 4
+redirect: assests/pdf/RoyFriedman_CV.pdf
 ---
 
 <html>
