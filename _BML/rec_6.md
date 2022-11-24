@@ -34,7 +34,7 @@ style="display: inline-block; margin: 0 auto; ">
 This is exactly the dilemma represented in figure 1; on the left, it is fairly obvious that the straight line should be chosen, although the 9th order polynomial fits the data better. On the other hand, the graph on the right shows exactly the opposite - the 9th order polynomial intuitively looks like it explains the data better than the linear function. However, in both cases the 9th order polynomial has much higher likelihood. So how can we choose which of the basis functions is a better fit for the data?
 
 
-The _evidence function_ [^1] (also called the \emph{marginal likelihood}, since we marginalize the parameters out of the distribution) is a way for us to intelligently choose which parameterization to use. The idea behind the evidence function is to "integrate out" the specific values of the parameters $\theta$ and to see how probable the data set is under our parameterization. Suppose we have a prior $p\left(\theta\mid \Psi\right)$ that is dependent
+The _evidence function_ [^1] (also called the _marginal likelihood_, since we marginalize the parameters out of the distribution) is a way for us to intelligently choose which parameterization to use. The idea behind the evidence function is to "integrate out" the specific values of the parameters $\theta$ and to see how probable the data set is under our parameterization. Suppose we have a prior $p\left(\theta\mid \Psi\right)$ that is dependent
 on some parameters $\Psi$ . Then:
 
 $$
@@ -161,7 +161,7 @@ But we can be even more specific. Remember that for a Gaussian prior $\hat{\thet
 
 $$
 \begin{equation}
-p\left(y\mid \mu,\Sigma\right)=\left(2\pi\right)^{N/2}\left\mid \Sigma_{\theta\mid \mathcal{D}}\right\mid ^{1/2}\mathcal{N}\left(\mu_{\theta\mid \mathcal{D}}\mid \;\mu,\Sigma\right)\mathcal{N}\left(y\mid \;H\mu_{\theta\mid \mathcal{D}},I\sigma^{2}\right)
+p\left(y\mid \mu,\Sigma\right)=\left(2\pi\right)^{N/2}\mid \Sigma_{\theta\mid \mathcal{D}}\mid ^{1/2}\mathcal{N}\left(\mu_{\theta\mid \mathcal{D}}\mid \;\mu,\Sigma\right)\mathcal{N}\left(y\mid \;H\mu_{\theta\mid \mathcal{D}},I\sigma^{2}\right)
 \end{equation}
 $$
 
@@ -216,7 +216,7 @@ $$
 \end{equation}
 $$
 
-We can define the evidence as a function of the variance as well and then choose from a closed set of values chosen ahead of time $S=\left\{ \sigma_{i}^{2}\right\} _{i=1}^{q}$ , in which case we would say:
+We can define the evidence as a function of the variance as well and then choose from a closed set of values chosen ahead of time $S=\{ \sigma_{i}^{2}\} _{i=1}^{q}$ , in which case we would say:
 
 $$
 \begin{equation}
@@ -365,6 +365,7 @@ Probably the "true Bayesian method" to overcome these problems is a different ap
 $$
 \psi\sim p(\Psi\mid \xi)
 $$
+
 where $\xi$  are the parameters of the hyperprior. 
 
 In such a setting, our posterior distribution will be defined by _integrating out_ the hyperparameters:
@@ -372,6 +373,7 @@ In such a setting, our posterior distribution will be defined by _integrating ou
 $$
 p(\theta\mid \mathcal{D})=\intop p(\theta\mid \Psi,\mathcal{D})p(\Psi\mid \xi)d\Psi
 $$
+
 This is nice since it bypasses the need to choose a model - simply integrate over all of them, a more Bayesian approach. It also incorporates are beliefs explicitly - in the integral above we explicitly assumed that $\Psi$ is independent of $\mathcal{D}$ !
 
 That said, we have introduced a new complication; how should $\xi$  be chosen? Continuing with this reasoning, shouldn't we also incorporate a prior over $\xi$, a so called "hyper-hyperprior",  and so on? While these concerns are valid, the "priors all the way down" kind of approach typically stops at the hyperprior, since it is far enough from the data term.
