@@ -52,7 +52,7 @@ we define a prior, we usually have to choose a distribution for the
 prior. Often, this distribution has parameters that define it; for
 instance, if the prior is a Gaussian, then the parameters are the
 specific $\mu_{0}$ and $\Sigma_{0}$ we chose. In our new notation
-$\Psi=\left\{ \mu_{0},\Sigma_{0}\right\}$ , and we want to compare
+$\Psi=\\{ \mu_{0},\Sigma_{0}\\}$ , and we want to compare
 between different possible $\Psi$ s.
 
 ---
@@ -84,7 +84,7 @@ p\left(y\mid \mu_{i},\Sigma_{i}\right)=\intop p\left(y\mid \theta\right)p\left(\
 \end{equation}
 $$
 
-for $i\in\left\{ 1,2\right\}$ . If we calculate this probability for both $\mu_{1}$ and $\mu_{2}$ , then we will get a value that tells us how likely the training data $y$ is under each of these different assumptions. That is, instead of asking how probable $y$ is under a specific value of $\theta$ (which is just the likelihood), this is like asking how probable $y$ is when averaging out the values of $\theta$ , _given the parameterization_ of $\mu_{i}$ and $\Sigma_{i}$ .
+for $i\in\\{ 1,2\\}$ . If we calculate this probability for both $\mu_{1}$ and $\mu_{2}$ , then we will get a value that tells us how likely the training data $y$ is under each of these different assumptions. That is, instead of asking how probable $y$ is under a specific value of $\theta$ (which is just the likelihood), this is like asking how probable $y$ is when averaging out the values of $\theta$ , _given the parameterization_ of $\mu_{i}$ and $\Sigma_{i}$ .
 
 Of course, the priors could assume different basis functions, as in:
 
@@ -97,7 +97,7 @@ f_{2}\left(x\right) & =\beta_{0}+\beta_{1}x\qquad\left(\begin{matrix}\beta_{0}\\
 \end{align}
 $$
 
-and we want to choose between $\Psi_{\theta}=\left\{ \mu_{\theta},\Sigma_{\theta}\right\}$ and $\Psi_{\beta}=\left\{ \mu_{\beta},\Sigma_{\beta}\right\}$ . Notice that the basis functions we assume are themselves compared when we do this, simply since the basis functions are part of the assumptions we made when we chose our prior.
+and we want to choose between $\Psi_{\theta}=\\{ \mu_{\theta},\Sigma_{\theta}\\}$ and $\Psi_{\beta}=\\{ \mu_{\beta},\Sigma_{\beta}\\}$ . Notice that the basis functions we assume are themselves compared when we do this, simply since the basis functions are part of the assumptions we made when we chose our prior.
 
 ---
 
@@ -158,7 +158,7 @@ p\left(y\mid \Psi\right)=\left(2\pi\right)^{N/2}\mid \Sigma_{\theta\mid \mathcal
 \end{equation}
 $$
 
-But we can be even more specific. Remember that for a Gaussian prior $\hat{\theta}_{\text{MAP}}=\mu_{\theta\mid D}$ and $\Psi=\left\{ \mu,\Sigma\right\}$ , so what we actually found is:
+But we can be even more specific. Remember that for a Gaussian prior $\hat{\theta}_{\text{MAP}}=\mu_{\theta\mid D}$ and $\Psi=\\{ \mu,\Sigma\\}$ , so what we actually found is:
 
 $$
 \begin{equation}
@@ -217,7 +217,7 @@ $$
 \end{equation}
 $$
 
-We can define the evidence as a function of the variance as well and then choose from a closed set of values chosen ahead of time $S=\{ \sigma_{i}^{2}\} _{i=1}^{q}$ , in which case we would say:
+We can define the evidence as a function of the variance as well and then choose from a closed set of values chosen ahead of time $S=\\{ \sigma_{i}^{2}\\}_{i=1}^{q}$ , in which case we would say:
 
 $$
 \begin{equation}
