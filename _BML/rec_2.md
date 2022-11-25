@@ -1,5 +1,6 @@
 ---
 layout: distill
+comments: true
 title: 2 - The Bayesian Philosophy
 description: A high-level description of the frequentist and Bayesian approaches, their differences, and some of their shared qualities.
 
