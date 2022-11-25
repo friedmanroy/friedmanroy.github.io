@@ -89,15 +89,9 @@
         {%- endif %}
 
         {{ content }}
-      </d-article>
-
-      <d-appendix>
-        <d-footnote-list></d-footnote-list>
-        <d-citation-list></d-citation-list>
-      </d-appendix>
-      
-      {%- if site.disqus_shortname and page.comments -%}
-       <div id="disqus_thread"; class="post distill"></div>
+        
+        {%- if site.disqus_shortname and page.comments -%}
+       <div id="disqus_thread"></div>
         <script type="text/javascript">
           var disqus_shortname  = '{{ site.disqus_shortname }}';
           var disqus_identifier = '{{ page.id }}';
@@ -110,6 +104,13 @@
         </script>
         <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>   
     {%- endif %}
+        
+      </d-article>
+
+      <d-appendix>
+        <d-footnote-list></d-footnote-list>
+        <d-citation-list></d-citation-list>
+      </d-appendix>
 
     </div>
 
