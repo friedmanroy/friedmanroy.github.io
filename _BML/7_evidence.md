@@ -383,4 +383,4 @@ That said, we have introduced a new complication; how should $\xi$  be chosen? C
 
 [^1]: Bishop section 3.4 or [MacKay's chapter on model selection in "Information Theory, Inference and Learning Algorithms"](http://www.inference.org.uk/mackay/itprnn/ps/343.355.pdf)
 [^2]: If you are curious, you can look at Bishop section 2.3.6 for a full derivation of the posterior under a proper prior.
-	[^3]: The way the prior is displayed in these plots is by calculating the mean and standard deviations of $\mathcal{N}\left(H\mu_0,\ H\Sigma_0 H^T + I\sigma^2\right)$ for every point in space, which is exactly like using the equivalent definition of the evidence.
+[^3]: The way the prior is displayed in these plots is by calculating the mean and standard deviations of $\mathcal{N}\left(H\mu_0,\ H\Sigma_0 H^T + I\sigma^2\right)$ for every point in space, which is exactly like using the equivalent definition of the evidence.
