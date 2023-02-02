@@ -9,13 +9,6 @@ authors:
     affiliations:
       name: Hebrew University
 
-toc:
-  - name: Frequentist Evaluation
-    - name: Maximum Likelihood Estimation
-  - name: Bayesian Evaluation
-    - name: Minimum MSE Estimator
-    - name: Other Bayes-Optimal Estimators
-    - name: The 0-1 Loss
 
 ---
 
