@@ -9,13 +9,6 @@ authors:
     affiliations:
       name: Hebrew University
 
-toc:
-  - name: Frequentist Evaluation
-	  - name: Maximum Likelihood Estimation
-  - name: Bayesian Evaluation
-  - name: Optimality of MMSE
-  - name: Other Bayes-Optimal Estimators
-
 ---
 
 
