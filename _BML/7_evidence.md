@@ -1,7 +1,7 @@
 ---
 layout: distill
 comments: true
-title: 6 - Evidence Function
+title: 7 - Evidence Function
 
 description: The evidence function (or marginal likielihood) is one of the cornerstones of Bayesian machine learning. This post shows the construction of the evidence and how it can be used in the context of Bayesian linear regression.   
 
@@ -158,7 +158,7 @@ p\left(y\mid \Psi\right)=\left(2\pi\right)^{N/2}\mid \Sigma_{\theta\mid \mathcal
 \end{equation}
 $$
 
-But we can be even more specific. Remember that for a Gaussian prior $\hat{\theta}_{\text{MAP}}=\mu_{\theta\mid D}$ and $\Psi=\\{ \mu,\Sigma\\}$ , so what we actually found is:
+But we can be even more specific by plugging in the MAP estimate under a Gaussian prior:
 
 $$
 \begin{equation}

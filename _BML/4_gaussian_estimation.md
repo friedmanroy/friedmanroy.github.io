@@ -1,7 +1,7 @@
 ---
 layout: distill
 comments: true
-title: 3 - Estimating the Gaussian Distribution
+title: 4 - Estimating the Gaussian Distribution
 description: The math of estimating the parameters of a Gaussian using MLE as well as Bayesian inference, with some intuition regarding the effects of sample size and prior selection.
 
 authors:

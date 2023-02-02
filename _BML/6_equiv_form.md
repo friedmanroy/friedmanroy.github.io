@@ -1,7 +1,7 @@
 ---
 layout: distill
 comments: true
-title: 5 - Equivalent Form for Bayesian Linear Regression
+title: 6 - Equivalent Form for Bayesian Linear Regression
 description: The construction of an equivalent form for Bayesian linear regression, which is helpful when there are more features than data points.
 
 authors:

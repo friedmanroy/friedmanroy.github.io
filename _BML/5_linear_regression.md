@@ -1,7 +1,7 @@
 ---
 layout: distill
 comments: true
-title: 4 - Linear Regression
+title: 5 - Linear Regression
 description: Overview of the construction of linear regression as well as it's classical and Bayesian solutions.
 
 authors:
