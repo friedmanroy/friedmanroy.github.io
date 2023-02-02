@@ -9,6 +9,14 @@ authors:
     affiliations:
       name: Hebrew University
 
+toc:
+  - name: Frequentist Evaluation
+    - name: Maximum Likelihood Estimation
+  - name: Bayesian Evaluation
+    - name: Minimum MSE Estimator
+    - name: Other Bayes-Optimal Estimators
+    - name: The 0-1 Loss
+
 ---
 
 
@@ -240,7 +248,7 @@ Using an estimator that is optimal under this kind of loss will be useful in cla
 
 ### Maximum a-Posteriori Estimator
 
-> **Theorem**:  $\hat{\theta}_{\text{MAP}}=\arg\max_\theta p(\theta\vert \mathcal{D})$  is the Bayes-optimal estimator in terms of the 0-1 loss<d-footnote>Under the assumption that $p(\theta\vert \mathcal{D})$ is smooth.</d-footnote>.
+> **Theorem**:  $\theta_{\text{MAP}}=\arg\max_\theta p(\theta\vert \mathcal{D})$  is the Bayes-optimal estimator in terms of the 0-1 loss<d-footnote>Under the assumption that $p(\theta\vert \mathcal{D})$ is smooth.</d-footnote>.
 
 ---
 
