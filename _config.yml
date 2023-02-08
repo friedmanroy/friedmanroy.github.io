@@ -103,7 +103,7 @@ discord_id: # your discord id (18-digit unique numerical identifier)
 google_analytics: G-1B05NVC2PJ # your Goole Analytics measurement ID (format: G-XXXXXXXXXX)
 panelbear_analytics:  # panelbear analytics site ID (format: XXXXXXXXX)
 
-google_site_verification: fqpmQwGNtZ1kJ8UAsQMb7RD2N7DcYRDlyGbAJsnZuGM# your google-site-verification ID (Google Search Console)
+google_site_verification: EUCyoY6MaSyn4ZvM9TfAuzzeleW7dR0PHS4_UCtyZ4I # your google-site-verification ID (Google Search Console)
 bing_site_verification:  # out your bing-site-verification ID (Bing Webmaster)
 
 # -----------------------------------------------------------------------------
