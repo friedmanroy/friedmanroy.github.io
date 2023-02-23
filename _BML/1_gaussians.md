@@ -18,8 +18,9 @@ toc:
 
 ---
 
-The distribution that is seen most often in ML (and statistics) is the Gaussian distribution, also called the _normal distribution_. The reason this distribution is so commonly used is because of two reasons: it is empirically observed in the wild many times and, perhaps more importantly, it is mathematically very simple to use the Gaussian distribution (we will see exactly how later on). This post will delve into the definition and properties of the Gaussian distribution[^1].
+The distribution that is seen most often in ML (and statistics) is the Gaussian distribution, also called the _normal distribution_. The reason this distribution is so commonly used is because of two reasons: it is empirically observed in the wild many times and, perhaps more importantly, it is mathematically very simple to use the Gaussian distribution (we will see exactly how later on). This post will delve into the definition and properties of the Gaussian distribution<d-footnote>See [Bishop 2.3](https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf) for a _much_ more extensive introduction to the Gaussian distribution.</d-footnote>.
 
+<br>
 # Definition
 
 A random variable $x$ is said to have a Gaussian distribution if it's PDF has the following form:
@@ -82,7 +83,7 @@ style="display: inline-block; margin: 0 auto;">
     Figure 2: example of a 2D Gaussian distribution. On the left is the heatmap of the distribution - darker means higher density. On the right is the contour at $\Delta=1$ overlayed on top of samples from the distribution. The contours of the distribution are ellipses aligned and scaled according to the eigenvectors and eigenvalues of the covariance matrix.
 </div>
 
-
+<br>
 # Geometry of the Gaussian Distribution
 
 In 1D, the Gaussian distribution takes the form of the famous bell curve in figure 1 and is easy to view. However, in multiple dimensions it is not so clear what the geometry of the distribution actually looks like. We can gain insight by considering the EVD of the covariance matrix $\Sigma$ (remember, this decomposition exists since $\Sigma$ is symmetric):
@@ -131,7 +132,7 @@ $$
 $$
 So in 2D, all of the _contour lines_ (which are lines that have the same density along the PDF) will always be ellipses; in the multivariate case they will be ellipsoids (which is an ellipse in more dimensions, kind of). Figure 2 (right) shows this explicitly - the Gaussian is centered around the mean $\mu$ , the contour of $\Delta=1$ is an ellipse with axes aligned and scaled by the eigenvectors and square root of the eigenvalues of the covariance matrix.
 
-
+<br>
 # The Derivative Trick
 
 The Gaussian distribution is, _by definition_, any distribution that is the exponent of a quadratic function, i.e. any distribution of the form:
@@ -158,7 +159,6 @@ $$
 \end{equation}
 $$
 
----
 
 ## Conditional Distribution of a Gaussian
 
@@ -277,7 +277,7 @@ style="display: inline-block; margin: 0 auto; ">
     Figure 3: visualization of the conditional of a bivariate Gaussian; plots of $p\left(x_{a}\mid x_{b}\right)$ for various values of $x_{b}$ . Notice how the variance doesn't change for different values of $x_{b}$ , only the mean of the conditional.
 </div>
 
-
+<br>
 # Completing the Squares
 
 While the derivative trick is very useful, we can't always use it, since we might lose information that we want to keep when differentiating. In such cases, we can use a different trick - completing the squares. 
@@ -294,7 +294,7 @@ $$
 f\left(x\right)=\underbrace{\left(x+\boxed{?}\right)^{T}\boxed{\boxed{?}}\left(x+\boxed{?}\right)}_{\text{depends on }x}+\underbrace{g\left(A,b,c\right)}_{\text{const w.r.t }x}
 \end{equation}
 $$
-where $\boxed{?}$ stands in for some vector and $\boxed{\boxed{?}}$ stands in for some matrix. For the case presented above, we can do so in the following manner (assuming $A$ is invertible[^2]):
+where $\boxed{?}$ stands in for some vector and $\boxed{\boxed{?}}$ stands in for some matrix. For the case presented above, we can do so in the following manner (assuming $A$ is invertible<d-footnote>We can also do this when $A$ is not invertible, in which case we will need to use the pseudo-inverse of $A$ such that $AA^{\dagger}=I$ . </d-footnote>):
 $$
 \begin{align}
 \label{eq:quad-full}
@@ -322,7 +322,6 @@ $$
 \end{align}
 $$
 
----
 
 ## Marginal Distribution of a Gaussian
 
@@ -425,6 +424,7 @@ x_{a}\sim\mathcal{N}\left(\mu_{a},\Sigma_{aa}\right)
 $$
 which really makes you wonder why we did all of that hard work.
 
+<br>
 # Extras 
 
 We saw the so called "derivative trick" and how completing the squares can also be of help, but it might not be obvious when to use each approach. First, remember that whenever we see a distribution of the form:
@@ -434,19 +434,10 @@ p\left(x,y\right)\propto\exp\left[-x^{T}\Gamma x+b\left(y\right)^{T}x+g\left(y\r
 \end{equation}
 $$
 
-then $p\left(x\right)$ and $p\left(x\mid y\right)$ will be Gaussians[^3], and we will usually want to find the "Gaussian form" we know and love. Once we figured that out, we can try to ask "how can we find the Gaussian form?", and the answer will usually be one of the following methods:
+then $p\left(x\right)$ and $p\left(x\mid y\right)$ will be Gaussians<d-footnote>This is a slightly more general statement than what we showed here, but you can verify the validity for yourself in these cases as well.</d-footnote>, and we will usually want to find the "Gaussian form" we know and love. Once we figured that out, we can try to ask "how can we find the Gaussian form?", and the answer will usually be one of the following methods:
 
 * If we don't care about $p\left(y\right)$ or $p\left(y\mid x\right)$ at all, i.e. we want to specifically find $p\left(x\right)$ or $p\left(x\mid y\right)$ , then we can use the derivative trick
 * If we need to know $p\left(y\right)$ or $p\left(y\mid x\right)$ explicitly as well as $p\left(x\right)$ or $p\left(x\mid y\right)$ , then completing the squares is usually the easiest way
 * When all else fails, but we know that what we are looking for is Gaussian, we can calculate the expectations and covariance explicitly, since a Gaussian is completely defined by these two values
 
 Once you fully understand why each method works, it will become quite clear when you should use each of them.
-
----
-
-
-[^1]: See [Bishop 2.3](https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf) for a _much_ more extensive introduction to the Gaussian distribution
-
-[^2]: We can also do this when $A$ is not invertible, in which case we will need to use the pseudo-inverse of $A$ such that $AA^{\dagger}=I$ . 
-
-[^3]: This is a slightly more general statement than what we showed here, but you can verify the validity for yourself in these cases as well
