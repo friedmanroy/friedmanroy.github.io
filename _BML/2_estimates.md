@@ -1,7 +1,7 @@
 ---
 layout: distill
 comments: true
-title: 3 - Estimation and Bayes-Optimal Estimators
+title: 2 - Estimation and Bayes-Optimal Estimators
 description: An overview of estimation and proofs for the MLE, MMSE and MAP estimators.
 
 authors:
