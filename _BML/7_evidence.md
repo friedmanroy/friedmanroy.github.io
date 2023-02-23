@@ -1,7 +1,7 @@
 ---
 layout: distill
 comments: true
-title: 7 - Evidence Function
+title: Evidence Function
 
 description: The evidence function (or marginal likielihood) is one of the cornerstones of Bayesian machine learning. This post shows the construction of the evidence and how it can be used in the context of Bayesian linear regression.   
 
@@ -17,6 +17,9 @@ toc:
   - name: Examples
   - name: Regarding Calibration
 ---
+
+<span style='float:left'><a href="https://friedmanroy.github.io/BML/6_equiv_form/">← Equivalent Form</a></span><span style='float:right'><a href=""> →</a></span>
+<br>
 
 As we have previously discussed, there are many possible basis functions $h\left(\cdot\right)$ we can use to fit the linear regression model, and it is not always so simple to determine which set of basis functions is the correct one to use. On one hand, if we use a very expressive set of basis functions, or a very large one, then the model will easily fit the training data, but will probably give very inaccurate predictions for unseen data points. On the other hand, if we use a model that is too simplistic, then we will end up missing all of the data points. 
 
@@ -35,7 +38,7 @@ style="display: inline-block; margin: 0 auto; ">
 This is exactly the dilemma represented in figure 1; on the left, it is fairly obvious that the straight line should be chosen, although the 9th order polynomial fits the data better. On the other hand, the graph on the right shows exactly the opposite - the 9th order polynomial intuitively looks like it explains the data better than the linear function. However, in both cases the 9th order polynomial has much higher likelihood. So how can we choose which of the basis functions is a better fit for the data?
 
 
-The _evidence function_ [^1] (also called the _marginal likelihood_, since we marginalize the parameters out of the distribution) is a way for us to intelligently choose which parameterization to use. The idea behind the evidence function is to "integrate out" the specific values of the parameters $\theta$ and to see how probable the data set is under our parameterization. Suppose we have a prior $p\left(\theta\mid \Psi\right)$ that is dependent
+The _evidence function_<d-footnote>Bishop section 3.4 or <a href="http://www.inference.org.uk/mackay/itprnn/ps/343.355.pdf">MacKay's chapter on model selection in "Information Theory, Inference and Learning Algorithms"</a>.</d-footnote> (also called the _marginal likelihood_, since we marginalize the parameters out of the distribution) is a way for us to intelligently choose which parameterization to use. The idea behind the evidence function is to "integrate out" the specific values of the parameters $\theta$ and to see how probable the data set is under our parameterization. Suppose we have a prior $p\left(\theta\mid \Psi\right)$ that is dependent
 on some parameters $\Psi$ . Then:
 
 $$
@@ -55,9 +58,10 @@ specific $\mu_{0}$ and $\Sigma_{0}$ we chose. In our new notation
 $\Psi=\\{ \mu_{0},\Sigma_{0}\\}$ , and we want to compare
 between different possible $\Psi$ s.
 
+
 ---
 
-#### Simple Bayesian linear regression
+#### Example: Simple Bayesian linear regression
 
 As an example, suppose we assume that:
 
@@ -101,6 +105,7 @@ and we want to choose between $\Psi_{\theta}=\\{ \mu_{\theta},\Sigma_{\theta}\\}
 
 ---
 
+<br>
 # Calculating the Evidence
 
 Suppose that our prior is described, as above, by:
@@ -131,6 +136,7 @@ $$
 
 Usually, the numerator is either known or pretty simple to calculate, while the denominator is quite hard to find. In such cases, the denominator is approximated in some manner in other to find the evidence. Luckily for us, the denominator is easy to calculate in the case of Bayesian linear regression with a Gaussian prior. 
 
+<br>
 # Evidence in Bayesian Linear Regression
 
 In standard Bayesian linear regression, the posterior is a Gaussian. We can utilize this knowledge to find a more specific formula for the evidence. Notice that:
@@ -166,7 +172,7 @@ p\left(y\mid \mu,\Sigma\right)=\left(2\pi\right)^{N/2}\mid \Sigma_{\theta\mid \m
 \end{equation}
 $$
 
-
+<br>
 # Equivalent Derivation
 
 The above derivation allows us to calculate the actual value of the evidence quickly, but it may be a bit harder to understand what is going on in this form. An equivalent way to find the evidence is to find $p\left(\mathcal{D}\mid \Psi\right)$ directly, from the definition. Recall that we modeled linear regression according to:
@@ -207,7 +213,7 @@ $$
 
 Notice that all this time we assumed that we know the variance of the sample noise, $\sigma^{2}$ . This really helps simplify many of the derivations we made, but is kind of a weird assumption to make. 
 
-We can try to use a fully Bayesian approach, where we choose a prior for $\sigma^{2}$ and then calculate the posterior. If we try to choose a Gaussian as a prior, we quickly run into a problem - $\sigma^{2}$ can't be negative, but every Gaussian will have a positive density at negative values! In addition, the Gaussian distribution is symmetric, but the distribution we want to describe $\sigma^{2}$ with is probably very asymmetrical, with low density at values close to zero, high density later on, and a long tail for higher values. So, clearly we can't use a Gaussian as the prior for $\sigma^{2}$ . There are distributions that match the above description, but we haven't discussed them (and won't). Also, finding their posterior is usually a bit harder than finding the posterior of a Gaussian distribution[^2] . So, going fully Bayesian is more complicated in this case.
+We can try to use a fully Bayesian approach, where we choose a prior for $\sigma^{2}$ and then calculate the posterior. If we try to choose a Gaussian as a prior, we quickly run into a problem - $\sigma^{2}$ can't be negative, but every Gaussian will have a positive density at negative values! In addition, the Gaussian distribution is symmetric, but the distribution we want to describe $\sigma^{2}$ with is probably very asymmetrical, with low density at values close to zero, high density later on, and a long tail for higher values. So, clearly we can't use a Gaussian as the prior for $\sigma^{2}$ . There are distributions that match the above description, but we haven't discussed them (and won't). Also, finding their posterior is usually a bit harder than finding the posterior of a Gaussian distribution<d-footnote>If you are curious, you can look at Bishop section 2.3.6 for a full derivation of the posterior under a proper prior.</d-footnote>. So, going fully Bayesian is more complicated in this case.
 
 Instead, we can use the evidence function in order to choose the most fitting sample noise. In the notation above, we only wrote $y$ as a function of $\mu$ and $\Sigma$ , but it is obviously affected by $\sigma^{2}$ through the covariance:
 
@@ -237,6 +243,7 @@ where $\epsilon$ is some learning rate. However, note that there is no guarantee
 
 ---
 
+<br>
 # Examples
 
 The way evidence is presented is usually not very intuitive. Let's look at the definition of the evidence for a second:
@@ -247,7 +254,7 @@ p(\mathcal{D}\mid \Psi)=\intop p(\mathcal{D}\mid \theta) p(\theta\mid \Psi)d\the
 \end{equation}
 $$
 
-This is the most direct (and intractable) way to define the evidence, but is a bit more approachable in an abstract way. Notice that the operation we actually have here is (basically) a sum of all possible likelihoods of fits according to the prior (the $p(\mathcal{D}\mid \theta)$ ), weighted by the prior probability. This means that if the data has high likelihood under the values of the prior with high density, then the evidence for the prior will be high. On the other hand, if the area with highest density on the prior isn't even close to the data, then the evidence will be low. This is shown in the figure below[^3].
+This is the most direct (and intractable) way to define the evidence, but is a bit more approachable in an abstract way. Notice that the operation we actually have here is (basically) a sum of all possible likelihoods of fits according to the prior (the $p(\mathcal{D}\mid \theta)$ ), weighted by the prior probability. This means that if the data has high likelihood under the values of the prior with high density, then the evidence for the prior will be high. On the other hand, if the area with highest density on the prior isn't even close to the data, then the evidence will be low. This is shown in the figure below<d-footnote>The way the prior is displayed in these plots is by calculating the mean and standard deviations of $\mathcal{N}\left(H\mu_0,\ H\Sigma_0 H^T + I\sigma^2\right)$ for every point in space, which is exactly like using the equivalent definition of the evidence.</d-footnote>.
 
 <div class="fake-img l-page">
 <p align="center">
@@ -325,8 +332,8 @@ style="display: inline-block; margin: 0 auto; ">
     Figure 4: the same as the previous visualization, only for linear functions. In this animation, the size of the dot corresponds to the sample-specific likelihood; notice how all points are large at the maximum evidence.
 </div>
 
----
 
+<br>
 # Regarding Calibration
 
 The evidence is certainly a useful tool for model selection, but it should be used carefully. In particular, relying too much on the evidence without taking care can result in overfitting to the training data. More concisely, high evidence doesn't equal to good generalization! This is because, by design, the marginal likelihood gives high scores to priors which explain the data well. 
@@ -379,8 +386,5 @@ This is nice since it bypasses the need to choose a model - simply integrate ove
 
 That said, we have introduced a new complication; how should $\xi$  be chosen? Continuing with this reasoning, shouldn't we also incorporate a prior over $\xi$, a so called "hyper-hyperprior",  and so on? While these concerns are valid, the "priors all the way down" kind of approach typically stops at the hyperprior, since it is far enough from the data term.
 
----
-
-[^1]: Bishop section 3.4 or [MacKay's chapter on model selection in "Information Theory, Inference and Learning Algorithms"](http://www.inference.org.uk/mackay/itprnn/ps/343.355.pdf)
-[^2]: If you are curious, you can look at Bishop section 2.3.6 for a full derivation of the posterior under a proper prior.
-[^3]: The way the prior is displayed in these plots is by calculating the mean and standard deviations of $\mathcal{N}\left(H\mu_0,\ H\Sigma_0 H^T + I\sigma^2\right)$ for every point in space, which is exactly like using the equivalent definition of the evidence.
+<br>
+<span style='float:left'><a href="https://friedmanroy.github.io/BML/6_equiv_form/">← Equivalent Form</a></span><span style='float:right'><a href=""> →</a></span>

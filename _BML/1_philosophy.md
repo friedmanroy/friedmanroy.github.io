@@ -1,7 +1,7 @@
 ---
 layout: distill
 comments: true
-title: 1 - The Bayesian Philosophy
+title: The Bayesian Philosophy
 description: A high-level description of the frequentist and Bayesian approaches, their differences, and some of their shared qualities.
 
 authors:
@@ -13,7 +13,11 @@ toc:
   - name: Frequentist Approach
   - name: Bayesian Approach
   - name: Connections
+  - name: Discussion
 ---
+
+<div style="text-align:right"><a href="https://friedmanroy.github.io/BML/2_estimates/">Estimation and Bayes-Optimal Estimators →</a> </div>
+<br>
 
 Many tasks in statistics and machine learning can be summarized as attempting to extract information from data. Usually, we will assume that we are given a set of data points:
 $$
@@ -63,6 +67,7 @@ Given the dataset $\mathcal{D}$ , we are tasked with finding the number $\theta$
 
 How should we go about doing this? The frequentist approach suggests defining some loss function $L(\mathcal{D};\ \theta)$ which will act as a criterion for the quality of our choice of $\theta$ , which we will then attempt to minimize.
 
+---
 <br>
 ## Classical Machine Learning
 
@@ -96,6 +101,8 @@ $$
 $$
 
 This example is simplified to the point of being cartoonish, but this a very simplified sketch of one method for estimation.
+
+---
 <br>
 ## Probabilistic Machine Learning
 
@@ -132,7 +139,7 @@ $$
 The result is the same (since the logarithm is a strictly monotonically increasing function), however this includes maximizing a sum instead of a product, which is usually easier.
 
 ---
-**Example: Coin Toss (yes, again)**
+#### Example: Coin Toss (yes, again)
 
 Coming back to our coin toss example, if we assume that each coin toss is independent of the one that came before it, then the likelihood that we saw $\mathcal{D}$ is given by:
 
@@ -166,6 +173,7 @@ $$
 
 and, amazingly, we got the same estimator as the previous approach!
 
+---
 <br>
 # Bayesian Approach
 
@@ -179,13 +187,13 @@ $$
 $$
 Usually we assume that the data set is held constant, so $p\left(\mathcal{D}\right)$ does not affect the calculation of the posterior probability, which is why it is usually disregarded (or swallowed up by the $\propto$ sign). The likelihood term here $p\left(\mathcal{D}\mid\theta\right)$ is actually exactly the same as the frequentist likelihood $p\left(\mathcal{D}\;;\theta\right)$ , only now we can properly condition on $\theta$ . 
 
-As mentioned, the posterior distribution is an updated version of our beliefs, and gives a new distribution over which values of $\theta$ are likely. That said, we can also extract point estimates (single estimates) of $\theta$ from the posterior:
+As mentioned, the posterior distribution is an updated version of our beliefs, and gives a new distribution over which values of $\theta$ are likely. That said, we can also extract point estimates (single estimates) of $\theta$ from the posterior. For example:
 
 1. The _maximum a-posteriori_ (MAP) estimate is defined as: 
 $$
 \hat{\theta}_{MAP}\stackrel{\Delta}{=}\arg\max_{\theta}p\left(\theta\mid\mathcal{D}\right)=\arg\max_{\theta}p\left(\theta\right)p\left(\mathcal{D}\mid\theta\right)
 $$
-4. The _minimum mean squared error_ (MMSE) estimate is defined as: $\hat{\theta}_{MMSE}\stackrel{\Delta}{=}\mathbb{E}\left[\theta\mid\mathcal{D}\right]$ . As the name suggests, the MMSE is the optimal estimator under a mean squared error loss (assuming our prior is correct)
+2. The _minimum mean squared error_ (MMSE) estimate is defined as: $\hat{\theta}_{MMSE}\stackrel{\Delta}{=}\mathbb{E}\left[\theta\mid\mathcal{D}\right]$ . As the name suggests, the MMSE is the optimal estimator under a mean squared error loss (assuming our prior is correct)
 
 Finally, many times we are not interested in the posterior over parameter values $\theta$ , but actually only care about the predictions. In this case, we can define the _posterior predictive distribution_ (PPD) defined as:
 $$
@@ -197,7 +205,7 @@ where $d^{*}$ is a newly observed data point.
 
 ---
 
-**Example: Coin Toss (last time, promise)**
+#### Example: Coin Toss (last time, promise)
 
 The only real difference in this example from the MLE version is that now we want to weight each outcome by the prior distribution. The prior distribution conveys our beliefs on the outcomes, which is why it is sometimes called a *subjective* probability.
 
@@ -211,6 +219,7 @@ $$
 
 That is, it is 4 times more likely for $\theta$ to be in the range $[1/4,\ 3/4]$ than outside it. Using this prior and a dataset, we can now calculate the posterior distribution which will effectively act as an updated probability for possible values of $\theta$ .
 
+---
 <br>
 ### Appeal of the Bayesian Approach
 
@@ -248,3 +257,12 @@ So we see that the frequentist estimate $\hat{\theta}\_{ML}$ is a special case o
 
 Actually, we did something extremely fishy when we said that $p\left(\theta\right)$ is "uniform" - this isn't possible in many cases! A uniform probability over all of the real line $\mathbb{R}$ is impossible... so how can we even talk about this so called "uninformative prior"? While this is true, as long as the posterior $p\left(\theta\mid\mathcal{D}\right)$ is well defined, the MAP and MMSE estimates will still exist. In this special case, the frequentist and Bayesian world views collide, and it will be useful to keep this fact in mind.
 
+<br>
+# Discussion
+
+Having shown the two possible philosophies, frequentist and Bayesian, it is important to keep in mind that both have viable methods and shortcomings. As a consequence, throughout this series of posts we will typically consider both of these approaches together. Usually, the Bayesian approach will _augment_ the frequentist approach, giving us some structured method to inject prior knowledge into our predictions.
+
+So far, everything was very abstract and amorphous. Starting with the next post, we'll go into some more details. Specifically, we will see how (and when) using estimators extracted using the Bayesian approach will typically be optimal. This necessitates the definition of "optimality" in estimators, which we will build using decision theory.
+
+
+<div style="text-align:right"><a href="https://friedmanroy.github.io/BML/2_estimates/">Estimation and Bayes-Optimal Estimators →</a> </div>

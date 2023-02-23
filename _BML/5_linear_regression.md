@@ -1,7 +1,7 @@
 ---
 layout: distill
 comments: true
-title: 5 - Linear Regression
+title: Linear Regression
 description: Overview of the construction of linear regression as well as it's classical and Bayesian solutions.
 
 authors:
@@ -15,13 +15,16 @@ toc:
   - name: Bayesian Linear Regression
 ---
 
+<span style='float:left'><a href="https://friedmanroy.github.io/BML/4_gaussian_estimation/">← Estimating the Gaussian Distribution</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/6_equiv_form/">Equivalent Form →</a></span>
+<br>
+
 Given a vector of features $x\in\mathbb{R}^{d}$ , the simplest regression model is a function given by the weighted combination of the input features (sometimes called regressors, explanatory variables, covariates or some other name):
 $$
 \begin{equation}
 y=\theta_{0}+\sum_{i}\theta_{i}x_{i}
 \end{equation}
 $$
-where we want to predict the value of $y$ (sometimes called the response), and the $\theta$ s are the parameters of our model (sometimes called the regression coefficients). The problem of finding the $\theta$ s that estimate $y$ the best is known as _linear regression_[^1].
+where we want to predict the value of $y$ (sometimes called the response), and the $\theta$ s are the parameters of our model (sometimes called the regression coefficients). The problem of finding the $\theta$ s that estimate $y$ the best is known as _linear regression_ <d-footnote>Bishop 3.1; Murphy 7.3.</d-footnote>.
 
 
 The weight $\theta_{0}$ is called the _bias term_, which allows the model to learn the intercept (so that $y$ doesn't have to be 0 at $x=0$ ). We can rewrite everything in vector form by defining $x\stackrel{\Delta}{=}\left[1,x_{1},\cdots,x_{d}\right]^{T}$ and $\theta\stackrel{\Delta}{=}\left[\theta_{0},\theta_{1},\cdots,\theta_{d}\right]$ :
@@ -84,6 +87,7 @@ style="display: inline-block; margin: 0 auto; ">
     Figure 1: an example of the linear regression task. Training points are given and are assumed to originate from a linear function plus some noise, which we will attempt to find given the points.
 </div>
 
+<br>
 # Basis Functions
 
 Notice that while the model is linear in the features $x$ , we can always define new features that are a non-linear function of $x$ , so that:
@@ -129,8 +133,8 @@ style="display: inline-block; margin: 0 auto; ">
 
 Of course, there are many more possible basis functions that can be used. Since there are many possible basis functions and some may work better than others on our data, we may run into issues of how to choose the best model. Later on we will discuss how to select which basis function to use from the myriad possibilities, but for now we will ignore this problem, since the optimization process for linear regression doesn't depend on the specific basis function that is used.
 
----
 
+<br>
 # Classical Linear Regression
 
 In the classical formulation of linear regression, the ML estimate for $\theta$ is used to define the function $y\left(x\right)$ . Let's find this estimate. First, let's write out the log-likelihood explicitly:
@@ -164,7 +168,7 @@ $$
 
 ## Geometry of Least Squares
 
-We can gain further insight into the ML solution by looking at the geometry of the least squares solution[^2].
+We can gain further insight into the ML solution by looking at the geometry of the least squares solution<d-footnote>The analysis that follows is a more fleshed out version of the same given in Bishop 3.1.2.</d-footnote>.
 
 Let's look at the $N$ dimensional vector $y=\left(y_{1},y_{2},...,y_{N}\right)^{T}$ and the columns of $H$ , which we will denote as $h^{\left(j\right)}$ for now. Some subspace $\mathcal{S}$ is spanned by the $d$ column vectors in $H$ , which leaves us with three possible scenarios that we have to think about when talking about the ML solution $\hat{\theta}_{\text{ML}}=\left(H^{T}H\right)^{-1}H^{T}y$ :
 
@@ -239,11 +243,11 @@ style="display: inline-block; margin: 0 auto; ">
     Figure 4: fitting a linear regression model with polynomial basis functions to data. The left most is the ML solution using 3rd order polynomials, the middle using 8th order polynomials while the right most is a Bayesian linear regression model using 8th order polynomials. The model in the center illustrates how the ML solution is prone to overfitting, when using basis functions that are expressive enough to completely describe the data points, unlike the case on the left. Unlike the ML solution, a well calibrated prior can avoid these problems of overfitting, while also defining a distribution over possible solutions. The black line is the MMSE estimate for BLR while the blue lines are samples from the posterior. Notice how the posterior describes high uncertainty outside the bounds of the data points, while being very certain around the data points themselves.
 </div>
 
----
 
+<br>
 # Bayesian Linear Regression
 
-Of course, we can also have a prior over the parameters $\theta$ [^3]. Since a linear transformation of a Gaussian is also a Gaussian, and since we wrote $x$ as a linear transformation of $\theta$ , it will make sense for our prior to have a Gaussian form. We will define our prior as:
+Of course, we can also have a prior over the parameters $\theta$ <d-footnote>Bishop 3.3; Murphy 7.6.</d-footnote>. Since a linear transformation of a Gaussian is also a Gaussian, and since we wrote $x$ as a linear transformation of $\theta$ , it will make sense for our prior to have a Gaussian form. We will define our prior as:
 $$
 \begin{equation}
 \theta\sim\mathcal{N}\left(\mu_{\theta},\Sigma_{\theta}\right)
@@ -263,7 +267,7 @@ style="display: inline-block; margin: 0 auto; ">
     Figure 5: Bayesian linear regression with 10 Gaussian basis functions with means in equally spaced in the range $[-2.5,2.5]$. On the left is an example of the prior described by the model, as well as a few sampled functions from the prior. The posterior given some data points is shown on the right, as well as sampled functions from the newly defined distribution which describes plausible functions given the observed data points.
 </div>
 
-The posterior $p\left(\theta\mid y\right)$ in this case is also a Gaussian distribution given by[^4] :
+The posterior $p\left(\theta\mid y\right)$ in this case is also a Gaussian distribution given by<d-footnote>The process to find the posterior distribution follows, pretty much, _exactly_ the same steps from the post about <a href="https://friedmanroy.github.io/BML/4_gaussian_estimation/">estimating the parameters of a Gaussian</a> (the part about Bayesian inference for MVNs). It's a good exercise to try and show this yourself! </d-footnote>:
 $$
 \begin{equation}
 p\left(\theta\,\mid \,y\right)=\mathcal{N}\left(y\,\mid \,\mu_{\theta\mid D},C_{\theta\mid D}\right)
@@ -311,9 +315,6 @@ $$
 $$
 In this sense, if we are very unsure about the prior ( $\alpha\gg1$ ) then the regularization will be very light, while if we are very sure ( $\alpha$ is small), then we will heavily penalize solutions that are far from what we expected.
 
----
+<br>
 
-[^1]: Bishop 3.1; Murphy 7.3
-[^2]: The analysis that follows is a more fleshed out version of the same given in Bishop 3.1.2
-[^3]: Bishop 3.3; Murphy 7.6
-[^4]: The process to find the posterior distribution follows, pretty much, _exactly_ the same steps from the post about [estimating the parameters of a Gaussian](https://friedmanroy.github.io/BML/rec_3/) (the part about Bayesian inference for MVNs). It's a good exercise to try and show this yourself! 
+<span style='float:left'><a href="https://friedmanroy.github.io/BML/4_gaussian_estimation/">← Estimating the Gaussian Distribution</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/6_equiv_form/">Equivalent Form →</a></span>

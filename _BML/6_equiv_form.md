@@ -1,7 +1,7 @@
 ---
 layout: distill
 comments: true
-title: 6 - Equivalent Form for Bayesian Linear Regression
+title: Equivalent Form for Bayesian Linear Regression
 description: The construction of an equivalent form for Bayesian linear regression, which is helpful when there are more features than data points.
 
 authors:
@@ -14,8 +14,10 @@ toc:
   - name: Equivalent Form
   - name: Regular vs. Equivalent
 ---
+<span style='float:left'><a href="https://friedmanroy.github.io/BML/5_linear_regression/">← Linear Regression</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/7_evidence/">Evidence Function →</a></span>
+<br>
 
-In the [previous post](https://friedmanroy.github.io/BML/rec_4/), we saw that the posterior distribution of Bayesian linear regression is given by:
+In the [previous post](https://friedmanroy.github.io/BML/5_linear_regression/), we saw that the posterior distribution of Bayesian linear regression is given by:
 
 $$
 \begin{equation}
@@ -62,8 +64,8 @@ $$
 $$
 Notice that the matrix $A^{T}A$ is an $m\times m$ matrix, so we end up only needing to invert $m\times m$ matrices, possibly avoiding many unneeded computations. 
 
----
 
+<br>
 # Equivalent Form
 
 We now turn back to the covariance we found in equation \eqref{eq:post-cov}. Using the Woodbury identity:
@@ -99,9 +101,8 @@ M & = \sigma^2I+H\Sigma_\theta H^T
 \end{align}
 $$
 
----
 
-
+<br>
 # Regular vs. Equivalent
 
 As discussed (and shown) above, both ways of writing the posterior distributions are valid and equivalent; mathematically, it doesn't matter which of them we use.
@@ -123,3 +124,6 @@ $$
 In this form, we need to invert the matrix $M = \sigma^2I+H\Sigma_\theta H^T$ , an $N\times N$ matrix. 
 
 Classically speaking, to ensure that we don't overfit, we would always make sure that $N > p$ . However, using the Bayesian approach we can use more features and still not overfit (as we saw in the last post). The equivalent form becomes useful in the regime where $p > N$ ; when we have more features than data points, since it means that we will have to invert an $N\times N$ matrix<d-footnote>The cost of inverting a $N \times N$ matrix is roughly $O(N^3)$</d-footnote>, which will be more efficient than inverting a $p\times p$ matrix. We will talk about this regime in great detail in later posts.
+
+<br>
+<span style='float:left'><a href="https://friedmanroy.github.io/BML/5_linear_regression/">← Linear Regression</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/7_evidence/">Evidence Function →</a></span>
