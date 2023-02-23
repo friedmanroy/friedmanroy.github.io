@@ -2082,7 +2082,7 @@ d-appendix > distill-appendix {
 
   function bylineTemplate(frontMatter) {
     return `
-  <div class="byline grid">
+  <!-- <div class="byline grid">
     <div class="authors-affiliations grid">
       <h3>Authors</h3>
       <h3>Affiliations</h3>
@@ -2105,7 +2105,7 @@ d-appendix > distill-appendix {
         <p>${frontMatter.publishedMonth} ${frontMatter.publishedDay}, ${frontMatter.publishedYear}</p> ` : `
         <p><em>Not published yet.</em></p>`}
     </div>
-  </div>
+  </div> -->
 `;
   }
 
