@@ -10,7 +10,7 @@ authors:
 toc: 
   - name: Frequentist Evaluation
   - name: Bayesian Evaluation
-  - Discussion
+  - name: Discussion
 
 
 
