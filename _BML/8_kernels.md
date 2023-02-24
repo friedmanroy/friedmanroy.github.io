@@ -8,14 +8,15 @@ description:
 authors:
   - name: Roy Friedman
 
-toc:
-  - name: 
+toc: 
+  - name: Positive Semi-Definite Kernels
+  - name: Connection to Linear Regression
 ---
 
 <span style='float:left'><a href="https://friedmanroy.github.io/BML/7_evidence/">← Evidence Function</a></span><span style='float:right'><a href=""> →</a></span>
-
----
 <br>
+<br>
+
 When we introduced linear regression, we allowed the usage of the
 basis functions $h\left(\cdot\right)$ which mapped the inputs of
 our problem to features in a different space, allowing the linear
@@ -159,7 +160,10 @@ y_{2}^{2}
 \end{align*}
 $$
 
-So, the kernel is actually the inner product between two basis functions, which in this case happen to be second order polynomials. The function $p_{2}\left(\cdot\right)$ maps a vector $x$ to all possible 2nd order terms, times some constants:$\left(\begin{matrix}x_{1}^{2} & \sqrt{2}x_{1}x_{2} & x_{2}^{2}\end{matrix}\right)^{T}$ . In the same manner, if we would have chosen a kernel of the form $\left(x^{T}y\right)^{m}$ , then it would map from the features into all possible $m$ -th order terms of the features. 
+So, the kernel is actually the inner product between two basis functions, which in this case happen to be second order polynomials. The function $p_{2}\left(\cdot\right)$ maps a vector $x$ to all possible 2nd order terms, times some constants:
+
+$$\left(\begin{matrix}x_{1}^{2} & \sqrt{2}x_{1}x_{2} & x_{2}^{2}\end{matrix}\right)^{T}$$ 
+In the same manner, if we would have chosen a kernel of the form $\left(x^{T}y\right)^{m}$ , then it would map from the features into all possible $m$ -th order terms of the features. 
 
 Now, instead, let's look at the following:
 
@@ -316,5 +320,8 @@ Now the reason we allow PSD and not only PD kernels might be easier to see. Sinc
 <span style='float:left'><a href="https://friedmanroy.github.io/BML/7_evidence/">← Evidence Function</a></span><span style='float:right'><a href=""> →</a></span>
 
 
-## A {.appendix}
+<d-appendix>
+
+## A 
 does this work?
+</d-appendix>

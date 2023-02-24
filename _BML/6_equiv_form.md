@@ -14,9 +14,9 @@ toc:
   - name: Equivalent Form
   - name: Regular vs. Equivalent
 ---
-<span style='float:left'><a href="https://friedmanroy.github.io/BML/5_linear_regression/">← Linear Regression</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/7_evidence/">Evidence Function →</a></span>
 
----
+<span style='float:left'><a href="https://friedmanroy.github.io/BML/5_linear_regression/">← Linear Regression</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/7_evidence/">Evidence Function →</a></span>
+<br>
 <br>
 
 In the [previous post](https://friedmanroy.github.io/BML/5_linear_regression/), we saw that the posterior distribution of Bayesian linear regression is given by:

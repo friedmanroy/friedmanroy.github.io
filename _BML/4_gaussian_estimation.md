@@ -17,9 +17,7 @@ toc:
 ---
 
 <span style='float:left'><a href="https://friedmanroy.github.io/BML/3_gaussians/">← The Gaussian Distribution</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/5_linear_regression/">Linear Regression →</a></span>
-
----
-
+<br>
 <br>
 
 While Bayesian statistics is our main interest in this thread of posts, many times it will prove easier to first go over the frequentist version as it is less mathematically involved. Only after we understand the ML solution, we will move on to the Bayesian treatment of the same, in the process revealing how they are related to each other.

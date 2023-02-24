@@ -17,8 +17,7 @@ toc:
 ---
 
 <div style="text-align:right"><a href="https://friedmanroy.github.io/BML/2_estimates/">Estimation and Bayes-Optimal Estimators →</a> </div>
-
----
+<br>
 <br>
 
 Many tasks in statistics and machine learning can be summarized as attempting to extract information from data. Usually, we will assume that we are given a set of data points:
