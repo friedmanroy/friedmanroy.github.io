@@ -319,9 +319,3 @@ Now the reason we allow PSD and not only PD kernels might be easier to see. Sinc
 ---
 <span style='float:left'><a href="https://friedmanroy.github.io/BML/7_evidence/">← Evidence Function</a></span><span style='float:right'><a href=""> →</a></span>
 
-
-<d-appendix>
-
-## A 
-does this work?
-</d-appendix>
