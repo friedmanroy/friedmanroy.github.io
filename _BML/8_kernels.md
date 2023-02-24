@@ -3,13 +3,15 @@ layout: distill
 comments: true
 title: Kernels
 
-description:  
+description: 
 
 authors:
   - name: Roy Friedman
 
 toc: 
   - name: Positive Semi-Definite Kernels
+  - name: Constructing Kernels
+  - name: RBF is a Valid Kernel
   - name: Connection to Linear Regression
 ---
 
@@ -119,7 +121,7 @@ However, there are some functions that do not violate these two rules but are st
 
 ---
 
-## Constructing Kernels
+# Constructing Kernels
 
 We've shown that we can think of any set of basis functions as one part of a kernel, but if we always do this then we fall back to the problem of having to pick the set basis functions, instead of choosing the kernel directly. We have also shown that it is kind of a pain to prove if something is a valid kernel or not, in the general case. We will now go on to show how kernels can be constructed directly<d-footnote>The construction of kernels is the same as in Bishop 6.2, although slightly altered</d-footnote>, instead of going through basis functions.
 
@@ -186,7 +188,7 @@ is called the polynomial kernel exactly because of the characteristics we descri
 
 ---
 
-## RBF is a Valid Kernel
+# RBF is a Valid Kernel
 
 A family of basis functions that are often used in practice are the radial basis functions (RBF). The most common function from this family is the Gaussian basis function:
 

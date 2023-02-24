@@ -13,7 +13,11 @@ toc:
   - name: Definition
   - name: Geometry of the Gaussian Distribution
   - name: The Derivative Trick
+    subsections:
+      - name: Conditional Distribution of a Gaussian
   - name: Completing the Squares
+    subsections:
+      - name: Marginal Distribution of a Gaussian
   - name: Extras
   - name: Discussion
 
@@ -27,6 +31,7 @@ toc:
 The distribution that is seen most often in ML (and statistics) is the Gaussian distribution, also called the _normal distribution_. The reason this distribution is so commonly used is because of two reasons: it is empirically observed in the wild many times and, perhaps more importantly, it is mathematically very simple to use the Gaussian distribution (we will see exactly how later on). This post will delve into the definition and properties of the Gaussian distribution<d-footnote>See <a href="https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf">Bishop 2.3</a> for a much more extensive introduction to the Gaussian distribution.</d-footnote>.
 
 <br>
+
 # Definition
 
 A random variable $x$ is said to have a Gaussian distribution if it's PDF has the following form:
@@ -90,6 +95,7 @@ style="display: inline-block; margin: 0 auto;">
 </div>
 <br>
 <br>
+
 # Geometry of the Gaussian Distribution
 
 In 1D, the Gaussian distribution takes the form of the famous bell curve in figure 1 and is easy to view. However, in multiple dimensions it is not so clear what the geometry of the distribution actually looks like. We can gain insight by considering the EVD of the covariance matrix $\Sigma$ (remember, this decomposition exists since $\Sigma$ is symmetric):
@@ -145,6 +151,7 @@ $$
 So in 2D, all of the _contour lines_ (which are lines that have the same density along the PDF) will always be ellipses; in the multivariate case they will be ellipsoids (which is an ellipse in more dimensions, kind of). Figure 2 (right) shows this explicitly - the Gaussian is centered around the mean $\mu$ , the contour of $\Delta=1$ is an ellipse with axes aligned and scaled by the eigenvectors and square root of the eigenvalues of the covariance matrix.
 
 <br>
+
 # The Derivative Trick
 
 The Gaussian distribution is, _by definition_, any distribution that is the exponent of a quadratic function, i.e. any distribution of the form:
@@ -318,6 +325,7 @@ style="display: inline-block; margin: 0 auto; ">
 </div>
 
 <br>
+
 # Completing the Squares
 
 While the derivative trick is very useful, we can't always use it, since we might lose information that we want to keep when differentiating. In such cases, we can use a different trick - completing the squares. 
@@ -483,6 +491,7 @@ $$
 which really makes you wonder why we did all of that hard work.
 
 <br>
+
 # Extras 
 
 We saw the so called "derivative trick" and how completing the squares can also be of help, but it might not be obvious when to use each approach. First, remember that whenever we see a distribution of the form:
@@ -503,6 +512,7 @@ Once you fully understand why each method works, it will become quite clear when
 
 
 <br>
+
 # Discussion
 
 Now that we know what the Gaussian distribution is and the important properties of the Gaussian distribution, we can start to use it for some real statistical problems. The next post will be dedicated to estimating $\mu$ and $\Sigma$ from observed data, after which we will move on to utilizing the Gaussian distribution for the task of regression.

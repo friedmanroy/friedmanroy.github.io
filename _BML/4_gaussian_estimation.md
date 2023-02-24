@@ -14,17 +14,21 @@ toc:
   - name: 1D Bayesian Inference
   - name: Multivariate Gaussian
   - name: Choices of Priors
+  - name: Discussion
 ---
 
 <span style='float:left'><a href="https://friedmanroy.github.io/BML/3_gaussians/">← The Gaussian Distribution</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/5_linear_regression/">Linear Regression →</a></span>
 <br>
 <br>
 
+> In the previous post, we saw the definition of the Gaussian distribution as well some of its most useful properties. Having defined this distribution, our next point of interest will be to _estimate_ the mean and covariance of a Gaussian distribution given some datapoints. This will be our main focus in this post.
+
 While Bayesian statistics is our main interest in this thread of posts, many times it will prove easier to first go over the frequentist version as it is less mathematically involved. Only after we understand the ML solution, we will move on to the Bayesian treatment of the same, in the process revealing how they are related to each other.
 
 The parameters of a Gaussian distribution are $\mu$ and $\Sigma$, so $\theta=\left\{ \mu,\Sigma\right\}$ . In the frequentist case we will estimate both, however the Bayesian treatment of $\Sigma$ is a bit more complex and doesn't teach much, so we will ignore it for now. 
 
 <br>
+
 # ML Estimates
 
 The log-likelihood of a data set $\mathcal{D}=\left\{ x_{i}\right\} _{i=1}^{N}$ sampled from a Gaussian distribution is:
@@ -145,6 +149,7 @@ $$
 
 
 <br>
+
 # 1D Bayesian Inference
 
 Recall that in the Bayesian treatment, we assume that the parameters are distributed in some manner. We begin by considering the 1D case for Gaussian distributions<d-footnote>See Bishop 2.3.6 for more details.</d-footnote>:
@@ -336,6 +341,7 @@ $$
 The fact that the MAP and MMSE estimates are the same is unique to the Gaussian distribution, in general they will differ quite a bit!
 
 <br>
+
 # Multivariate Gaussian
 
 Now that we understood the basic premise of the Bayesian inference for $\mu$ in 1D, we can start all over again for the multivariate case. We assume, again, that:
@@ -357,11 +363,13 @@ p\left(\mathcal{D}|\mu\right)\propto\exp\left[-\frac{1}{2}\sum_{i=1}^{N}\left(x_
 \end{equation}
 $$
 and the posterior is:
+
 $$
 \begin{equation}
 p\left(\mu|\mathcal{D}\right)\propto\exp\left[-\frac{1}{2}\sum_{i=1}^{N}\left(x_{i}-\mu\right)^{T}\Sigma^{-1}\left(x_{i}-\mu\right)\right]\exp\left[-\frac{1}{2}\left(\mu-\mu_{0}\right)^{T}\Sigma_{0}^{-1}\left(\mu-\mu_{0}\right)\right]
 \end{equation}
 $$
+
 
 Essentially nothing has changed from before; the term in the exponent is still quadratic in $\mu$, so we can employ our tricks once again:
 
@@ -397,6 +405,7 @@ $$
 
 
 <br>
+
 # Choices of Priors
 
 Bayesian machine learning is often described in terms of "known priors". However, many times we don't actually have an explicit prior we can choose, which is the main criticism against the Bayesian approach. The problem is that when there isn't a good prior, researchers amount to choosing arbitrary distributions for their priors. 
@@ -420,6 +429,13 @@ The figure above illustrates what happens when Gaussian priors of different kind
 
 The more interesting case is when $\mu\_{0}$ is well calibrated and $\Sigma\_{0}$ is moderate (middle column, top). In this setting, the MMSE gives a much better estimate than the MLE, _especially_ in low sample-size settings - in this case, more than an order of magnitude. However, when the prior is bad, the MMSE estimate will always be worse than the MLE (middle column, bottom).
 
+<br>
+
+# Discussion
+
+Even though the Gaussian distribution is one of the simplest distributions we can work with, it already illustrates the effects of using the Bayesian approach, which  we saw in [the previous section](#choices-of-priors). When the prior is correctly specified, it can greatly boost performance in the low-data regime; on the other hand, when given the amount of observed data increases, this posterior "collapses" to the ML solution.
+
+In the next few posts we will still be concerned with the Gaussian distribution, however we will cast the problem into that of _prediction_ in the regression task. Basically, we will observe what we consider to be a linear transformation of a Gaussian, and we will once again attempt to recover the parameters of the Gaussian.
 <br>
 
 ---

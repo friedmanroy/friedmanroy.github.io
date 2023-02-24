@@ -11,7 +11,13 @@ authors:
 
 toc:
   - name: Frequentist Approach
+    subsections:
+      - name: Classical Machine Learning
+      - name: Probabilistic Machine Learning
   - name: Bayesian Approach
+    subsections:
+      - name: Appeal of the Bayesian Approach
+      - name: Problems with the Bayesian Approach
   - name: Connections
   - name: Discussion
 ---
@@ -46,7 +52,7 @@ The frequentist outlook can be further split into two categories - classical and
 ---
 All of these definitions tend to be pretty confusing, but hopefully a very simple example will make the meanings behind the terms clearer. 
 
-**Example: Coin Toss**
+#### Example: Coin Toss
 
 Suppose we observe the outcomes of coin tosses, where each data point $x$ is either "heads" (denoted by $H$ ), or "tails" (denoted by $T$ ). Such a dataset will look something like:
 
@@ -70,6 +76,7 @@ How should we go about doing this? The frequentist approach suggests defining so
 
 ---
 <br>
+
 ## Classical Machine Learning
 
 In the most general form, frequentist machine learning requires two objects, as mentioned before: a set of parameters $\theta$ that define a hypothesis class and a loss function $L\left(\mathcal{D};\,\theta\right)$ . Typically, the loss function is chosen in such a way that it is minimized by the wanted outcome, although this can be hard to control in many real life applications. 
@@ -78,7 +85,7 @@ Framing the problem of machine learning in this manner results in a deterministi
 
 ---
 
-**Example: Coin Toss (again)**
+#### Example: Coin Toss (again)
 Through a simple thought experiment, we can convince ourselves that for any value of $\theta$ , if we look at a dataset of size $N$ and count the number of heads $N_H$ in said dataset, then at the limit of very large $N$ we will usually observe:
 
 $$
@@ -105,6 +112,7 @@ This example is simplified to the point of being cartoonish, but this a very sim
 
 ---
 <br>
+
 ## Probabilistic Machine Learning
 
 This form of frequentist machine learning is slightly more structured, framing the problem probabilistically. In this form, a stochastic model for the generation of the data is assumed. This model has parameters $\theta$ and a distribution attached to these parameters $p\left(\mathcal{D};\,\theta\right)$ which controls how likely it is for us to have observed the data under a specific choice of the parameters $\theta$ . Here, while $\theta$ appears in a density function, it is _not a probabilistic object_; that is what the semi-colon (the ";" sign) is meant to convey. The solution to this problem is then to find the parameters $\theta$ that created the data points in $\mathcal{D}$ .
@@ -176,6 +184,7 @@ and, amazingly, we got the same estimator as the previous approach!
 
 ---
 <br>
+
 # Bayesian Approach
 
 The Bayesian philosophy assumes that we have some knowledge about the distribution the points were drawn from ahead of time, i.e. we assume that the parameters themselves have some distribution $p\left(\theta\right)$ . This distribution is usually called the _prior distribution_, because we assume we have some prior knowledge. This means that there is no single true value for $\theta$ , rather that a distribution of $\theta$s could have given rise to the data. That is, unlike the frequentist view where $\theta$ _is by definition not probabilistic_, under the Bayesian view we assume that there is some distribution over $\theta$ s.
@@ -222,13 +231,14 @@ That is, it is 4 times more likely for $\theta$ to be in the range $[1/4,\ 3/4]$
 
 ---
 <br>
-### Appeal of the Bayesian Approach
+
+## Appeal of the Bayesian Approach
 
 Similarly to probabilistic ML, Bayesian ML allows us to elegantly define our problems and how to solve them. All we need to do is define the likelihood function, our prior, and we have the solution - find the posterior distribution. This counters that of the classical ML approach, where a loss function and algorithm have to be found such that: (a) minimizing the loss gives a solution to the problem and (b) the algorithm actually minimizes the loss. 
 
 Additionally, the Bayesian approach allows us to inject prior knowledge of the problem in order to generate a solution through the density $p\left(\theta\right)$ . This prior knowledge can be very helpful if not much data has been observed. Finally, under certain circumstances, it can be proved that the Bayesian approach will give the _optimal_ solutions.
 
-### Problems with the Bayesian Approach
+## Problems with the Bayesian Approach
 
 The biggest flaw (and strength!) of Bayesian ML is the prior distribution $p\left(\theta\right)$ . Since the prior can _heavily_ affect the solution, it is imperative that it is chosen to correctly reflect the space of solutions. But many times we have no prior knowledge over solutions; for instance, how can we know what the distribution over the parameters of a neural network should look like? This is a very ambiguous decision that has to be made, and many times it is not obvious how to make it. In practice, this means the prior is often arbitrarily chosen and doesn't necessarily reflect the distribution over parameters we want. 
 
@@ -238,6 +248,7 @@ However, both of the above flaws are usually shared with methods in classic ML. 
 
 
 <br>
+
 # Connections
 
 If we assume an uninformative prior over $\theta$ , i.e. all values of $\theta$ are equally probable and the prior doesn't add any knowledge as to the choice of $\theta$ :
@@ -259,6 +270,7 @@ So we see that the frequentist estimate $\hat{\theta}\_{ML}$ is a special case o
 Actually, we did something extremely fishy when we said that $p\left(\theta\right)$ is "uniform" - this isn't possible in many cases! A uniform probability over all of the real line $\mathbb{R}$ is impossible... so how can we even talk about this so called "uninformative prior"? While this is true, as long as the posterior $p\left(\theta\mid\mathcal{D}\right)$ is well defined, the MAP and MMSE estimates will still exist. In this special case, the frequentist and Bayesian world views collide, and it will be useful to keep this fact in mind.
 
 <br>
+
 # Discussion
 
 Having shown the two possible philosophies, frequentist and Bayesian, it is important to keep in mind that both have viable methods and shortcomings. As a consequence, throughout this series of posts we will typically consider both of these approaches together. Usually, the Bayesian approach will _augment_ the frequentist approach, giving us some structured method to inject prior knowledge into our predictions.

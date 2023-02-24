@@ -9,7 +9,13 @@ authors:
 
 toc: 
   - name: Frequentist Evaluation
+    subsections:
+      - name: Maximum Likelihood Estimation
   - name: Bayesian Evaluation
+    subsections:
+      - name: Minimum MSE Estimator
+      - name: Other Bayes-Optimal Estimators
+      - name: The 0-1 Loss
   - name: Discussion
 
 
@@ -42,6 +48,7 @@ where $\theta \in [0,1]$ . That is, the probability for heads is $\theta$ . Give
 What follows is a decision-theoretic approach for choosing how to estimate the parameters. This will allow us to give concrete guarantees regarding specific estimators and gives a general framework in order to determine when an estimator is optimal while also elucidating what it means for an estimator to be optimal. 
 
 <br>
+
 # Frequentist Evaluation
 
 The classical approach to this would be to devise a _loss_ $\mathcal{L}(\hat{\theta},\theta^\star;\ \mathcal{D})$  <d-footnote>This notation for the loss function is not the typical notation that is used and is a bit cumbersome, but it is useful as it shows which information we assume that have when calculating it.</d-footnote> which allows us to evaluate the estimator $\hat{\theta}(\mathcal{D})$ against the true parameter value $\theta^\star$ . Written this way, the estimator is _an algorithm_ that has as it's input the dataset $\mathcal{D}$ and outputs a guess of the true parameters, and the function $\mathcal{L}(\cdot ,\theta^\star;\ \mathcal{D})$ tells us how much "we are losing" by using the estimator $\hat{\theta}(\mathcal{D})$ .
@@ -148,6 +155,7 @@ In other words, $\hat{\theta}_{\text{ML}}$ minimizes the KL-divergence to the tr
 <span style='float:right'> $\square$ </span>
 
 <br>
+
 # Bayesian Evaluation
 
 The assumption that the data is always generated from one specific parameter $\theta^\star$ is quite constricting. A more general assumption is that there is a distribution over $\theta$ s which gave rise to the data we see. This distribution is called the prior, $p(\theta)$ . In this setting, we assume that for each possible dataset a different parameter was chosen, and the way they are chosen is according to the prior.
@@ -214,7 +222,6 @@ $$
 \end{equation}
 $$
 <span style='float:right'> $\square$ </span>
-
 
 
 
@@ -331,8 +338,8 @@ $$
 which is the maximum a-posteriori  (MAP) estimator.
 <span style='float:right'> $\square$ </span>
 
-
 <br>
+
 # Discussion
 
 Notice that while we have shown some estimates that are optimal under different loss functions, this optimality was predicated on many assumptions. First, we assumed that the data was truly generated according to the likelihood function $p(\mathcal{D}|\theta)$ , which affects both Bayesian and non-Bayesian approaches. The second assumption was that we know the true prior $p(\theta)$ , which is possible even more suspect than the first assumption.

@@ -1,7 +1,7 @@
 ---
 layout: distill
 comments: true
-title: Extras: Linear Algebra and Probability
+title: Extras - Linear Algebra and Probability
 description: Almost all of the material in linear algebra and probability needed to understand research in Bayesian machine learning.
 
 authors:
@@ -11,11 +11,27 @@ authors:
 
 toc:
   - name: Linear Algebra
+    subsections:
+      - name: Vectors
+      - name: Matrices
+      - name: Eigenvalues and Eigenvectors
+      - name: Singular Value Decomposition
+      - name: Determinant and Trace
+      - name: Positive Semi-Definite Matrices
   - name: Derivatives
+    subsections:
+      - name: Jacobian
+      - name: Chain Rule
   - name: Probability
+    subsections:
+      - name: Discrete Probabilities
+      - name: Continuous Probabilities
+      - name: Expectation
+      - name: Variance and Covariance
+      - name: Random Vectors
 ---
 
-# Linear Algebra
+# Linear Algebra 
 
 Almost all of the relevant material in Bayesian machine learning happens in a high dimensional space. In order to be comfortable with operations in many dimensions, it's crucial to have a good understanding of linear algebra and the notation conventions. This is the purpose of this section.
 
@@ -171,7 +187,7 @@ There are a few common families of matrices that we will use, so it will be usef
 
 
 ----
-**Example: Blockwise Inversion**
+#### Example: Blockwise Inversion
 
 Suppose we want to find the inverse of the matrix:
 
@@ -427,7 +443,7 @@ $$
 
 There are a few useful characteristics that PD and PSD matrices have, including:
 
-1. A matrix $A$ is PD if and only if it's eigenvalues $\lambda_{1},...,\lambda_{n}$ are all positive ($\forall i\,\lambda_{i}>0$). This also means that a PD matrix is invertible since $\left|A\right|=\prod_{i}\lambda_{i}>0$
+1. A matrix $A$ is PD if and only if it's eigenvalues $\lambda_{1},...,\lambda_{n}$ are all positive ($\forall i\,\lambda_{i}>0$). This also means that a PD matrix is invertible since $\left\vert A\right\vert=\prod_{i}\lambda_{i}>0$
 
 2. A matrix $A$ is PSD if and only if it's eigenvalues $\lambda_{1},...,\lambda_{n}$ are all non-negative ($\forall i\,\lambda_{i}\ge0$)
 
@@ -438,7 +454,7 @@ There are a few useful characteristics that PD and PSD matrices have, including:
 Also, notice that any PD matrix is also PSD, but the opposite isn't true.
 
 ----
-**Example: Product of a Matrix and it's Transpose**
+#### Example: Product of a Matrix and it's Transpose
 
 Suppose we have a matrix $A\in\mathbb{R}^{n\times m}$. We will show that $A^{T}A$ is PSD for _any_ (real) matrix $A$. We need to show that for any vector $x$:
 
@@ -524,7 +540,7 @@ $$
 and will make differentiating a bit easier to understand later on.
 
 ----
-**Example: Gradient of the Norm**
+#### Example: Gradient of the Norm
 
 Let's look at the function $g\left(x\right)=\|x\|^{2}=\sum_{i}x_{i}^{2}$. The elements of the gradient of this function will be:
 
@@ -567,7 +583,7 @@ which looks exactly like the normal chain rule. However, the distinction that is
 is that $\nabla_{f\left(x\right)}g\left(f\left(x\right)\right)$ is a _vector_ and $J_{x}\left[f\left(x\right)\right]$ is a _matrix_; this is important to remember, as in this case the order of multiplication _is_ important, unlike when the function is 1 dimensional.
 
 ----
-**Example: Gradient of the Norm of a Product**
+#### Example: Gradient of the Norm of a Product
 
 Let's build on the previous example by looking at the function $g\left(x\right)=\|Ax\|^{2}$, where $A\in\mathbb{R}^{m\times n}$ and $x\in\mathbb{R}^{n}$.
 
@@ -583,7 +599,7 @@ $$
 \frac{\partial\left(Ax\right)_{j}}{\partial x_{i}}=\frac{\partial\sum_{k}A_{jk}x_{k}}{\partial x_{i}}=A_{ji}
 $$
 
-so we see that $\left[J_{x}\left[Ax\right]\right]_{ij}=A_{ij}$, i.e.:
+so we see that $[J_{x}[A x]]\vert_{ij}=A_{ij}$ , i.e.:
 
 $$
 \frac{\partial Ax}{\partial x}=A^{T}
@@ -597,10 +613,10 @@ $$
 
 ----
 
-
+<br>
 # Probability
 
-Bayesian machine learning is probabilistic in nature. To really understand everything that happens, we must have a good understanding of probability. The following section will be a refresher for some of the key concepts in probability[^1] which we will use throughout the course.
+Bayesian machine learning is probabilistic in nature. To really understand everything that happens, we must have a good understanding of probability. The following section will be a refresher for some of the key concepts in probability<d-footnote>See <a href="https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf">Bishop 1.2</a> and <a href="https://probml.github.io/pml-book/book0.html">Murphy 2.2</a>, although they also assume that most of the content is known ahead of time.</d-footnote> which we will use throughout the course.
 
 ## Discrete Probabilities
 
@@ -633,11 +649,11 @@ P\left(x\right)=\sum_{y}P\left(x,y\right)
 $$
 
 
-Of course, if $Y$ takes a specific value, then this may effect $X$ in some manner. We notate this _conditional probability_ as $P\left(x|y\right)$; this new function is also a probability function, i.e.
+Of course, if $Y$ takes a specific value, then this may effect $X$ in some manner. We notate this _conditional probability_ as $P\left(x\vert y\right)$; this new function is also a probability function, i.e.
 
 $$
 \begin{equation}
-\sum_{x}P\left(x|y\right)=1
+\sum_{x}P\left(x\vert y\right)=1
 \end{equation}
 $$
 
@@ -646,7 +662,7 @@ We can think of this behavior on the side of $y$ as a "re-weighting'' of specifi
 $$
 \begin{equation}
 \label{eq:factorized-joint}
-P\left(x,y\right)=P\left(x|y\right)P\left(y\right)
+P\left(x,y\right)=P\left(x\vert y\right)P\left(y\right)
 \end{equation}
 $$
 
@@ -663,7 +679,7 @@ which is a direct result from the rule given by \eqref{eq:factorized-joint}. We 
 
 $$
 \begin{equation}
-P\left(y|x\right)=\frac{P\left(x,y\right)}{P\left(x\right)}=\frac{P\left(x|y\right)P\left(y\right)}{P\left(x\right)}
+P\left(y\vert x\right)=\frac{P\left(x,y\right)}{P\left(x\right)}=\frac{P\left(x\vert y\right)P\left(y\right)}{P\left(x\right)}
 \end{equation}
 $$
 
@@ -671,7 +687,7 @@ Finally, if we have a random variable $X$ and a random variable $Y$ that partiti
 
 $$
 \begin{equation}
-P\left(x\right)=\sum_{y}P\left(x|y\right)P\left(y\right)
+P\left(x\right)=\sum_{y}P\left(x\vert y\right)P\left(y\right)
 \end{equation}
 $$
 
@@ -866,7 +882,7 @@ P_{y}\left(y\right)\stackrel{\Delta}{=}P\left(Y\le y\right)=\intop_{-\infty}^{y}
 \end{equation}
 $$
 
-As is maybe obvious, we can get back to the PDF by deriving the CDF. If we have a function $f:X\rightarrow Y$ that maps between the random variables, then[^2]:
+As is maybe obvious, we can get back to the PDF by deriving the CDF. If we have a function $f:X\rightarrow Y$ that maps between the random variables, then<d-footnote>See the <a href="https://en.wikipedia.org/wiki/Probability_density_function#Function_of_random_variables_and_change_of_variables_in_the_probability_density_function">Wikipedia</a> page for the change of variables for a slightly more organized explanation of what's happening here.</d-footnote>:
 
 $$
 \begin{equation}
@@ -908,7 +924,7 @@ p_{y}\left(\boldsymbol{y}\right)=p_{x}\left(f^{-1}\left(\boldsymbol{y}\right)\ri
 $$
 
 ----
-**Example: Change of Variable**
+#### Example: Change of Variable
 
 Let's build an example for the change of variable rule. Let $x$ be a uniform random variable in the range $\left[0,\;\alpha\right]$; in other words:
 
@@ -957,10 +973,3 @@ p_{z}\left(z\right)=\frac{1}{2}\cdot\frac{1}{\sqrt{z}}p_{x}\left(\sqrt{z}\right)
 \end{cases}
 \end{equation}
 $$
-
-----
-
-
-[^1]: See [Bishop 1.2](https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf) and [Murphy 2.2](https://probml.github.io/pml-book/book0.html), although they also assume that most of the content is known ahead of time.
-
-[^2]: See the [Wikipedia](https://en.wikipedia.org/wiki/Probability_density_function#Function_of_random_variables_and_change_of_variables_in_the_probability_density_function) page for the change of variables for a slightly more organized explanation of what's happening here.
