@@ -17,6 +17,8 @@ toc:
 ---
 
 <div style="text-align:right"><a href="https://friedmanroy.github.io/BML/2_estimates/">Estimation and Bayes-Optimal Estimators →</a> </div>
+
+---
 <br>
 
 Many tasks in statistics and machine learning can be summarized as attempting to extract information from data. Usually, we will assume that we are given a set of data points:
@@ -264,5 +266,7 @@ Having shown the two possible philosophies, frequentist and Bayesian, it is impo
 
 So far, everything was very abstract and amorphous. Starting with the next post, we'll go into some more details. Specifically, we will see how (and when) using estimators extracted using the Bayesian approach will typically be optimal. This necessitates the definition of "optimality" in estimators, which we will build using decision theory.
 
+<br>
 
+---
 <div style="text-align:right"><a href="https://friedmanroy.github.io/BML/2_estimates/">Estimation and Bayes-Optimal Estimators →</a> </div>

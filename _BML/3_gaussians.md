@@ -20,6 +20,9 @@ toc:
 ---
 
 <span style='float:left'><a href="https://friedmanroy.github.io/BML/2_estimates/">← Estimation and Bayes-Optimal Estimators</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/4_gaussian_estimation/">Estimating the Gaussian Distribution →</a></span>
+
+---
+
 <br>
 
 The distribution that is seen most often in ML (and statistics) is the Gaussian distribution, also called the _normal distribution_. The reason this distribution is so commonly used is because of two reasons: it is empirically observed in the wild many times and, perhaps more importantly, it is mathematically very simple to use the Gaussian distribution (we will see exactly how later on). This post will delve into the definition and properties of the Gaussian distribution<d-footnote>See <a href="https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf">Bishop 2.3</a> for a much more extensive introduction to the Gaussian distribution.</d-footnote>.
@@ -505,4 +508,7 @@ Once you fully understand why each method works, it will become quite clear when
 
 Now that we know what the Gaussian distribution is and the important properties of the Gaussian distribution, we can start to use it for some real statistical problems. The next post will be dedicated to estimating $\mu$ and $\Sigma$ from observed data, after which we will move on to utilizing the Gaussian distribution for the task of regression.
 <br>
+
+---
+
 <span style='float:left'><a href="https://friedmanroy.github.io/BML/2_estimates/">← Estimation and Bayes-Optimal Estimators</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/4_gaussian_estimation/">Estimating the Gaussian Distribution →</a></span>

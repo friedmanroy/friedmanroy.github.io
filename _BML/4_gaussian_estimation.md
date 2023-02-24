@@ -17,6 +17,9 @@ toc:
 ---
 
 <span style='float:left'><a href="https://friedmanroy.github.io/BML/3_gaussians/">← The Gaussian Distribution</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/5_linear_regression/">Linear Regression →</a></span>
+
+---
+
 <br>
 
 While Bayesian statistics is our main interest in this thread of posts, many times it will prove easier to first go over the frequentist version as it is less mathematically involved. Only after we understand the ML solution, we will move on to the Bayesian treatment of the same, in the process revealing how they are related to each other.
@@ -420,5 +423,7 @@ The figure above illustrates what happens when Gaussian priors of different kind
 The more interesting case is when $\mu\_{0}$ is well calibrated and $\Sigma\_{0}$ is moderate (middle column, top). In this setting, the MMSE gives a much better estimate than the MLE, _especially_ in low sample-size settings - in this case, more than an order of magnitude. However, when the prior is bad, the MMSE estimate will always be worse than the MLE (middle column, bottom).
 
 <br>
+
+---
 
 <span style='float:left'><a href="https://friedmanroy.github.io/BML/3_gaussians/">← The Gaussian Distribution</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/5_linear_regression/">Linear Regression →</a></span>

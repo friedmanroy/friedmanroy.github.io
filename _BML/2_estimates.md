@@ -6,13 +6,16 @@ description: An overview of estimation and proofs for the MLE, MMSE and MAP esti
 
 authors:
   - name: Roy Friedman
-    affiliations:
-      name: Hebrew University
+
+toc: true
+
 
 
 ---
 
 <span style='float:left'><a href="https://friedmanroy.github.io/BML/1_philosophy/">← The Bayesian Philosophy</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/3_gaussians/">The Gaussian Distribution →</a></span>
+
+---
 <br>
 
 > In the [previous post](https://friedmanroy.github.io/BML/1_philosophy/) we saw what the frequentist and Bayesian philosophies are, how they are different, and also a bit of how they are similar. In this post, we will take a look at the specific task of estimation and methods to analyze the optimality of estimators in both regimes.
@@ -336,4 +339,7 @@ It is important, in this case, to remember that any modeling task, the act of ch
 
 In the following posts we will start to learn about distributions and tasks where we can take this information extract useful estimates. The first step will be to define the most basic distribution of any real use - the Gaussian distribution.
 <br>
+
+---
+
 <span style='float:left'><a href="https://friedmanroy.github.io/BML/1_philosophy/">← The Bayesian Philosophy</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/3_gaussians/">The Gaussian Distribution →</a></span>

@@ -18,9 +18,10 @@ toc:
   - name: Regarding Calibration
 ---
 
-<span style='float:left'><a href="https://friedmanroy.github.io/BML/6_equiv_form/">← Equivalent Form</a></span><span style='float:right'><a href=""> →</a></span>
-<br>
+<span style='float:left'><a href="https://friedmanroy.github.io/BML/6_equiv_form/">← Equivalent Form</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/8_kernels/">Kernels →</a></span>
 
+---
+<br>
 As we have previously discussed, there are many possible basis functions $h\left(\cdot\right)$ we can use to fit the linear regression model, and it is not always so simple to determine which set of basis functions is the correct one to use. On one hand, if we use a very expressive set of basis functions, or a very large one, then the model will easily fit the training data, but will probably give very inaccurate predictions for unseen data points. On the other hand, if we use a model that is too simplistic, then we will end up missing all of the data points. 
 
 <div class="fake-img l-page">
@@ -385,6 +386,7 @@ $$
 This is nice since it bypasses the need to choose a model - simply integrate over all of them, a more Bayesian approach. It also incorporates are beliefs explicitly - in the integral above we explicitly assumed that $\Psi$ is independent of $\mathcal{D}$ !
 
 That said, we have introduced a new complication; how should $\xi$  be chosen? Continuing with this reasoning, shouldn't we also incorporate a prior over $\xi$, a so called "hyper-hyperprior",  and so on? While these concerns are valid, the "priors all the way down" kind of approach typically stops at the hyperprior, since it is far enough from the data term.
-
 <br>
-<span style='float:left'><a href="https://friedmanroy.github.io/BML/6_equiv_form/">← Equivalent Form</a></span><span style='float:right'><a href=""> →</a></span>
+
+---
+<span style='float:left'><a href="https://friedmanroy.github.io/BML/6_equiv_form/">← Equivalent Form</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/8_kernels/">Kernels →</a></span>

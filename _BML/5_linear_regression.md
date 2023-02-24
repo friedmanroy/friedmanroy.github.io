@@ -16,6 +16,8 @@ toc:
 ---
 
 <span style='float:left'><a href="https://friedmanroy.github.io/BML/4_gaussian_estimation/">← Estimating the Gaussian Distribution</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/6_equiv_form/">Equivalent Form →</a></span>
+
+---
 <br>
 
 Given a vector of features $x\in\mathbb{R}^{d}$ , the simplest regression model is a function given by the weighted combination of the input features (sometimes called regressors, explanatory variables, covariates or some other name):
@@ -314,7 +316,7 @@ $$
 \end{equation}
 $$
 In this sense, if we are very unsure about the prior ( $\alpha\gg1$ ) then the regularization will be very light, while if we are very sure ( $\alpha$ is small), then we will heavily penalize solutions that are far from what we expected.
-
 <br>
 
+---
 <span style='float:left'><a href="https://friedmanroy.github.io/BML/4_gaussian_estimation/">← Estimating the Gaussian Distribution</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/6_equiv_form/">Equivalent Form →</a></span>
