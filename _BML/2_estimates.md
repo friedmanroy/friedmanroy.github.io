@@ -342,7 +342,7 @@ which is the maximum a-posteriori  (MAP) estimator.
 
 # Discussion
 
-Notice that while we have shown some estimates that are optimal under different loss functions, this optimality was predicated on many assumptions. First, we assumed that the data was truly generated according to the likelihood function $p(\mathcal{D}|\theta)$ , which affects both Bayesian and non-Bayesian approaches. The second assumption was that we know the true prior $p(\theta)$ , which is possible even more suspect than the first assumption.
+Notice that while we have shown some estimates that are optimal under different loss functions, this optimality was predicated on many assumptions. First, we assumed that the data was truly generated according to the likelihood function $p(\mathcal{D}\vert\theta)$ , which affects both Bayesian and non-Bayesian approaches. The second assumption was that we know the true prior $p(\theta)$ , which is possible even more suspect than the first assumption.
 
 It is important, in this case, to remember that any modeling task, the act of choosing the likelihood itself as well as the prior are subjective choices; in real life, nature probably didn't create data in the same process as any of our models. This casts the whole process of analyzing whether an estimate is optimal or not into question - what does it matter, if we can never be sure our assumptions are correct? While I think that this is definitely something to keep in mind, we would also always want to know that under _our specific assumptions_, at least our estimates are going to be the best they can be. For this reason alone, taking the time time to find which estimates will be optimal is worth it.
 
