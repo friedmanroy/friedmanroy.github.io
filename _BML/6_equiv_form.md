@@ -48,7 +48,9 @@ $$
 $$
 where we assumed that $A$ and $C$ are invertible, while $U$ and $V$ don't even have to be square. Before we continue to use this on the covariance of the posterior, we should talk about when to use this identity. Obviously, if all of the matrices $A$ and $C$ are square and have the same dimensions and we know nothing about their inverses, using this identity will not help us at all. However, many times we will be confronted with an equation similar to the left hand side of equation \eqref{eq:woodbury}, where we actually know what the inverse of $A$ is directly, or know that the inverses of $A$ and $C$ are rather simple to compute.
 
-### Example: Low Rank Matrices
+---
+
+#### Example: Low Rank Matrices
 
 Let's look at an example. Suppose we want to find:
 $$
@@ -66,8 +68,9 @@ $$
 $$
 Notice that the matrix $A^{T}A$ is an $m\times m$ matrix, so we end up only needing to invert $m\times m$ matrices, possibly avoiding many unneeded computations. 
 
-
+---
 <br>
+
 # Equivalent Form
 
 We now turn back to the covariance we found in equation \eqref{eq:post-cov}. Using the Woodbury identity:
@@ -105,6 +108,7 @@ $$
 
 
 <br>
+
 # Regular vs. Equivalent
 
 As discussed (and shown) above, both ways of writing the posterior distributions are valid and equivalent; mathematically, it doesn't matter which of them we use.

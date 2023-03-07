@@ -15,7 +15,13 @@ toc:
   - name: Evidence in Bayesian Linear Regression
   - name: Equivalent Derivation
   - name: Examples
+    subsections:
+      - name: Choosing Basis Functions
+      - name: Choosing the Prior Mean
   - name: Regarding Calibration
+    subsections:
+      - name: Mitigation
+      - name: Priors all the Way Down
 ---
 
 <span style='float:left'><a href="https://friedmanroy.github.io/BML/6_equiv_form/">← Equivalent Form</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/8_kernels/">Kernels →</a></span>
@@ -107,6 +113,7 @@ and we want to choose between $\Psi_{\theta}=\\{ \mu_{\theta},\Sigma_{\theta}\\}
 ---
 
 <br>
+
 # Calculating the Evidence
 
 Suppose that our prior is described, as above, by:
@@ -138,6 +145,7 @@ $$
 Usually, the numerator is either known or pretty simple to calculate, while the denominator is quite hard to find. In such cases, the denominator is approximated in some manner in other to find the evidence. Luckily for us, the denominator is easy to calculate in the case of Bayesian linear regression with a Gaussian prior. 
 
 <br>
+
 # Evidence in Bayesian Linear Regression
 
 In standard Bayesian linear regression, the posterior is a Gaussian. We can utilize this knowledge to find a more specific formula for the evidence. Notice that:
@@ -174,6 +182,7 @@ p\left(y\mid \mu,\Sigma\right)=\left(2\pi\right)^{N/2}\mid \Sigma_{\theta\mid \m
 $$
 
 <br>
+
 # Equivalent Derivation
 
 The above derivation allows us to calculate the actual value of the evidence quickly, but it may be a bit harder to understand what is going on in this form. An equivalent way to find the evidence is to find $p\left(\mathcal{D}\mid \Psi\right)$ directly, from the definition. Recall that we modeled linear regression according to:
@@ -245,6 +254,7 @@ where $\epsilon$ is some learning rate. However, note that there is no guarantee
 ---
 
 <br>
+
 # Examples
 
 The way evidence is presented is usually not very intuitive. Let's look at the definition of the evidence for a second:
@@ -268,7 +278,7 @@ style="display: inline-block; margin: 0 auto; ">
     Figure 2: a graphical plot for two models - one with high evidence, and one with low evidence. The red dots are the given data, which are the same for the left and right plots. The gray contour lines represent the prior's density over possible functions while the black line is the mean of the prior.
 </div>
 
-#### Changing the basis functions
+#### Choosing Basis Functions
 
 Evidence can be used to decide which basis function to use. At the beginning of this post, I showed an example with two polynomials, but we can compare more than just two functions each time. 
 
@@ -310,7 +320,7 @@ f_\theta(x)=\theta_1 h_1(x)+ \theta_2h_2(x)+\eta
 $$
 
 
-#### Changing the Prior Mean
+#### Choosing the Prior Mean
 
 Evidence can also be used to choose which prior is suitable. For instance, suppose that our prior is given by:
 
@@ -335,6 +345,7 @@ style="display: inline-block; margin: 0 auto; ">
 
 
 <br>
+
 # Regarding Calibration
 
 The evidence is certainly a useful tool for model selection, but it should be used carefully. In particular, relying too much on the evidence without taking care can result in overfitting to the training data. More concisely, high evidence doesn't equal to good generalization! This is because, by design, the marginal likelihood gives high scores to priors which explain the data well. 

@@ -3,7 +3,7 @@ layout: distill
 comments: true
 title: Kernels
 
-description: 
+description: The kernel trick allows us to move from regression over  a predefined set of basis functions to regression in infinite spaces. All of this is predicated on understanding what a kernel even is and how to construct it. In this post, we will see exactly how to do this and how to use kernels for regression.
 
 authors:
   - name: Roy Friedman
@@ -12,7 +12,7 @@ toc:
   - name: Positive Semi-Definite Kernels
   - name: Constructing Kernels
   - name: RBF is a Valid Kernel
-  - name: Connection to Linear Regression
+  - name: Kernel Regression
 ---
 
 <span style='float:left'><a href="https://friedmanroy.github.io/BML/7_evidence/">← Evidence Function</a></span><span style='float:right'><a href=""> →</a></span>
@@ -30,6 +30,7 @@ us much greater flexibility in the functions the linear regression
 model can learn.
 
 <br>
+
 # Positive Semi-Definite Kernels
 
 Before we begin to talk about kernels in earnest, let's start by defining what a kernel actually is. We will only be looking at positive semi-definite kernels in the course, which will allow us to use them in our setting (more on that later).
@@ -120,6 +121,7 @@ Okay, okay, that's enough examples. From the above there are two rules we can cl
 However, there are some functions that do not violate these two rules but are still not kernels, so we need to be especially careful with how we define our functions and whether they are actually valid kernels or not.
 
 ---
+<br>
 
 # Constructing Kernels
 
@@ -188,6 +190,8 @@ is called the polynomial kernel exactly because of the characteristics we descri
 
 ---
 
+<br>
+
 # RBF is a Valid Kernel
 
 A family of basis functions that are often used in practice are the radial basis functions (RBF). The most common function from this family is the Gaussian basis function:
@@ -244,12 +248,10 @@ $$
 where $k_{n}\left(\cdot,\cdot\right)$ is the $n$ -th order polynomial kernel. Remember how we opened up the polynomial kernel into the inner product between two vectors? For this kernel, we would have to build infinitely long vectors, with every polynomial degree in it, and then find the inner product of these two vectors. In this sense, we can think of the kernel as a basis function $h\left(\cdot\right)$ that maps inputs into infinite feature spaces.
 
 <br>
-# Connection to Linear Regression
 
-The above is well and good, but it is not readily apparent how all
-of this is connected to what we talked about up to this point. We
-will now give an intuition for how this is connected to ridge regression,
-which can be viewed as a private case of Bayesian linear regression<d-footnote>Bishop 6.1</d-footnote>.
+# Kernel Regression
+
+We will now give an intuition for how this is connected to ridge regression, which can be viewed as a private case of Bayesian linear regression<d-footnote>Bishop 6.1</d-footnote>.
 
 First, remember that the loss function for ridge regression is given by:
 
@@ -314,7 +316,7 @@ $$
 
 Suppose that, instead of defining the basis functions $h\left(\cdot\right)$ , we define a kernel $k\left(x_{i},x_{j}\right)$ . While before it was not so obvious how this would fit into the structure of the linear regression, now all we need to define is $K_{ij}=k\left(x_{i},x_{j}\right)$ and $k_{i}\left(x\right)=k\left(x,x_{i}\right)$ in order to get the prediction for a new point $x$ .
 
-Now the reason we allow PSD and not only PD kernels might be easier to see. Since the matrix we are inverting is $\left(K+I\lambda\right)$ , even if the Gram matrix $K$ is not PD (i.e. not invertible) and only PSD, because of the added term $I\lambda$ , the whole matrix is PD. Under this reasoning, and because forming PSD kernels is easier than forming PD kernels, we can relax our restrictions on the form of the kernels and use PSD kernels, giving us just a bit more freedom.
+Now the reason we allow the kernels to be PSD and not restrict them to PD kernels might be easier to see. Since the matrix we are inverting is $\left(K+I\lambda\right)$ , even if the Gram matrix $K$ is not PD (i.e. not invertible) and only PSD, because of the added term $I\lambda$ , the whole matrix is PD. Under this reasoning, and because forming PSD kernels is easier than forming PD kernels, we can relax our restrictions on the form of the kernels and use PSD kernels, giving us just a bit more freedom.
 
 <br>
 

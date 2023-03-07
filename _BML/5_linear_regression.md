@@ -11,8 +11,15 @@ authors:
 
 toc:
   - name: Basis Functions
+    subsections:
+      - name: Common Basis Functions
   - name: Classical Linear Regression
+    subsections:
+      - name: Geometry of Least Squares
+      - name: Ridge Regression
   - name: Bayesian Linear Regression
+    subsections:
+      - name: Connection to Classic Linear Regression
 ---
 
 <span style='float:left'><a href="https://friedmanroy.github.io/BML/4_gaussian_estimation/">← Estimating the Gaussian Distribution</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/6_equiv_form/">Equivalent Form →</a></span>
@@ -89,6 +96,7 @@ style="display: inline-block; margin: 0 auto; ">
 </div>
 
 <br>
+
 # Basis Functions
 
 Notice that while the model is linear in the features $x$ , we can always define new features that are a non-linear function of $x$ , so that:
@@ -136,6 +144,7 @@ Of course, there are many more possible basis functions that can be used. Since 
 
 
 <br>
+
 # Classical Linear Regression
 
 In the classical formulation of linear regression, the ML estimate for $\theta$ is used to define the function $y\left(x\right)$ . Let's find this estimate. First, let's write out the log-likelihood explicitly:
@@ -246,6 +255,7 @@ style="display: inline-block; margin: 0 auto; ">
 
 
 <br>
+
 # Bayesian Linear Regression
 
 Of course, we can also have a prior over the parameters $\theta$ <d-footnote>Bishop 3.3; Murphy 7.6.</d-footnote>. Since a linear transformation of a Gaussian is also a Gaussian, and since we wrote $x$ as a linear transformation of $\theta$ , it will make sense for our prior to have a Gaussian form. We will define our prior as:
