@@ -1,8 +1,10 @@
 ---
 layout: distill
-comments: true
+comments: false
 title: Estimating the Gaussian Distribution
 description: The math of estimating the parameters of a Gaussian using MLE as well as Bayesian inference, with some intuition regarding the effects of sample size and prior selection.
+
+date: 2022-10-28
 
 authors:
   - name: Roy Friedman

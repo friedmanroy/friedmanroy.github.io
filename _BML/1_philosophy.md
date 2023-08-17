@@ -1,8 +1,10 @@
 ---
 layout: distill
-comments: true
+comments: false
 title: The Bayesian Philosophy
 description: A high-level description of the frequentist and Bayesian approaches, their differences, and some of their shared qualities.
+
+date: 2022-10-28
 
 authors:
   - name: Roy Friedman
@@ -20,6 +22,7 @@ toc:
       - name: Problems with the Bayesian Approach
   - name: Connections
   - name: Discussion
+
 ---
 
 <div style="text-align:right"><a href="https://friedmanroy.github.io/BML/2_estimates/">Estimation and Bayes-Optimal Estimators →</a> </div>

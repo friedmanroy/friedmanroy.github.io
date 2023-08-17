@@ -1,8 +1,10 @@
 ---
 layout: distill
-comments: true
+comments: false
 title: Linear Regression
 description: Overview of the construction of linear regression as well as it's classical and Bayesian solutions.
+
+date: 2022-10-28
 
 authors:
   - name: Roy Friedman

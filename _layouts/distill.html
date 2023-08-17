@@ -18,6 +18,28 @@
     {%- endif %}
   </head>
 
+  {%- if page.remove_front -%}
+  <d-front-matter>
+    <script async type="text/json">{
+      "title": "{{ page.title }}",
+      "description": "{{ page.description }}",
+      "katex": {
+        "delimiters": [
+          {
+            "left": "$",
+            "right": "$",
+            "display": false
+          },
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          }
+        ]
+      }
+    }</script>
+  </d-front-matter>
+  {%- else -%}
   <d-front-matter>
     <script async type="text/json">{
       "title": "{{ page.title }}",
@@ -53,6 +75,7 @@
       }
     }</script>
   </d-front-matter>
+  {%- endif -%}
 
   <body class="{%- if site.navbar_fixed -%}fixed-top-nav{%- endif -%} {%- unless site.footer_fixed -%}sticky-bottom-footer{%- endunless -%}">
 
@@ -89,38 +112,33 @@
         {%- endif %}
 
         {{ content }}
-        
       </d-article>
 
       <d-appendix>
         <d-footnote-list></d-footnote-list>
         <d-citation-list></d-citation-list>
       </d-appendix>
-      
-      <d-appendix>
-        {%- if site.disqus_shortname and page.comments -%}
-         <div id="disqus_thread"></div>
-          <script type="text/javascript">
-            var disqus_shortname  = '{{ site.disqus_shortname }}';
-            var disqus_identifier = '{{ page.id }}';
-            var disqus_title      = {{ page.title | jsonify }};
-            (function() {
-              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                        })();
-          </script>
-          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>   
-        {%- endif %}
-      </d-appendix>
+
+      <d-bibliography src="{{ page.bibliography | prepend: '/assets/bibliography/' | relative_url }}"></d-bibliography>
+
+      {%- if site.disqus_shortname and page.disqus_comments -%}
+        {% include disqus.html %}
+      {%- endif %}
+      {%- if site.giscus.repo and page.giscus_comments -%}
+        {% include giscus.html %}
+      {%- endif -%}
 
     </div>
+
+    {%- if page.include_appendix -%}
+    <d-appendix>
+      {{ page.appendix | prepend: '/assets/appendix/' | relative_url }}
+    </d-appendix>
+    {%- endif -%}
 
     <!-- Footer -->
     {%- include footer.html %}
 
-    <d-bibliography src="{{ page.bibliography | prepend: '/assets/bibliography/' | relative_url }}"></d-bibliography>
-    
     {% include scripts/bootstrap.html %}
     {% include scripts/analytics.html %}
     {% include scripts/progressBar.html %}

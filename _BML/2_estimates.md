@@ -1,11 +1,15 @@
 ---
 layout: distill
-comments: true
+comments: false
 title: Estimation and Bayes-Optimal Estimators
 description: An overview of estimation and proofs for the MLE, MMSE and MAP estimators.
 
+date: 2022-10-28
+
 authors:
   - name: Roy Friedman
+    affiliations:
+      name: Hebrew University
 
 toc: 
   - name: Frequentist Evaluation

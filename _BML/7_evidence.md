@@ -1,9 +1,11 @@
 ---
 layout: distill
-comments: true
+comments: false
 title: Evidence Function
 
 description: The evidence function (or marginal likielihood) is one of the cornerstones of Bayesian machine learning. This post shows the construction of the evidence and how it can be used in the context of Bayesian linear regression.   
+
+date: 2022-10-28
 
 authors:
   - name: Roy Friedman
