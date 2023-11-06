@@ -132,7 +132,11 @@
 
     {%- if page.include_appendix -%}
     <d-appendix>
-      {{ page.appendix | prepend: '/assets/appendix/' | relative_url }}
+      {% capture appendix %}
+      {% include {{ page.appendix | prepend: '/appendix/' | relative_url }}%}
+      {% endcapture %}
+      {{appendix | markdownify}}
+      </nav>
     </d-appendix>
     {%- endif -%}
 
