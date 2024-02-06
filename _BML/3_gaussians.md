@@ -14,12 +14,11 @@ authors:
 toc:
   - name: Definition
   - name: Geometry of the Gaussian Distribution
-  - name: The Derivative Trick
+  - name: Gaussians as Log-Quadratic Functions
     subsections:
-      - name: Conditional Distribution of a Gaussian
-  - name: Completing the Squares
-    subsections:
-      - name: Marginal Distribution of a Gaussian
+      - name: Derivatives of the Log-PDF
+  - name: Conditional Distribution of a Gaussian
+  - name: Marginal Distribution of a Gaussian
   - name: Extras
   - name: Discussion
 
@@ -30,7 +29,7 @@ toc:
 <br>
 <br>
 
-The distribution that is seen most often in ML (and statistics) is the Gaussian distribution, also called the _normal distribution_. The reason this distribution is so commonly used is because of two reasons: it is empirically observed in the wild many times and, perhaps more importantly, it is mathematically very simple to use the Gaussian distribution (we will see exactly how later on). This post will delve into the definition and properties of the Gaussian distribution<d-footnote>See <a href="https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf">Bishop 2.3</a> for a much more extensive introduction to the Gaussian distribution.</d-footnote>.
+The distribution that is used most often in ML (and statistics) is the Gaussian distribution, also called the _normal distribution_. The reason this distribution is so commonly used is because of two reasons: it is empirically observed in the wild many times and, perhaps more importantly, it is mathematically very simple to use. This post will delve into the definition and properties of the Gaussian distribution<d-footnote>See <a href="https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf">Bishop 2.3</a> for a much more extensive introduction to the Gaussian distribution.</d-footnote>.
 
 <br>
 
@@ -154,39 +153,66 @@ So in 2D, all of the _contour lines_ (which are lines that have the same density
 
 <br>
 
-# The Derivative Trick
+# Gaussians as Log-Quadratic Functions
 
-The Gaussian distribution is, _by definition_, any distribution that is the exponent of a quadratic function, i.e. any distribution of the form:
+A common approach in many probabilistic modeling methods is to ignore the normalization constant of a distribution, either because it is hard to calculate or because it's a chore to write it down completely. Moreover, it is sometimes easier to look at distributions in log space. So, for instance, the Gaussian distribution will be written as follows:
+$$
+\begin{align}
+p\left(x\right) & =\underbrace{\frac{1}{Z}}_{\text{normalization}}\cdot\exp\left[-\frac{1}{2}\left(x-\mu\right)^{T}\Sigma^{-1}\left(x-\mu\right)\right]\\
+\Leftrightarrow\log p\left(x\right) & =-\frac{1}{2}\left(x-\mu\right)^{T}\Sigma^{-1}\left(x-\mu\right)+\text{const}
+\end{align}
+$$
+where the constant term is only constant with respect to $x$ (not necessarily $\Sigma$ and $\mu$). If we open up the quadratic expression even further, we have:
+$$
+\begin{equation}
+\log p\left(x\right)=-\frac{1}{2}x^{T}\Sigma^{-1}x+x^{T}\Sigma^{-1}\mu+\text{const}
+\end{equation}
+$$
+Again, the constants are only with respect to $x$: $\mu$ is not a function of $x$, so we bunch it together with the constant terms.
+
+So, _by definition_, any distribution that is log-quadratic<d-footnote>Any distribution $p\left(x\right)$ such that $\log p\left(x\right)$
+is a quadratic function</d-footnote> is a Gaussian distribution. Being a bit more explicit, whenever we have a distribution of the form:
+$$
+\begin{equation}
+p\left(x\right)\propto\exp\left[-x^{T}\Gamma x+b^{T}x+c\right]\label{eq:log-quad}
+\end{equation}
+$$
+then we know that it will be Gaussian. This is useful knowledge, as Gaussian distributions have nice attributes which can be exploited. Note, however, that in the above example $\Gamma$ and $b$ are _not_ the mean and (inverse) covariance. We will typically need to do a bit more algebra to find the mean and covariance of the distribution, which will allow us to write the Gaussian in "standard form" - as $\mathcal{N}\left(x\ |\ \mu,\Sigma\right)$.
+
+<br>
+
+## Derivatives of the Log-PDF
+
+As a by-product of the above, the derivatives of the log-PDF of the Gaussian are surprisingly informative and given by:
+$$
+\begin{align}
+\frac{\partial}{\partial x}\log\mathcal{N}\left(x\ |\ \mu,\Sigma\right) & =\frac{\partial}{\partial x}\left[-\frac{1}{2}\left(x-\mu\right)^{T}\Sigma^{-1}\left(x-\mu\right)\right]\\
+ & =-\Sigma^{-1}\left(x-\mu\right)
+\end{align}
+$$
+This already tells us a lot. For instance, if we want to find the maximum, then we can ensure that the above equals to 0 and we get:
 
 $$
 \begin{equation}
-p\left(x\right)\propto\exp\left[-x^{T}\Gamma x+b^{T}x+c\right]
+-\Sigma^{-1}\left(x-\mu\right)\stackrel{!}{=}0\qquad\Leftrightarrow x=\mu
 \end{equation}
 $$
 
-is Gaussian (even though it doesn't seem like it at first). In this course, we will see distributions with a form similar to the above, but will want to find the actual parameters ( $\mu$ and $\Sigma$ ) that define the Gaussian, instead of leaving it as it is written above.
+since $\Sigma^{-1}\neq0$. So, we always know how to find the mean of the Gaussian distribution! We only have to find the maximum of the log-PDF.
 
-
-However, we can go even further:
+Differentiating one more time:
 
 $$
 \begin{align}
-\Delta & =\frac{1}{2}\left(x-\mu\right)^{T}\Sigma^{-1}\left(x-\mu\right)\nonumber \\
-\Leftrightarrow\frac{\partial\Delta}{\partial x} & =\Sigma^{-1}\left(x-\mu\right)\\
-\frac{\partial^{2}\Delta}{\partial x\partial x^{T}} & =\Sigma^{-1}
+\frac{\partial^{2}}{\partial x\partial x^{T}}\log\mathcal{N}\left(x\ |\ \mu,\Sigma\right) & =\frac{\partial}{\partial x^{T}}-\Sigma^{-1}\left(x-\mu\right)\\ & =-\Sigma^{-1}
 \end{align}
 $$
 
-So, if we know that $p\left(x\right)$ is a Gaussian, and we want to find $\mu$ and $\Sigma$ , we can simply differentiate $-\log p\left(x\right)$ and try to manipulate the resulting expression until we get:
+and again we get useful information. Whenever we differentiate twice, we get the precision matrix (a different name for the inverse of the covariance).
 
-$$
-\begin{equation}
-\frac{\partial}{\partial x}\left(-\log p\left(x\right)\right)=\Sigma^{-1}\left(x-\mu\right)
-\end{equation}
-$$
+<br>
 
-
-## Conditional Distribution of a Gaussian
+# Conditional Distribution of a Gaussian
 
 An important property of the multivariate Gaussian distribution is that if two sets of variables are jointly Gaussian, then the conditional distribution of one set on the other is also Gaussian.
 
@@ -222,6 +248,7 @@ $$
 \end{equation}
 $$
 
+{%details Full derivation to find conditional distribution%}
 Note that $\Lambda_{aa}\neq\Sigma_{aa}^{-1}$ ! Later we will find out how each part of $\Lambda$ relates to each part of $\Sigma$ .
 
 Let's start by finding an expression for the conditional distribution $p\left(x_{a}\mid x_{b}\right)$ . We can find this distribution by evaluating the distribution of $p\left(x_{a},x_{b}\right)$ while fixing $x_{b}$ to a certain value and re-normalizing (the conditional distribution is a legal distribution). We will start by rewriting the quadratic term and it's parts:
@@ -300,8 +327,9 @@ $$
 \Lambda_{ab} & =-\Lambda_{aa}\Sigma_{ab}\Sigma_{bb}^{-1}
 \end{align}
 $$
+{% enddetails %}
 
-Finally, we have the expressions needed to describe the conditional distribution:
+The conditional distribution in such a setting is given by:
 
 $$
 \begin{align}
@@ -311,7 +339,14 @@ p\left(x_{a}\mid x_{b}\right) & =\mathcal{N}\left(x_{a}\,\mid \,\mu_{a\mid b},\S
 \end{align}
 $$
 
-Note that in this case, the conditional distribution is much easier to describe in terms of the precision matrix instead of the covariance matrix. 
+Note that in this case, the conditional distribution is much easier to describe in terms of the precision matrix instead of the covariance matrix:
+
+$$
+\begin{align}
+\mu_{a\mid b} & =\mu_{a}-\Lambda_{aa}^{-1}\Lambda_{ab}\left(x_{b}-\mu_{b}\right)\\
+\Sigma_{a\mid b} & =\Lambda_{aa}^{-1}
+\end{align}
+$$
 
 When implementing the code for this, it may be simpler to save the precision matrix (as well as the covariance matrix) in memory to easily compute the conditional distribution.
 
@@ -328,60 +363,8 @@ style="display: inline-block; margin: 0 auto; ">
 
 <br>
 
-# Completing the Squares
+# Marginal Distribution of a Gaussian 
 
-While the derivative trick is very useful, we can't always use it, since we might lose information that we want to keep when differentiating. In such cases, we can use a different trick - completing the squares. 
-
-"Completing the squares" means that we want to turn a quadratic _function_ into the quadratic _form_ (plus some residuals). Suppose we have the following expression:
-
-$$
-\begin{equation}
-f\left(x\right)=x^{T}Ax+2x^{T}b+c
-\end{equation}
-$$
-
-In this case, completing the squares means we would like to bring $f\left(x\right)$ to the form:
-
-$$
-\begin{equation}
-f\left(x\right)=\underbrace{\left(x+\boxed{?}\right)^{T}\boxed{\boxed{?}}\left(x+\boxed{?}\right)}_{\text{depends on }x}+\underbrace{g\left(A,b,c\right)}_{\text{const w.r.t }x}
-\end{equation}
-$$
-
-where $\boxed{?}$ stands in for some vector and $\boxed{\boxed{?}}$ stands in for some matrix. For the case presented above, we can do so in the following manner (assuming $A$ is invertible<d-footnote>We can also do this when $A$ is not invertible, in which case we will need to use the pseudo-inverse of $A$ such that $AA^{\dagger}=I$ . </d-footnote>):
-
-$$
-\begin{align}
-\label{eq:quad-full}
-f\left(x\right) & =x^{T}Ax+2x^{T}b+c\\
- & =x^{T}Ax+2x^{T}AA^{-1}b+c\\
- & =x^{T}Ax+2x^{T}AA^{-1}b-b^{T}A^{-1}AA^{-1}b+b^{T}A^{-1}AA^{-1}b+c\\
- & =\left(x+A^{-1}b\right)^{T}A\left(x+A^{-1}b\right)-\underbrace{b^{T}A^{-1}b+c}_{\text{const w.r.t }x}
-\end{align}
-$$
-
-Having written down the full quadratic form in \eqref{eq:quad-full}, we can now understand which terms we lose when we use the derivative trick. When we differentiate $f\left(\cdot\right)$ with respect to $x$ , we willingly drop all of the terms that are constant with respect to $x$ - in this case, we would lose all information regarding $g\left(A,b,c\right)$ . 
-
-For example, suppose we want to find:
-
-$$
-\begin{equation}
-p\left(y\right)\propto\intop\exp\left[-\frac{1}{2}\left(x^{T}\Gamma x+2x^{T}h\left(y\right)\right)\right]dx
-\end{equation}
-$$
-
-If we use the derivative trick to find the form of the Gaussian in the exponent, we would lose all information regarding $y$ ! This information is obviously important - we want to find $p\left(y\right)$ , after all. Instead, plugging into the formula from \eqref{eq:quad-full}, we have:
-
-$$
-\begin{align}
-\intop\exp\left[-\frac{1}{2}\left(x^{T}\Gamma x+2x^{T}h\left(y\right)\right)\right]dx & =\intop\exp\left[-\frac{1}{2}\left(x-\Gamma^{-1}h\left(y\right)\right)^{T}\Gamma\left(x-\Gamma^{-1}h\left(y\right)\right)+\frac{1}{2}h\left(y\right)^{T}\Gamma^{-1}h\left(y\right)\right]dx\\
- & \propto e^{\frac{1}{2}h\left(y\right)^{T}\Gamma^{-1}h\left(y\right)}\intop\mathcal{N}\left(x\,\mid \,\Gamma^{-1}h\left(y\right),\Gamma^{-1}\right)dx\\
- & =e^{\frac{1}{2}h\left(y\right)^{T}\Gamma^{-1}h\left(y\right)}\propto p\left(y\right)
-\end{align}
-$$
-
-
-## Marginal Distribution of a Gaussian
 
 Another important property of the Gaussian distribution is that its marginals are also Gaussian, which is what we will show here.
 
@@ -399,6 +382,7 @@ $$
 
 and we will again define $\Lambda=\Sigma^{-1}$ . We want to find $p\left(x_{a}\right)$ .
 
+{%details Click here to see the derivation%}
 
 Our battle plan is to first find all of the dependence on $x_{b}$ ,
 and to integrate it out. If we can do this without losing track of
@@ -492,6 +476,16 @@ $$
 
 which really makes you wonder why we did all of that hard work.
 
+{% enddetails %}
+
+The marginals of the Gaussian distribution are much more intuitive than their conditional distributions. The marginals are given by:
+
+$$
+\begin{equation}
+x_{a}\sim\mathcal{N}\left(\mu_{a},\Sigma_{aa}\right)
+\end{equation}
+$$
+
 <br>
 
 # Extras 
@@ -517,7 +511,7 @@ Once you fully understand why each method works, it will become quite clear when
 
 # Discussion
 
-Now that we know what the Gaussian distribution is and the important properties of the Gaussian distribution, we can start to use it for some real statistical problems. The next post will be dedicated to estimating $\mu$ and $\Sigma$ from observed data, after which we will move on to utilizing the Gaussian distribution for the task of regression.
+Now that we know what the Gaussian distribution is and the important properties of the Gaussian distribution, we can start to use in for some real statistical problems. The next post will be dedicated to estimating $\mu$ and $\Sigma$ from observed data, after which we will move on to utilizing the Gaussian distribution in the task of regression.
 <br>
 
 ---

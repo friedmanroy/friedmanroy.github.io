@@ -23,9 +23,9 @@ toc:
 <br>
 <br>
 
-> In the previous post, we saw the definition of the Gaussian distribution as well some of its most useful properties. Having defined this distribution, our next point of interest will be to _estimate_ the mean and covariance of a Gaussian distribution given some datapoints. This will be our main focus in this post.
+> In the previous post we saw the definition of the Gaussian distribution and some of its most useful properties. Having defined this distribution, our next point of interest will be to _estimate_ the mean and covariance of a Gaussian distribution given some datapoints. This will be our main focus in this post.
 
-While Bayesian statistics is our main interest in this thread of posts, many times it will prove easier to first go over the frequentist version as it is less mathematically involved. Only after we understand the ML solution, we will move on to the Bayesian treatment of the same, in the process revealing how they are related to each other.
+While Bayesian statistics is our main interest in this thread of posts, many times it's easier to go over the frequentist version first, since it's less mathematically involved. Once we understand the ML solution, we will move on to the Bayesian treatment. Many times, this process reveals how the Bayesian and frequentist views are related to each other.
 
 The parameters of a Gaussian distribution are $\mu$ and $\Sigma$, so $\theta=\left\{ \mu,\Sigma\right\}$ . In the frequentist case we will estimate both, however the Bayesian treatment of $\Sigma$ is a bit more complex and doesn't teach much, so we will ignore it for now. 
 
@@ -51,7 +51,7 @@ $$
 a=\text{trace}\left[a\right]
 \end{equation}
 $$
-Since this is true for any scalar, we can apply this to the inner product of 2 vectors $x^{T}y$ (which is just a number), as well:
+Since this is true for any scalar, we can apply this to the inner product of 2 vectors $x^{T}y$ (which is just a number) as well:
 
 $$
 \begin{equation}
@@ -59,7 +59,7 @@ x^{T}y=\text{trace}\left[x^{T}y\right]=\text{trace}\left[yx^{T}\right]
 \end{equation}
 $$
 
-Now, recall that the Mahalanobis distance $\left(x-\mu\right)^{T}\Sigma^{-1}\left(x-\mu\right)$ is also a scalar, so we can use the above identity to rewrite it as:
+Now, recall that $\left(x-\mu\right)^{T}\Sigma^{-1}\left(x-\mu\right)$ is also a scalar, so we can use the above identity to rewrite it as:
 
 $$
 \begin{align}
@@ -96,8 +96,7 @@ $$
 \end{equation}
 $$
 
-Here we write $\hat{\mu}\_{\text{ML}}$ to show that it is the _maximum likelihood estimator_ for the data set. Notice that, unsurprisingly, the ML estimator for the mean of the Gaussian
-is the _empirical mean_ of the data.
+Here we write $\hat{\mu}\_{\text{ML}}$ to show that it is the _maximum likelihood estimator_ for the data set. Notice that, unsurprisingly, the ML estimator for the mean of the Gaussian is the _empirical mean_ of the data.
 
 
 ## MLE for $\Sigma$
@@ -140,7 +139,7 @@ $$
 
 ---
 
-Putting the two equations together, the MLE for a Gaussian distribution are:
+Putting the two equations together, the ML estimators for the parameters of a Gaussian distribution are:
 $$
 \begin{equation}
 \begin{split}\hat{\mu}_{\text{ML}} & =\frac{1}{N}\sum_{i}x_{i}\\
@@ -190,6 +189,7 @@ $$
 
 Recall that the term $p\left(\mathcal{D}\right)$ is constant and only serves as a normalization, so for now we can ignore it. 
 
+{% details Derivation of the posterior %}
 Let's look at the product in equation \eqref{eq:post} more closely:
 
 $$
@@ -221,6 +221,7 @@ $$
 
 where $\mu_{\text{ML}}=\frac{1}{N}\sum_{i}x_{i}$ is the ML estimate for $\mu$ , as we showed in [section for the MLE of the mean](#mu-MLE) . 
 
+{% enddetails %}
 
 Defining: 
 $$
@@ -318,7 +319,7 @@ style="display: inline-block; margin: 0 auto; ">
 
 ## MAP and MMSE Estimates for $\mu$
 
-If we want to find the MAP estimate for $\mu$ under the prior above, we need to find:
+The MAP estimate for $\mu$ under the prior above is given by:
 
 $$
 \begin{equation}
@@ -334,13 +335,13 @@ $$
 \end{equation}
 $$
 
-where $\mu\_{N}$ is given explicitly in equation \eqref{eq:mu-N}. Notice that (in this case) this is also the MMSE estimate:
+where $\mu\_{N}$ is given explicitly in equation \eqref{eq:mu-N}. Notice that (in this case) the MAP and MMSE estimates are one and the same:
 $$
 \begin{equation}
 \hat{\mu}_{MAP}=\mathbb{E}\left[p\left(\mu|\mathcal{D}\right)\right]=\hat{\mu}_{MMSE}
 \end{equation}
 $$
-The fact that the MAP and MMSE estimates are the same is unique to the Gaussian distribution, in general they will differ quite a bit!
+The fact that the MAP and MMSE estimates are the same only happens to be true for the Gaussian distribution, in general they might be very different from each other!
 
 <br>
 
@@ -410,7 +411,9 @@ $$
 
 # Choices of Priors
 
-Bayesian machine learning is often described in terms of "known priors". However, many times we don't actually have an explicit prior we can choose, which is the main criticism against the Bayesian approach. The problem is that when there isn't a good prior, researchers amount to choosing arbitrary distributions for their priors. 
+When theoretically analyzing Bayesian methods, they are often described in terms of "the true prior". However, in practice we don't actually have explicit access to "the true prior" and instead have to choose which prior to use. This is the main criticism against the Bayesian approach, because when there is not much prior knowledge researchers tend to choose arbitrary distributions as their priors. 
+
+The fact that a prior can be chosen, however, does give a lot of flexibility. If a researcher understands that their prior knowledge isn't very good, they can assign a very "wide" prior - one that gives similar densities to most parameter settings. Choosing a wide prior then has the effect of only slightly biasing the MLE. On the flip side, if there is a lot of prior knowledge, then it only seems natural to take that knowledge into account.
 
 
 
@@ -427,15 +430,17 @@ style="display: inline-block; margin: 0 auto; ">
 </div>
 
 
-The figure above illustrates what happens when Gaussian priors of different kinds are chosen. When the variance of the prior is low, i.e. $\Sigma\_{0}=I\sigma\_{0}^{2}$ with small $\sigma$ (left column), then many samples are needed to change the posterior distribution. When the prior mean is well calibrated to the generating distribution, this translates to a better MMSE than the ML estimate with few samples but doesn't get better when more samples are introduced. However, when the prior mean is far from the generating distribution, then the estimate will always be quite bad. The other end of the spectrum is when $\sigma$ is large (right column), in which case it doesn't really matter what the prior mean is since the posterior mean is more or less equal to the ML estimate.
+The figure above illustrates what happens when Gaussian priors of different kinds are chosen. When the variance of the prior is low, i.e. $\Sigma\_{0}=I\sigma\_{0}^{2}$ with small $\sigma$ (left column), then many samples are needed to change the posterior distribution. When the prior mean is well calibrated to the generating distribution but the variance is still small, this translates to a better MMSE than the ML estimate with few samples but doesn't get better when more samples are introduced. However, when the prior mean is far from the generating distribution, then the estimate will always be quite bad if the variance is kept small. The other end of the spectrum is when $\sigma$ is large (right column), in which case it doesn't really matter what the prior mean is since the posterior mean is more or less equal to the ML estimate.
 
-The more interesting case is when $\mu\_{0}$ is well calibrated and $\Sigma\_{0}$ is moderate (middle column, top). In this setting, the MMSE gives a much better estimate than the MLE, _especially_ in low sample-size settings - in this case, more than an order of magnitude. However, when the prior is bad, the MMSE estimate will always be worse than the MLE (middle column, bottom).
+The more interesting case is when $\mu\_{0}$ is well calibrated and $\Sigma\_{0}$ is moderate (middle column, top). In this setting, the MMSE gives a much better estimate than the MLE, _especially_ in low sample-size settings - in this case, more than an order of magnitude. 
+
+All of this is to say that the choice of prior can, and sometimes _should_, have big effects on estimates. Choosing a _well calibrated prior_, something we will look into in a few posts but can be done.
 
 <br>
 
 # Discussion
 
-Even though the Gaussian distribution is one of the simplest distributions we can work with, it already illustrates the effects of using the Bayesian approach, which  we saw in [the previous section](#choices-of-priors). When the prior is correctly specified, it can greatly boost performance in the low-data regime; on the other hand, when given the amount of observed data increases, this posterior "collapses" to the ML solution.
+Even though the Gaussian distribution is one of the simplest distributions we can work with, it already illustrates the effects of using the Bayesian approach, which we saw in [the previous section](#choices-of-priors). When the prior is correctly specified, it can greatly boost performance in the low-data regime; on the other hand, when the amount of observed data increases, this posterior "merges" with the ML solution.
 
 In the next few posts we will still be concerned with the Gaussian distribution, however we will cast the problem into that of _prediction_ in the regression task. Basically, we will observe what we consider to be a linear transformation of a Gaussian, and we will once again attempt to recover the parameters of the Gaussian.
 <br>

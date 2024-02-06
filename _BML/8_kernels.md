@@ -22,6 +22,8 @@ toc:
 <span style='float:left'><a href="https://friedmanroy.github.io/BML/7_evidence/">← Evidence Function</a></span><span style='float:right'><a href=""> →</a></span>
 <br>
 <br>
+>Hopefully, by this point you are extremely comfortable with the linear regression problem and it's Bayesian interpretation. Starting with this post, we are going to explore what happens when, and how we can use, more parameters than data points. This is enabled by the _kernel trick_. 
+
 
 When we introduced linear regression, we allowed the usage of the
 basis functions $h\left(\cdot\right)$ which mapped the inputs of
@@ -31,13 +33,13 @@ greatly improves the expressiveness of the linear regression model,
 but is still quite limited as we can only use a finite number of basis
 functions. In this section we will introduce kernels, which will give
 us much greater flexibility in the functions the linear regression
-model can learn.
+model can use.
 
 <br>
 
 # Positive Semi-Definite Kernels
 
-Before we begin to talk about kernels in earnest, let's start by defining what a kernel actually is. We will only be looking at positive semi-definite kernels in the course, which will allow us to use them in our setting (more on that later).
+Before we begin to talk about kernels in earnest, let's start by defining it. We will only be looking at positive semi-definite kernels in the course, which will allow us to use them in our setting (more on that later).
 
 > **Definition: Positive Semi-Definite (PSD) Kernels** 
 > A symmetric function $k:X\times X\rightarrow\mathbb{R}$ is called a PSD kernel on the set $X$ if the associated kernel matrix (also known as the Gram matrix) $K_{ij}=k\left(x_{i},x_{j}\right)$ is PSD for any set of distinct points $\left\{ x_{i}\right\} _{i=1}^{N}\subseteq X$
@@ -71,7 +73,7 @@ $$
 As we have seen before, any the product of a matrix with it's transpose is a PSD matrix, which means that $G$ is PSD, which in turn means that $g\left(\cdot,\cdot\right)$ is a kernel. So, for any symmetric function $k\left(\cdot,\cdot\right)$, if we can show that it is the inner product of two vectors, then the function is a kernel. 
 <span style='float:right'> $\square$ </span>
 
-Now the connection to basis functions should be easy to see - any set of basis functions is part of a kernel.
+Now the connection to basis functions should be easy to see - any set of basis functions defines a kernel.
 
 ---
 #### Examples:

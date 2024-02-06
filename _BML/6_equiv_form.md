@@ -134,5 +134,6 @@ In this form, we need to invert the matrix $M = \sigma^2I+H\Sigma_\theta H^T$ , 
 Classically speaking, to ensure that we don't overfit, we would always make sure that $N > p$ . However, using the Bayesian approach we can use more features and still not overfit (as we saw in the last post). The equivalent form becomes useful in the regime where $p > N$ ; when we have more features than data points, since it means that we will have to invert an $N\times N$ matrix<d-footnote>The cost of inverting a $N \times N$ matrix is roughly $O(N^3)$</d-footnote>, which will be more efficient than inverting a $p\times p$ matrix. We will talk about this regime in great detail in later posts.
 <br>
 
+
 ---
 <span style='float:left'><a href="https://friedmanroy.github.io/BML/5_linear_regression/">← Linear Regression</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/7_evidence/">Evidence Function →</a></span>

@@ -22,6 +22,7 @@ toc:
   - name: Bayesian Linear Regression
     subsections:
       - name: Connection to Classic Linear Regression
+  - name: Discussion
 ---
 
 <span style='float:left'><a href="https://friedmanroy.github.io/BML/4_gaussian_estimation/">← Estimating the Gaussian Distribution</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/6_equiv_form/">Equivalent Form →</a></span>
@@ -327,6 +328,14 @@ $$
 \end{equation}
 $$
 In this sense, if we are very unsure about the prior ( $\alpha\gg1$ ) then the regularization will be very light, while if we are very sure ( $\alpha$ is small), then we will heavily penalize solutions that are far from what we expected.
+<br>
+
+# Discussion
+
+We have finally made it to the first "real" example of machine learning in this collection of posts. Linear regression seems like a really simple model but therein lies its' strengths. It's east to understand the predictions by the linear regression model and tweaking the basis functions allows for a ton of versatility. By moving to Bayesian linear regression, we can get a sense of uncertainty in the prediction of the model, which is a pretty attractive attribute. 
+
+In the next post, we will see a different form for writing the solution to Bayesian linear regression which is sometimes used in literature. In the post after, we will look into ways to choose which basis functions to use given some observations.
+
 <br>
 
 ---

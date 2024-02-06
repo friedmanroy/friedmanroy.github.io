@@ -29,8 +29,9 @@ toc:
 <span style='float:left'><a href="https://friedmanroy.github.io/BML/6_equiv_form/">← Equivalent Form</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/8_kernels/">Kernels →</a></span>
 <br>
 <br>
+>In the previous posts, we defined the problem of (Bayesian) linear regression and found the MLE and posterior for the linear regression parameters. Throughout, we kind of assumed that the basis functions and prior were somehow chosen ahead of time, and didn't really talk about how to choose which basis functions to use. This is the focus of the current post.
 
-As we have previously discussed, there are many possible basis functions $h\left(\cdot\right)$ we can use to fit the linear regression model, and it is not always so simple to determine which set of basis functions is the correct one to use. On one hand, if we use a very expressive set of basis functions, or a very large one, then the model will easily fit the training data, but will probably give very inaccurate predictions for unseen data points. On the other hand, if we use a model that is too simplistic, then we will end up missing all of the data points. 
+As we have previously discussed, there are many possible basis functions $h\left(\cdot\right)$ we can use to fit the linear regression model, and it is not always so simple to determine which set of basis functions is the correct one to use. On one hand, if we use a very expressive set of basis functions (or a very large one) then the model will easily fit the training data but will probably give very inaccurate predictions for unseen data points. On the other hand, if we use a model that is too simplistic, then we will end up missing all of the data points. 
 
 <div class="fake-img l-page">
 <p align="center">
@@ -44,11 +45,10 @@ style="display: inline-block; margin: 0 auto; ">
 </div>
 
 
-This is exactly the dilemma represented in figure 1; on the left, it is fairly obvious that the straight line should be chosen, although the 9th order polynomial fits the data better. On the other hand, the graph on the right shows exactly the opposite - the 9th order polynomial intuitively looks like it explains the data better than the linear function. However, in both cases the 9th order polynomial has much higher likelihood. So how can we choose which of the basis functions is a better fit for the data?
+This is exactly the dilemma represented in figure 1; on the left, it is fairly obvious that the straight line should be chosen, although the 9th order polynomial fits the data better. The graph on the right shows exactly the opposite - the 9th order polynomial intuitively looks like it explains the data better than the linear function. However, in both cases the 9th order polynomial has much higher likelihood. So, how can we choose which of the basis functions is a better fit for the data?
 
 
-The _evidence function_<d-footnote>Bishop section 3.4 or <a href="http://www.inference.org.uk/mackay/itprnn/ps/343.355.pdf">MacKay's chapter on model selection in "Information Theory, Inference and Learning Algorithms"</a>.</d-footnote> (also called the _marginal likelihood_, since we marginalize the parameters out of the distribution) is a way for us to intelligently choose which parameterization to use. The idea behind the evidence function is to "integrate out" the specific values of the parameters $\theta$ and to see how probable the data set is under our parameterization. Suppose we have a prior $p\left(\theta\mid \Psi\right)$ that is dependent
-on some parameters $\Psi$ . Then:
+The _evidence function_<d-footnote>Bishop section 3.4 or <a href="http://www.inference.org.uk/mackay/itprnn/ps/343.355.pdf">MacKay's chapter on model selection in "Information Theory, Inference and Learning Algorithms"</a>.</d-footnote> (also called the _marginal likelihood_, since we marginalize the parameters out of the distribution) is a way for us to intelligently choose which parameterization to use. The idea behind the evidence function is to "integrate out" the specific values of the parameters $\theta$ and to see how probable the data set is under our prior (which basically includes the basis functions, as well). Suppose we have a prior $p\left(\theta\mid \Psi\right)$ that is dependent on some parameters $\Psi$. Then:
 
 $$
 \begin{align}
@@ -57,15 +57,7 @@ p\left(\mathcal{D}\mid \Psi\right) & =\intop p\left(\mathcal{D},\theta\mid \Psi\
 \end{align}
 $$
 
-The way it is written at the moment may be a bit confusing. Up until
-now (and from now on, as well), we wrote the prior as $p\left(\theta\right)$ ,
-but suddenly we're adding the conditioning on $\Psi$ - why? When
-we define a prior, we usually have to choose a distribution for the
-prior. Often, this distribution has parameters that define it; for
-instance, if the prior is a Gaussian, then the parameters are the
-specific $\mu_{0}$ and $\Sigma_{0}$ we chose. In our new notation
-$\Psi=\\{ \mu_{0},\Sigma_{0}\\}$ , and we want to compare
-between different possible $\Psi$ s.
+The way it is written at the moment may be a bit confusing. Up until now (and from now on, as well), we wrote the prior as $p\left(\theta\right)$ , but suddenly we're adding the conditioning on $\Psi$ - why? When we define a prior, we usually have to choose a distribution for the prior. Often, this distribution has (hyper)parameters that define it; for instance, if the prior is a Gaussian, then the parameters are the specific $\mu_{0}$ and $\Sigma_{0}$ we chose. In our new notation $\Psi=\\{ \mu_{0},\Sigma_{0}\\}$ , and we want to compare between different possible $\Psi$ s.
 
 
 ---
@@ -97,7 +89,7 @@ p\left(y\mid \mu_{i},\Sigma_{i}\right)=\intop p\left(y\mid \theta\right)p\left(\
 \end{equation}
 $$
 
-for $i\in\\{ 1,2\\}$ . If we calculate this probability for both $\mu_{1}$ and $\mu_{2}$ , then we will get a value that tells us how likely the training data $y$ is under each of these different assumptions. That is, instead of asking how probable $y$ is under a specific value of $\theta$ (which is just the likelihood), this is like asking how probable $y$ is when averaging out the values of $\theta$ , _given the parameterization_ of $\mu_{i}$ and $\Sigma_{i}$ .
+for $i\in\\{ 1,2\\}$ . If we calculate this probability for both $\mu_{1}$ and $\mu_{2}$ , then we will get a value that tells us how likely the training data $y$ is under each of these different assumptions. That is, instead of asking how probable $y$ is under a specific value of $\theta$ (which is just the likelihood), this is like asking how probable $y$ is when averaging out the values of $\theta$ , _given a parameterization_ with $\mu_{i}$ and $\Sigma_{i}$ .
 
 Of course, the priors could assume different basis functions, as in:
 
@@ -110,7 +102,7 @@ f_{2}\left(x\right) & =\beta_{0}+\beta_{1}x\qquad\left(\begin{matrix}\beta_{0}\\
 \end{align}
 $$
 
-and we want to choose between $\Psi_{\theta}=\\{ \mu_{\theta},\Sigma_{\theta}\\}$ and $\Psi_{\beta}=\\{ \mu_{\beta},\Sigma_{\beta}\\}$ . Notice that the basis functions we assume are themselves compared when we do this, simply since the basis functions are part of the assumptions we made when we chose our prior.
+and we want to choose between $\Psi_{\theta}=\\{ \mu_{\theta},\Sigma_{\theta}\\}$ and $\Psi_{\beta}=\\{ \mu_{\beta},\Sigma_{\beta}\\}$ . Notice that the basis functions we assume are also compared when we do this, simply since the basis functions are part of the assumptions we made when we chose our prior.
 
 ---
 
@@ -126,7 +118,7 @@ $$
 \end{equation}
 
 $$
-where $\Psi$ are some parameters. We want to find the value of $p\left(\mathcal{D}\mid \ \Psi\right)$ - the evidence for seeing the data under this parameterization $\Psi$ . Recall from Bayes' law:
+where $\Psi$ are some hyperparameters. We want to find the value of $p\left(\mathcal{D}\mid \ \Psi\right)$ - the evidence for seeing the data under this parameterization $\Psi$ . Recall from Bayes' law:
 
 $$
 \begin{align}
@@ -144,7 +136,7 @@ $$
 \end{equation}
 $$
 
-Usually, the numerator is either known or pretty simple to calculate, while the denominator is quite hard to find. In such cases, the denominator is approximated in some manner in other to find the evidence. Luckily for us, the denominator is easy to calculate in the case of Bayesian linear regression with a Gaussian prior. 
+Usually, the numerator is either known or pretty simple to calculate, while the denominator is quite hard to find. When not analytically tractable, the denominator is approximated in some manner in other to find the evidence. Luckily for us, the denominator is easy to calculate in the case of Bayesian linear regression with a Gaussian prior. 
 
 <br>
 
@@ -267,7 +259,7 @@ p(\mathcal{D}\mid \Psi)=\intop p(\mathcal{D}\mid \theta) p(\theta\mid \Psi)d\the
 \end{equation}
 $$
 
-This is the most direct (and intractable) way to define the evidence, but is a bit more approachable in an abstract way. Notice that the operation we actually have here is (basically) a sum of all possible likelihoods of fits according to the prior (the $p(\mathcal{D}\mid \theta)$ ), weighted by the prior probability. This means that if the data has high likelihood under the values of the prior with high density, then the evidence for the prior will be high. On the other hand, if the area with highest density on the prior isn't even close to the data, then the evidence will be low. This is shown in the figure below<d-footnote>The way the prior is displayed in these plots is by calculating the mean and standard deviations of $\mathcal{N}\left(H\mu_0,\ H\Sigma_0 H^T + I\sigma^2\right)$ for every point in space, which is exactly like using the equivalent definition of the evidence.</d-footnote>.
+This is the most direct (and intractable) way to define the evidence, but is a bit more approachable, in an abstract kind of way. Notice that the operation we actually have here is (basically) a sum of all possible likelihoods the data gets under different values of $\theta$ according to the prior (the $p(\mathcal{D}\mid \theta)$ ), weighted by the prior probability. This means that if the data has high likelihood under values of the prior that have high density, then the evidence for the prior will be high. On the other hand, if the area with highest density on the prior isn't even close to the data, then the evidence will be low. This is shown in the figure below<d-footnote>The way the prior is displayed in these plots is by calculating the mean and standard deviations of $\mathcal{N}\left(H\mu_0,\ H\Sigma_0 H^T + I\sigma^2\right)$ for every point in space, which is exactly like using the equivalent definition of the evidence.</d-footnote>.
 
 <div class="fake-img l-page">
 <p align="center">
@@ -277,12 +269,12 @@ style="display: inline-block; margin: 0 auto; ">
 </p>
 </div>
 <div class="caption">
-    Figure 2: a graphical plot for two models - one with high evidence, and one with low evidence. The red dots are the given data, which are the same for the left and right plots. The gray contour lines represent the prior's density over possible functions while the black line is the mean of the prior.
+    Figure 2: a graphical plot for two models - one with high evidence, and one with low evidence. The red dots are the observed data points, which are the same in both plots. The gray contour lines represent the prior's density over possible functions while the black line is the mean of the prior. The left plot is an example of a prior that explains the data well; most data points fall on a high density function according to the prior. On the right, by contrast, the prior gives very low density to the function that created the data, so the the evidence is much worse. 
 </div>
 
 #### Choosing Basis Functions
 
-Evidence can be used to decide which basis function to use. At the beginning of this post, I showed an example with two polynomials, but we can compare more than just two functions each time. 
+Evidence can be used to decide which basis function to use. At the beginning of this post, I showed an example with two polynomials. 
 
 Below, I show the same as figure 2, just for Gaussian basis functions which are defined according to:
 
@@ -348,9 +340,32 @@ style="display: inline-block; margin: 0 auto; ">
 
 <br>
 
-# Regarding Calibration
+# Maximizing Evidence as Hypothesis Selection
 
-The evidence is certainly a useful tool for model selection, but it should be used carefully. In particular, relying too much on the evidence without taking care can result in overfitting to the training data. More concisely, high evidence doesn't equal to good generalization! This is because, by design, the marginal likelihood gives high scores to priors which explain the data well. 
+Back in the <a href="https://friedmanroy.github.io/BML/2_estimates/">post about Bayesian decision theory</a>, I introduced which estimators are considered optimal under specific losses and risks. One particular example, actually related to evidence, was that of the 0-1 loss. To jog your memory, in that post we said that if our loss is the same for every wrong example, no matter how far, then the best possible estimator is the MAP estimate. In this sense, if we have to put all our eggs in one basket, the MAP estimator is the way to go.
+
+Choosing the linear regression model and set of basis functions to use is an example of this "putting all our eggs in one basket" scenario. Let's bunch together the basis functions, prior and noise and call all of these things together a _hypothesis_. Now suppose we have a set of hypothesis:
+
+$$
+\begin{equation}
+\mathcal{H}=\left\{\Psi_i \right\}_{i=1}^{M}
+\end{equation}
+$$
+We now have to choose one of these hypothesis - only one. It's kind of hard to say "how wrong" a hypothesis is, after all we started this whole debating by saying that the likelihood for a set of points isn't a good way to choose a model (at the start of the post). Instead, we just want the one that will be closest.
+
+I'm going to assume that all hypothesis are equally as likely, so $p(\Psi_i)=p(\Psi_j)=1/|\mathcal{H}|$. Then, the MAP estimate under this "hyperprior" over $\mathcal{H}$, given the observed $\mathcal{D}$, is:
+
+$$
+\begin{equation}
+\hat{\Psi}=\arg\max_{\Psi\in\mathcal{H}}p\left(\Psi\right)p\left(\mathcal{D}|\Psi\right)=\arg\max_{\Psi\in\mathcal{H}}p\left(\mathcal{D}|\Psi\right)
+\end{equation}
+$$
+
+This is exactly the setting we've been discussing this whole post.
+
+## Regarding Calibration
+
+The evidence is certainly a useful tool for model selection, but it should be used carefully. In particular, relying too much on the evidence without taking care can result in overfitting to the training data. More concisely, high evidence doesn't equal good generalization! This is because, by design, the marginal likelihood gives high scores to priors which explain the data well. 
 
 This is really problematic if we don't take care to separate the manner in which we choose the prior from the model selection stage. For instance, assume we have some data $\mathcal{D}$ and want to find the model that gives this data the highest possible evidence. Recall that:
 
@@ -371,16 +386,14 @@ which is equal to infinity when $\tilde{y}=y$ , a really good evidence score. Ho
 While the above is kind of a silly case we won't see in real life, it still illustrates the problems that may arise when optimizing the evidence. Specifically, if the set of possible models contains many very specific and expressive models, then optimizing on this set of models is prone to overfitting. On the other hand, it could be tempting to iterate over different sets of possible models as we see the results; again, this would just lead to models that are overfit and won't be calibrated towards new (unseen) data points. 
 
 
-### Mitigation
+## Mitigation
 
-While the above is true, we can take steps to ensure this doesn't happen. For starters, the discussion above is kind of backwards of how we defined the fitting process in the first place; we assumed that we have several priors that (we believe) explain the data equally well, _and only then_ do we want to select one out of these possible priors. 
+This overfitting problem seems to break the proof we had that choosing according to evidence is optimal, right? However, notice that when we have an infinite number of hypothesis to choose from, all of which we give the same probability, we've already infringed on the assumptions we made in the previous section. Where did we go wrong? There is no uniform distribution on a set with an infinite number of members!
 
-In other words, if we remain true to the original Bayesian method and choose a set of priors **before we ever see the data**. Only then would we try to select  one of them, then the biasing towards the data that was described above is mitigated, in the sense that the selection of the priors is independent of the data. This, as mentioned, is more in line with the Bayesian philosophy.
-
-Another thing to keep in mind is that maximizing the evidence will probably work best when the set of hypotheses is small; this is to ensure that we don't allow too fine-grained definitions of priors.
+Instead, the discussion above is kind of backwards of how we defined the fitting process in the first place; we assumed that we have several priors that (we believe) explain the data equally well, _and only then_ do we want to select one out of these possible priors. In other words, choosing according to evidence should be carried out only if we remain true to the original Bayesian method and choose a set of priors **before we ever see the data**. Only then should we try to select one of them, so that the selection of the possible set of priors is independent of the data. This, as mentioned, is more in line with the Bayesian philosophy. 
 
 
-### Priors all the Way Down
+## Priors all the Way Down
 
 Probably the "true Bayesian method" to overcome these problems is a different approach all together. In the first place, assuming that all these sets of hypotheses we were talking about are equally likely is questionable. Instead, we would want to choose some sort of _hyperprior_ - a prior over the hyperparameters:
 
@@ -396,9 +409,16 @@ $$
 p(\theta\mid \mathcal{D})=\intop p(\theta\mid \Psi,\mathcal{D})p(\Psi\mid \xi)d\Psi
 $$
 
-This is nice since it bypasses the need to choose a model - simply integrate over all of them, a more Bayesian approach. It also incorporates are beliefs explicitly - in the integral above we explicitly assumed that $\Psi$ is independent of $\mathcal{D}$ !
+This is nice since it bypasses the need to choose a model - simply integrate over all of them, a more Bayesian approach. It also incorporates our beliefs explicitly - in the integral above we explicitly assumed that $\Psi$ is independent of $\mathcal{D}$ !
 
-That said, we have introduced a new complication; how should $\xi$  be chosen? Continuing with this reasoning, shouldn't we also incorporate a prior over $\xi$, a so called "hyper-hyperprior",  and so on? While these concerns are valid, the "priors all the way down" kind of approach typically stops at the hyperprior, since it is far enough from the data term.
+That said, we have introduced a new complication; how should $\xi$  be chosen? Continuing with this reasoning, shouldn't we also incorporate a prior over $\xi$, a so called "hyper-hyperprior",  and so on? While these concerns are valid, the "priors all the way down" kind of approach typically stops at a single hyperprior, since it is far enough from the data term. Also, it becomes way too difficult when there's more than a single hyperprior. 
+<br>
+
+# Discussion
+
+Choosing models according to the evidence is a very strong method. In particular, we saw how it can be the optimal method to select which model/prior to use. Actually, showing how to calculate the evidence for linear regression is an extremely useful example - in most cases, calculating the evidence is impossible, but for linear regression there's a closed form for it!
+
+Something we haven't fully explored yet is what happens when we have _more parameters than data points_, something completely illegal in "classical" machine learning but totally fine under the Bayesian paradigm. Starting in the next post, we're going to use more parameters - sometimes even infinitely many parameters.
 <br>
 
 ---
