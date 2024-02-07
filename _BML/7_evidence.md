@@ -351,13 +351,14 @@ $$
 \mathcal{H}=\left\{\Psi_i \right\}_{i=1}^{M}
 \end{equation}
 $$
+
 We now have to choose one of these hypothesis - only one. It's kind of hard to say "how wrong" a hypothesis is, after all we started this whole debating by saying that the likelihood for a set of points isn't a good way to choose a model (at the start of the post). Instead, we just want the one that will be closest.
 
-I'm going to assume that all hypothesis are equally as likely, so $p(\Psi_i)=p(\Psi_j)=1/|\mathcal{H}|$. Then, the MAP estimate under this "hyperprior" over $\mathcal{H}$, given the observed $\mathcal{D}$, is:
+I'm going to assume that all hypothesis are equally as likely, so $p(\Psi_i)=p(\Psi_j)=1/\vert\mathcal{H}\vert$. Then, the MAP estimate under this "hyperprior" over $\mathcal{H}$, given the observed $\mathcal{D}$, is:
 
 $$
 \begin{equation}
-\hat{\Psi}=\arg\max_{\Psi\in\mathcal{H}}p\left(\Psi\right)p\left(\mathcal{D}|\Psi\right)=\arg\max_{\Psi\in\mathcal{H}}p\left(\mathcal{D}|\Psi\right)
+\hat{\Psi}=\arg\max_{\Psi\in\mathcal{H}}p\left(\Psi\right)p\left(\mathcal{D}\vert\Psi\right)=\arg\max_{\Psi\in\mathcal{H}}p\left(\mathcal{D}\vert\Psi\right)
 \end{equation}
 $$
 
@@ -381,6 +382,7 @@ $$
 p\left(\tilde{y}\mid \Psi\right)=\delta(y)
 \end{equation}
 $$
+
 which is equal to infinity when $\tilde{y}=y$ , a really good evidence score. However, this is obviously not the model we would want to choose! Such a model will not generalize to any new data, which is basically the definition of overfitting.
 
 While the above is kind of a silly case we won't see in real life, it still illustrates the problems that may arise when optimizing the evidence. Specifically, if the set of possible models contains many very specific and expressive models, then optimizing on this set of models is prone to overfitting. On the other hand, it could be tempting to iterate over different sets of possible models as we see the results; again, this would just lead to models that are overfit and won't be calibrated towards new (unseen) data points. 
