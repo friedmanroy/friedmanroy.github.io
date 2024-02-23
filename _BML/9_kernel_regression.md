@@ -355,7 +355,7 @@ The whole point of using kernel regression was that we are suddenly able to use 
 
 ## Approximating Kernels
 
-By <a href="https://en.wikipedia.org/wiki/Mercer\%27s_theorem">Mercer's theorem</a>, if $k:\mathcal{X}\times\mathcal{X}\rightarrow\mathbb{R}$ is a valid kernel, then there exists a basis function $\varphi:\mathcal{X}\rightarrow\mathcal{V}$ such that:
+By Mercer's theorem, if $k:\mathcal{X}\times\mathcal{X}\rightarrow\mathbb{R}$ is a valid kernel, then there exists a basis function $\varphi:\mathcal{X}\rightarrow\mathcal{V}$ such that:
 
 $$
 \begin{equation}
