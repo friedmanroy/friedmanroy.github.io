@@ -20,7 +20,7 @@ toc:
   - name: Kernel Regression
 ---
 
-<span style='float:left'><a href="https://friedmanroy.github.io/BML/7_evidence/">← Evidence Function</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/9_kernel_regression/"> Extras in kernel regression →</a></span>
+<span style='float:left'><a href="https://friedmanroy.github.io/BML/7_evidence/">← Evidence Function</a></span><span style='float:right'><a href=""> Extras in kernel regression →</a></span>
 <br>
 <br>
 >Hopefully, by this point you are extremely comfortable with the linear regression problem and it's Bayesian interpretation. Starting with this post, we are going to explore what happens when, and how we can use, more parameters than data points. This is enabled by the _kernel trick_. 
@@ -435,5 +435,5 @@ Now the reason we allow the kernels to be PSD and not restrict them to PD kernel
 <br>
 
 ---
-<span style='float:left'><a href="https://friedmanroy.github.io/BML/7_evidence/">← Evidence Function</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/9_kernel_regression/"> Extras in kernel regression →</a></span>
+<span style='float:left'><a href="https://friedmanroy.github.io/BML/7_evidence/">← Evidence Function</a></span><span style='float:right'><a href=""> Extras in kernel regression →</a></span>
 

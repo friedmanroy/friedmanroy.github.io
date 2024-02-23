@@ -237,7 +237,7 @@ style="display: inline-block; margin: 0 auto; ">
 </p>
 </div>
 <div class="caption">
-    Figure 3: Examples of the subset of data method (SDM). Orange dots represent data points that were kept (also known as the _active set_); the orange line is the approximation learned with the particular active set, while the black, dashed line is the true MMSE prediction. As you can see, in this example $\sim$13% of the data already achieves a pretty good approximation of the true posterior.
+    Figure 3: Examples of the subset of data method (SDM). Orange dots represent data points that were kept (also known as the active set); the orange line is the approximation learned with the particular active set, while the black, dashed line is the true MMSE prediction. As you can see, in this example $\sim$13% of the data already achieves a pretty good approximation of the true posterior.
 </div>
 <br>
 
@@ -314,7 +314,7 @@ style="display: inline-block; margin: 0 auto; ">
 </p>
 </div>
 <div class="caption">
-    Figure 4: Examples of the subset of regressors method (SRM). Blue dots represent the _active set_; the blue line is the approximation learned with the particular active set, while the black, dashed line is the true MMSE prediction. Using SRM, even the prediction with very few points is already much more accurate than the SDM we saw before. However, notice that the learned variance is incorrect in areas far from the active set.
+    Figure 4: Examples of the subset of regressors method (SRM). Blue dots represent the active set; the blue line is the approximation learned with the particular active set, while the black, dashed line is the true MMSE prediction. Using SRM, even the prediction with very few points is already much more accurate than the SDM we saw before. However, notice that the learned variance is incorrect in areas far from the active set.
 </div>
 <br>
 
