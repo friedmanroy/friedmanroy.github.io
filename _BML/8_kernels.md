@@ -13,33 +13,131 @@ authors:
       name: Hebrew University
 
 toc: 
+  - name: More Parameters than Data Points
   - name: Positive Semi-Definite Kernels
   - name: Constructing Kernels
   - name: RBF is a Valid Kernel
   - name: Kernel Regression
 ---
 
-<span style='float:left'><a href="https://friedmanroy.github.io/BML/7_evidence/">← Evidence Function</a></span><span style='float:right'><a href=""> →</a></span>
+<span style='float:left'><a href="https://friedmanroy.github.io/BML/7_evidence/">← Evidence Function</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/9_kernel_regression/"> Extras in kernel regression →</a></span>
 <br>
 <br>
 >Hopefully, by this point you are extremely comfortable with the linear regression problem and it's Bayesian interpretation. Starting with this post, we are going to explore what happens when, and how we can use, more parameters than data points. This is enabled by the _kernel trick_. 
 
 
-When we introduced linear regression, we allowed the usage of the
-basis functions $h\left(\cdot\right)$ which mapped the inputs of
-our problem to features in a different space, allowing the linear
-regression to learn non-linear functions over the input space. This
-greatly improves the expressiveness of the linear regression model,
-but is still quite limited as we can only use a finite number of basis
-functions. In this section we will introduce kernels, which will give
-us much greater flexibility in the functions the linear regression
-model can use.
+When we introduced linear regression, we allowed the usage of the basis functions $h\left(\cdot\right)$ which mapped the inputs of our problem to features in a different space, allowing us to learn non-linear functions over the input space. This greatly improves the expressiveness of the linear regression model, but is still quite limited as we can only use a finite (and usually small) number of hand-crafted basis functions. We will now look into using more basis functions than data points, and specifically how introducing kernels enables much greater flexibility in the functions the linear regression model can learn.
+
+<br>
+
+# More Parameters than Data Points
+
+In the classical setting of linear regression, it is typical to hear that "the number of parameters has to be smaller than the number of data points". However, in the Bayesian framework the number of parameters or data points doesn't matter all that much. Consider the MMSE function based on some prior $\theta\sim\mathcal{N}\left(\mu_{\theta},\Sigma_{\theta}\right)$:
+
+$$
+\begin{align}
+f_{\hat{\theta}}\left(x\right) & =h^{T}\left(x\right)\hat{\theta}\\
+ & =h^{T}\left(x\right)\left(\frac{1}{\sigma^{2}}H^{T}H+\Sigma_{\theta}^{-1}\right)^{-1}\left(\Sigma_{\theta}^{-1}\mu_{\theta}+\frac{1}{\sigma^{2}}H^{T}y\right)
+\end{align}
+$$
+
+As long as $\Sigma_{\theta}$ is PD, then $\hat{\theta}_{\text{MMSE}}$ always exists. If there aren't many data points, then the model falls back on the prior for predictions. If there are many data points, then the prior is mostly ignored for predictions. So, in general, the function $h\left(\cdot\right)$ can be as expressive as we want.
+
+However, if $h\left(\cdot\right)$ maps to very high dimensions, then we have a different, mostly computational problem. Say $h:\mathbb{R}^{d}\rightarrow\mathbb{R}^{p}$ and $p$ is about a million, then it is infeasible to invert the matrix $H^{T}H+\Sigma_{\theta}^{-1}$ - it will be a huge matrix! To take this to the absurd, if $h\left(\cdot\right)$ is a function that maps to an infinite number of basis functions, what then? It would be helpful if there was a way for us to get past these mostly computational costs.
+
+<br>
+
+## Return of the Equivalent Form
+
+Recall that we saw two forms for the MMSE estimate $\hat{\theta}$ that were equivalent. Suppose for a moment that we have a very simple prior $\theta\sim\mathcal{N}\left(0,I\lambda\right)$. Then<d-footnote>See <a href="https://friedmanroy.github.io/BML/6_equiv_form/"> the post about the equivalent form</a>
+for how to move between the standard and equivalent form</d-footnote>:
+
+$$
+\begin{align}
+\mu_{\theta|\mathcal{D}} & =\overbrace{\left(\frac{1}{\sigma^{2}}H^{T}H+\frac{1}{\lambda}I\right)^{-1}\frac{1}{\sigma^{2}}H^{T}y}^{\text{standard form}}\\
+ & =\underbrace{\lambda\cdot H^{T}\left(\lambda HH^{T}+I\sigma^{2}\right)^{-1}y}_{\text{equivalent form}}
+\end{align}
+$$
+
+Notice that here the matrix we have to invert is dependent on the number of _data points_, not number of parameters. In fact, the matrix $HH^{T}$ is composed only of inner products of the basis functions between points:
+
+$$
+\begin{equation}
+HH^{T}=\left[\begin{matrix}h^{T}\left(x_{1}\right)h\left(x_{1}\right) & \cdots & h^{T}\left(x_{1}\right)h\left(x_{N}\right)\\
+\vdots\\
+h^{T}\left(x_{N}\right)h\left(x_{1}\right) & \cdots & h^{T}\left(x_{N}\right)h\left(x_{N}\right)
+\end{matrix}\right]
+\end{equation}
+$$
+
+Let's try to take advantage of this fact.
+<br>
+## Dual Problem
+If we put the definition of the equivalent form instead of the standard form into the MMSE function, we get:
+
+$$
+\begin{equation}
+f_{\hat{\theta}}\left(x\right)=h^{T}\left(x\right)H^{T}\left(HH^{T}+I\frac{\sigma^{2}}{\lambda}\right)^{-1}y
+\end{equation}
+$$
+
+Suddenly, everything here is written in terms of the inner products
+of the basis functions, instead of the outer product, after all:
+
+$$
+\begin{equation}
+h^{T}\left(x\right)H^{T}=\left[\begin{matrix}h^{T}\left(x\right)h\left(x_{1}\right)\\
+\vdots\\
+h^{T}\left(x\right)h\left(x_{N}\right)
+\end{matrix}\right]
+\end{equation}
+$$
+
+where $x$ is a newly observed point and $x_{1},\cdots,x_{N}$ are
+our training examples.
+
+Let's define:
+
+$$
+\begin{equation}
+K=HH^{T}\quad;\quad k\left(x\right)=Hh\left(x\right)
+\end{equation}
+$$
+
+and rewrite the MMSE function one more time (we're getting there,
+I promise):
+
+$$
+\begin{align}
+f_{\hat{\theta}}\left(x\right) & =k^{T}\left(x\right)\overbrace{\left(K+I\frac{\sigma^{2}}{\lambda}\right)^{-1}y}^{\stackrel{\Delta}{=}\alpha}\\
+ & \stackrel{\Delta}{=}k^{T}\left(x\right)\hat{\alpha}=f_{\hat{\alpha}}\left(x\right)
+\end{align}
+$$
+
+This looks a lot like the regular linear regression! Only now, instead of $p$ basis functions with $h:\mathbb{R}^{d}\rightarrow\mathbb{R}^{p}$, we have $N$ basis functions with $k:\mathbb{R}^{d}\rightarrow\mathbb{R}^{N}$. This linear regression problem is called the _dual problem_ to the primal problem that depends on $\theta$.
+
+<br>
+
+## The Trick
+So far, we only really manipulated the math into a form which depends on inner products. As is, it seems like a kind of useless exercise in math, since we still always have to calculate the vectors $h\left(x\right)$ anyway. But it turns out we can bypass this evaluation.
+
+Suppose that instead of defining the basis functions $h\left(\cdot\right)$ we _directly calculate the inner products_. That is, instead of defining $h\left(\cdot\right)$, we will define the following function:
+
+$$
+\begin{equation}
+k\left(x_{i},x_{j}\right)=h^{T}\left(x_{i}\right)h\left(x_{j}\right)
+\end{equation}
+$$
+
+If such a function $k\left(\cdot,\cdot\right)$ exists, then we won't ever have to actually calculate the (possibly very large) vectors $h\left(x_{i}\right)$ and will only have to calculate a number for each inner product. If $N\ll p$, this silly trick can cut out a lot of needless computations.
+
+This trick is called the _kernel trick_ and the dual form of the solution that we saw above (with $\hat{\alpha}$) is called _kernel regression_.
 
 <br>
 
 # Positive Semi-Definite Kernels
 
-Before we begin to talk about kernels in earnest, let's start by defining it. We will only be looking at positive semi-definite kernels in the course, which will allow us to use them in our setting (more on that later).
+Let's start by actually defining a kernel.
 
 > **Definition: Positive Semi-Definite (PSD) Kernels** 
 > A symmetric function $k:X\times X\rightarrow\mathbb{R}$ is called a PSD kernel on the set $X$ if the associated kernel matrix (also known as the Gram matrix) $K_{ij}=k\left(x_{i},x_{j}\right)$ is PSD for any set of distinct points $\left\{ x_{i}\right\} _{i=1}^{N}\subseteq X$
@@ -75,9 +173,7 @@ As we have seen before, any the product of a matrix with it's transpose is a PSD
 
 Now the connection to basis functions should be easy to see - any set of basis functions defines a kernel.
 
----
-#### Examples:
-
+{% details Examples %}
 Let's go over some examples for valid and non-valid kernels. Hopefully this will build a good intuition of whether something is a PSD kernel or not.
 
 -  $k\left(x,y\right)=c$ where $c>0$ is some constant
@@ -125,8 +221,8 @@ Okay, okay, that's enough examples. From the above there are two rules we can cl
 
 
 However, there are some functions that do not violate these two rules but are still not kernels, so we need to be especially careful with how we define our functions and whether they are actually valid kernels or not.
+{% enddetails %}
 
----
 <br>
 
 # Constructing Kernels
@@ -145,9 +241,22 @@ Since a kernel is valid as long as the Gram matrix on any set of points is PSD, 
 
 Using these building blocks, we can create more and more complex kernels, as we see fit.
 
----
+<br>
+<div class="fake-img l-page">
+<p align="center">
+<img  
+src="https://friedmanroy.github.io/assets/bml_figs/rec_8/rec6_gram_matrices.png"  
+alt="Visualization of noiseless ridge regression"  
+style="display: inline-block; margin: 0 auto; ">
+</p>
+</div>
+<div class="caption">
+    Figure 1: Examples of different Gram matrices for inputs in the linear range [-3, 3]. The left two examples are for Gaussian kernels with different widths, and the right two are the Gram matrices of the linear and quadratic kernels, respectively. In all of these plots, darker colors mean higher values.
+</div>
 
-#### Example: Polynomial Kernel
+<br>
+{% details Example: Polynomial Kernel %}
+
 Using the construction blocks, we saw that a polynomial of a kernel with non-negative coefficients is, itself, a valid kernel. Let's look at the specific case:
 
 $$
@@ -193,8 +302,7 @@ k_{m}\left(x,y\right)=\left(x^{T}y+1\right)^{m}
 $$
 
 is called the polynomial kernel exactly because of the characteristics we described. 
-
----
+{% enddetails %}
 
 <br>
 
@@ -327,5 +435,5 @@ Now the reason we allow the kernels to be PSD and not restrict them to PD kernel
 <br>
 
 ---
-<span style='float:left'><a href="https://friedmanroy.github.io/BML/7_evidence/">← Evidence Function</a></span><span style='float:right'><a href=""> →</a></span>
+<span style='float:left'><a href="https://friedmanroy.github.io/BML/7_evidence/">← Evidence Function</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/9_kernel_regression/"> Extras in kernel regression →</a></span>
 
