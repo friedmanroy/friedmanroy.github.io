@@ -17,10 +17,11 @@ toc:
   - name: Positive Semi-Definite Kernels
   - name: Constructing Kernels
   - name: RBF is a Valid Kernel
-  - name: Kernel Regression
+  - name: Frequentist Derivation of Kernel Regression
+  - name: Discussion
 ---
 
-<span style='float:left'><a href="https://friedmanroy.github.io/BML/7_evidence/">← Evidence Function</a></span><span style='float:right'><a href=""> Extras in kernel regression →</a></span>
+<span style='float:left'><a href="https://friedmanroy.github.io/BML/7_evidence/">← Evidence Function</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/9_kernel_regression/"> Extras in kernel regression →</a></span>
 <br>
 <br>
 >Hopefully, by this point you are extremely comfortable with the linear regression problem and it's Bayesian interpretation. Starting with this post, we are going to explore what happens when, and how we can use, more parameters than data points. This is enabled by the _kernel trick_. 
@@ -363,9 +364,9 @@ where $k_{n}\left(\cdot,\cdot\right)$ is the $n$ -th order polynomial kernel. Re
 
 <br>
 
-# Kernel Regression
+# Frequentist Derivation of Kernel Regression
 
-We will now give an intuition for how this is connected to ridge regression, which can be viewed as a private case of Bayesian linear regression<d-footnote>Bishop 6.1</d-footnote>.
+We saw how we can manipulate the Bayesian linear regression to the form of kernel regression. But the same can be done in the frequentist framework, starting from ridge regression<d-footnote>Bishop 6.1</d-footnote> (which, as we all know, is just a private case of Bayesian linear regression anyway). 
 
 First, remember that the loss function for ridge regression is given by:
 
@@ -378,9 +379,10 @@ $$
 Deriving this by $\theta$ and equating to 0 we see that:
 
 $$
-\begin{equation}
-2\frac{\partial}{\partial\theta}L\left(\theta\right)=-H^{T}H\theta+H^{T}y+\lambda\theta\stackrel{!}{=}0
-\end{equation}
+\begin{align}
+2\frac{\partial}{\partial\theta}L\left(\theta\right) & =-H^{T}H\theta+H^{T}y+\lambda\theta\stackrel{!}{=}0\\
+\Rightarrow\theta & =\frac{1}{\lambda}H^{T}\left(H\theta-y\right)
+\end{align}
 $$
 
 We can now define:
@@ -392,9 +394,9 @@ $$
 \end{align}
 $$
 
-So we can rewrite the MLE solution for $\theta$ as a linear function of the basis functions in $H$ , where $\alpha_{i}$ is the coefficient for the basis functions over the $i$ -th sample $h\left(x_{i}\right)$ .
+So we can rewrite the solution for $\theta$ as a linear function of the functions that make up $H$, where $\alpha_{i}$ is the coefficient for the basis functions over the $i$-th sample $h\left(x_{i}\right)$. 
 
-The minimum of $L$ with respect to $\alpha$ is:
+The minimum of $L\left(\cdot\right)$ with respect to $\alpha$ is:
 
 $$
 \begin{align*}
@@ -411,7 +413,7 @@ $$
 \end{equation}
 $$
 
-which is very similar to what we saw for the MLE for $\theta$ . Now, let's plug this into the linear regression function:
+which is very similar to the solution we saw for ridge regression with $\theta$. Now, let's plug this into the linear regression function:
 
 $$
 \begin{align}
@@ -420,7 +422,7 @@ f\left(x\right) & =\hat{\theta}_{ML}^{T}h\left(x\right)=\hat{\alpha}_{ML}^{T}Hh\
 \end{align}
 $$
 
-Defining the Gram matrix $K=HH^{T}$ such that $K_{ij}=h\left(x_{i}\right)^{T}h\left(x_{j}\right)$ and the vector $k\left(x\right)$ where $k_{i}\left(x\right)=h\left(x\right)^{T}h\left(x_{i}\right)$ , then we can rewrite the above as:
+Defining the Gram matrix $K=HH^{T}$ such that $K_{ij}=h\left(x_{i}\right)^{T}h\left(x_{j}\right)$ and the vector $k\left(x\right)$ where $k_{i}\left(x\right)=h\left(x\right)^{T}h\left(x_{i}\right)$, then we can rewrite the above as:
 
 $$
 \begin{equation}
@@ -428,12 +430,19 @@ f\left(x\right)=y^{T}\left(K+I\lambda\right)^{-1}k\left(x\right)
 \end{equation}
 $$
 
-Suppose that, instead of defining the basis functions $h\left(\cdot\right)$ , we define a kernel $k\left(x_{i},x_{j}\right)$ . While before it was not so obvious how this would fit into the structure of the linear regression, now all we need to define is $K_{ij}=k\left(x_{i},x_{j}\right)$ and $k_{i}\left(x\right)=k\left(x,x_{i}\right)$ in order to get the prediction for a new point $x$ .
+Suppose that, instead of defining the basis functions $h\left(\cdot\right)$, we define a kernel $k\left(x_{i},x_{j}\right)$. While before it was not so obvious how this would fit into the structure of the linear regression, now all we need to define is $K_{ij}=k\left(x_{i},x_{j}\right)$ and $k_{i}\left(x\right)=k\left(x,x_{i}\right)$ in order to get the prediction for a new point $x$.
 
-Now the reason we allow the kernels to be PSD and not restrict them to PD kernels might be easier to see. Since the matrix we are inverting is $\left(K+I\lambda\right)$ , even if the Gram matrix $K$ is not PD (i.e. not invertible) and only PSD, because of the added term $I\lambda$ , the whole matrix is PD. Under this reasoning, and because forming PSD kernels is easier than forming PD kernels, we can relax our restrictions on the form of the kernels and use PSD kernels, giving us just a bit more freedom.
+Now the reason we allow P**S**D and not only PD kernels might be easier to see. Since the matrix we are inverting is $\left(K+I\lambda\right)$, even if the Gram matrix $K$ is not PD (i.e. not invertible) and only PSD, because of the added term $I\lambda$, the whole matrix is PD. Under this reasoning, and because forming PSD kernels is easier than forming PD kernels, we can relax our restrictions on the form of the kernels and use PSD kernels, giving us just a bit more freedom.
+<br>
+
+# Discussion
+
+The kernel trick allows us to move from a small number of parameters, to many more parameters than data points even. While classically using more (meaningful) parameters than data points makes no sense, in the Bayesian framework of linear regression, there is no reason _not to_ use many parameters. Because we added a prior of the values of the parameters, the complexity of the results is efficiently mitigated.
+
+However, it is still not exactly clear _how_ to use kernels, or what priors over kernels really mean. Moreover, moving from basis functions to kernels actually introduces some difficulties. In the next post we will look into all of these aspects of kernel regression.
 
 <br>
 
 ---
-<span style='float:left'><a href="https://friedmanroy.github.io/BML/7_evidence/">← Evidence Function</a></span><span style='float:right'><a href=""> Extras in kernel regression →</a></span>
+<span style='float:left'><a href="https://friedmanroy.github.io/BML/7_evidence/">← Evidence Function</a></span><span style='float:right'><a href="https://friedmanroy.github.io/BML/9_kernel_regression/"> Extras in kernel regression →</a></span>
 
