@@ -1,11 +1,8 @@
 ---
 layout: distill
 comments: false
-
-title: Kernel Regression
-
+title: More on Kernel Regression
 description: Having defined kernels, this post delves into how such kernels can be used in the context of linear regression. This results in an extremely powerful model, but also adds computational problems when confronted with vast amounts of data. To over come these problems, we briefly introduce the subset of methods, subset of regressors and random Fourier feature estimates for kernel machines.
-
 date: 2024-02-06
 authors:
   - name: Roy Friedman
@@ -20,7 +17,7 @@ toc:
   - name: Discussion
 ---
 
-<span style="float:left"><a href="https://friedmanroy.github.io/BML/8_kernels/">← Kernels</a></span><span style="float:right"><a href=""> →</a></span>
+<span style="float:left"><a href="https://friedmanroy.github.io/BML/8_kernels/">← Kernels</a></span><span style="float:right"><a href="https://friedmanroy.github.io/BML/10_gaussian_process/">Gaussian processes →</a></span>
 <br>
 <br>
 
@@ -48,7 +45,7 @@ If we assume that the inner product is given by some kernel, i.e. $h^{T}\left(x\
 
 $$
 \begin{align}
-y_{\hat{\theta}}\left(x\right) & =y^{T}\left(\frac{\sigma^{2}}{\lambda}I+K\right)^{-1}\left(\begin{matrix}h^{T}\left(x_{1}\right)h\left(x\right)\\ \vdots\\ h^{T}\left(x_{N}\right)h\left(x\right) \end{matrix}\right) \\ & =y^{T}\left(\frac{\sigma^{2}}{\lambda}I+K\right)^{-1}\left(\begin{matrix}k\left(x,x_{1}\right)\\ \vdots\\ k\left(x,x_{N}\right) \end{matrix}\right) \\ & =\sum_{i=1}^{N}\left[y^{T}\left(\frac{\sigma^{2}}{\lambda}I+K\right)^{-1}\right]_{i}k\left(x,x_{i}\right) \\ & \stackrel{\Delta}{=}\sum_{i=1}^{N}\alpha_{i}\cdot k\left(x,x_{i}\right)
+y_{\hat{\theta}}\left(x\right) & =y^{T}\left(\frac{\sigma^{2}}{\lambda}I+K\right)^{-1}\left(\begin{matrix}h^{T}\left(x_{1}\right)h\left(x\right)\\ \vdots\\ h^{T}\left(x_{N}\right)h\left(x\right) \end{matrix}\right) \\ & =y^{T}\left(\frac{\sigma^{2}}{\lambda}I+K\right)^{-1}\left(\begin{matrix}k\left(x,x_{1}\right)\\ \vdots\\ k\left(x,x_{N}\right) \end{matrix}\right) \\ & =\sum_{i=1}^{N}\left[y^{T}\left(\frac{\sigma^{2}}{\lambda}I+K\right)^{-1}\right]_{i}k\left(x,x_{i}\right) \\ & \stackrel{\Delta}{=}\sum_{i=1}^{N}\alpha_{i}\cdot k\left(x,x_{i}\right)\label{eq:dual-form}
 \end{align}
 $$
 
@@ -476,8 +473,8 @@ style="display: inline-block; margin: 0 auto; ">
 
 This was a long post. However, you now hopefully have a better understanding of kernel ridge regression, challenges with this regression, and even ways to get around said challenges.
 
-One thing that remains kind of dodgy is that we never explicitly defined a prior over our infinite number of parameters. In fact, is a distribution on an infinite number of parameters even possible? The next post delves into this exact conundrum. We will show that yes, it's possible to define a distribution on the infinite number of parameters, and that it in fact completely aligns with ridge regression.
+One thing that remains kind of dodgy is that we never explicitly defined a prior over our infinite number of parameters. In fact, is a distribution on an infinite number of parameters even possible? The next post delves into this exact conundrum. We will show that _yes_, it's possible to define a distribution on the infinite number of parameters, and it allows us to nicely consider the functional form of the regression.
 
 
 ---
-<span style="float:left"><a href="https://friedmanroy.github.io/BML/8_kernels/">← Kernels</a></span><span style="float:right"><a href=""> →</a></span>
+<span style="float:left"><a href="https://friedmanroy.github.io/BML/8_kernels/">← Kernels</a></span><span style="float:right"><a href="https://friedmanroy.github.io/BML/10_gaussian_process/">Gaussian processes →</a></span>
