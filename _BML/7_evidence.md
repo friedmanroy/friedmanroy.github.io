@@ -163,7 +163,7 @@ Plugging this into equation \eqref{eq:general-evidence}, we have:
 
 $$
 \begin{equation}\label{eq:evidence-function}
-p\left(y\mid \Psi\right)=\left(2\pi\right)^{N/2}\mid \Sigma_{\theta\mid \mathcal{D}}\mid ^{1/2}p\left(y\mid \hat{\theta}_{\text{MAP}}\right)p\left(\hat{\theta}_{\text{MAP}}\mid \Psi\right)
+p\left(y\mid \Psi\right)=\left(2\pi\right)^{d/2}\mid \Sigma_{\theta\mid \mathcal{D}}\mid ^{1/2}p\left(y\mid \hat{\theta}_{\text{MAP}}\right)p\left(\hat{\theta}_{\text{MAP}}\mid \Psi\right)
 \end{equation}
 $$
 
