@@ -347,7 +347,7 @@ p\left(\pi_{i}\right)\propto\pi_{i}^{\alpha_{i}-1}\cdot\left(1-\pi_{i}\right)^{\
 \end{equation}
 $$
 
-where $\overline{\alpha}_{i}=\sum_{j}\alpha_{j}-\alpha_{i}$. This distribution happens to be called the _Beta distribution_:
+where $\overline{\alpha}\_i=\sum_{j}\alpha_{j}-\alpha_{i}$. This distribution happens to be called the _Beta distribution_:
 
 $$
 \begin{equation}
@@ -371,7 +371,7 @@ $$
 \end{equation}
 $$
 
-Using the above two properties, the MMSE and MAP estimates are easily defined under the posterior $p\left(\pi|y\right)$ we saw as:
+Using the above two properties, the MMSE and MAP estimates are easily defined under the posterior $p\left(\pi\vert y\right)$ we saw as:
 
 $$
 \begin{equation}

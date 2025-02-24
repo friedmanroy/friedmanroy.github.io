@@ -171,7 +171,7 @@ But we can be even more specific by plugging in the MAP estimate under a Gaussia
 
 $$
 \begin{equation}
-p\left(y\mid \mu,\Sigma\right)=\left(2\pi\right)^{N/2}\mid \Sigma_{\theta\mid \mathcal{D}}\mid ^{1/2}\mathcal{N}\left(\mu_{\theta\mid \mathcal{D}}\mid \;\mu,\Sigma\right)\mathcal{N}\left(y\mid \;H\mu_{\theta\mid \mathcal{D}},I\sigma^{2}\right)
+p\left(y\mid \mu,\Sigma\right)=\left(2\pi\right)^{d/2}\mid \Sigma_{\theta\mid \mathcal{D}}\mid ^{1/2}\mathcal{N}\left(\mu_{\theta\mid \mathcal{D}}\mid \;\mu,\Sigma\right)\mathcal{N}\left(y\mid \;H\mu_{\theta\mid \mathcal{D}},I\sigma^{2}\right)
 \end{equation}
 $$
 
