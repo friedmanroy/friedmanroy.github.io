@@ -1,7 +1,7 @@
 ---
 layout: distill
 comments: false
-title: Kernels (and Kernel Regression)
+title: Kernels and Kernel Regression
 description: The kernel trick allows us to move from regression over  a predefined set of basis functions to regression in infinite spaces. All of this is predicated on understanding what a kernel even is and how to construct it. In this post, we will see exactly how to do this and how to use kernels for regression.
 date: 2022-10-28
 authors:
