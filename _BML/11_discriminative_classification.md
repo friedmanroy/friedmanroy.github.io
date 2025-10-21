@@ -19,7 +19,7 @@ toc:
 <br>
 <br>
 
-not the only task of interest in machine learning and we will now turn our attention towards _classification_. Very broadly, classification is quite similar to regression - in both we get a dataset comprised of pairs $\mathcal{D}=\\{ \left(x\_{i},y\_{i}\right)\\}\_{i=1}^{N}$, and in both we attempt to predict the value of $y_{i}$ given $x_{i}$. However, while in (normal) regression $y_{i}\in\mathbb{R}$ is a scalar, in classification the $y_{i}$s are categorical, i.e. $y_{i}\in\\{ 1,\cdots,C\\}$. This small change ends up affecting and ruining many of the mathematical operations we had up until now, in surprising ways.
+So far, we have only considered regression in this series of posts. However, regression is not the only task of interest in machine learning and we will now turn our attention towards _classification_. Very broadly, classification is quite similar to regression - in both we get a dataset comprised of pairs $\mathcal{D}=\\{ \left(x\_{i},y\_{i}\right)\\}\_{i=1}^{N}$, and in both we attempt to predict the value of $y_{i}$ given $x_{i}$. However, while in (normal) regression $y_{i}\in\mathbb{R}$ is a scalar, in classification the $y_{i}$s are categorical, i.e. $y_{i}\in\\{ 1,\cdots,C\\}$. This small change ends up affecting and ruining many of the mathematical operations we had up until now, in surprising ways.
 
 Broadly speaking, there are two types of classification: discriminative and generative. We will begin by discussing discriminative classification in this post, wherein we will see that explicitly defining the posterior is basically impossible. We will then move on to generative classification in the next post, which is harder but more forgiving to the Bayesian approach.
 

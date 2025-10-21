@@ -15,7 +15,7 @@ toc:
   - name: Discussion
 ---
 
-<span style="float:left"><a href="https://friedmanroy.github.io/BML/11_discriminative_classification/">← Discriminative classification</a></span><span style="float:right"><a href=""> →</a></span>
+<span style="float:left"><a href="https://friedmanroy.github.io/BML/11_discriminative_classification/">← Discriminative classification</a></span><span style="float:right"><a href="https://friedmanroy.github.io/BML/13_gmms/">GMMs and EM →</a></span>
 <br>
 <br>
 
@@ -460,4 +460,4 @@ In the next post we will look at using priors more complex then the simple Gauss
 
 
 ---
-<span style="float:left"><a href="https://friedmanroy.github.io/BML/11_discriminative_classification/">← Discriminative classification</a></span><span style="float:right"><a href=""> →</a></span>
+<span style="float:left"><a href="https://friedmanroy.github.io/BML/11_discriminative_classification/">← Discriminative classification</a></span><span style="float:right"><a href="https://friedmanroy.github.io/BML/13_gmms/">GMMs and EM →</a></span>
