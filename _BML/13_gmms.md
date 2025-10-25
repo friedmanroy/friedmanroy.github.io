@@ -432,6 +432,16 @@ $$
 p\left(\theta\vert \mathcal{D}\right)=\sum_{k=1}^{K}q_{k}\cdot\mathcal{N}\left(\theta\,\vert \,\hat{\mu}_{k},\hat{\Sigma}_{k}\right)
 $$
 
+where:
+
+$$
+\begin{align}
+q_k   &= \frac{\pi_k\cdot p(\mathcal{D}\vert k)}{\sum_{k'}\pi_{k'}\cdot p(\mathcal{D}\vert k')}\\
+\hat{\Sigma}_k   &= \left(\Sigma_k^{-1}+\frac{1}{\sigma^2}H^TH\right)^{-1}\\
+\hat{\mu}_k     &=\hat{\Sigma}_k\left(\Sigma_k^{-1}\mu_k+\frac{1}{\sigma^2}H^Ty\right)
+\end{align}
+$$
+
 As stated before, this is difficult to maximize. Our hidden variable is $k$ (similar to before) where $p\left(\theta,k\vert \mathcal{D}\right)$ is easy to maximize. 
 
 ### E-Step
