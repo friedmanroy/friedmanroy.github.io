@@ -134,7 +134,7 @@ $$
 \begin{align}
 p(\theta|\mathcal{D})&=\frac{1}{p(\mathcal{D})}p(\mathcal{D},\theta)\\
 &= \frac{1}{p(\mathcal{D})}\sum_kp(\mathcal{D},\theta,k)\\
-&= \sum_k\frac{\pi_k\cdot(\mathcal{D}|k)}{p(\mathcal{D})}\cdot p (\theta|\mathcal{D},k)
+&= \sum_k\frac{\pi_k\cdot(\mathcal{D}\vert k)}{p(\mathcal{D})}\cdot p (\theta\vert\mathcal{D},k)
 \end{align}
 $$
 
