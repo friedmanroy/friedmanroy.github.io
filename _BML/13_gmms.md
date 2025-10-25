@@ -128,56 +128,19 @@ $$
 y=h^{T}\left(x\right)\theta+\eta\qquad\eta\sim\mathcal{N}\left(0,I\sigma^{2}\right)
 $$
 
-Then the posterior distribution will be given by:
-
-$$
-\theta\vert\mathcal{D}	\sim\text{GMM}\left(q,\,\left\{ \hat{\mu}_{k}\right\} ,\,\left\{ \hat{\Sigma}_{k}\right\} \right)
-$$
-
-where:
+Then the posterior distribution will also be a GMM, however writing down the full posterior will be quite difficult. The posterior will be given by:
 
 $$
 \begin{align}
-q_{k}	&=\frac{\pi_{k}p\left(\mathcal{D}\vert k\right)}{\sum_{k'}\pi_{k'}p\left(\mathcal{D}\vert k'\right)}\\
-\hat{\Sigma}_{k}	&=\left(\Sigma_{k}^{-1}+\frac{1}{\sigma^{2}}H^{T}H\right)^{-1}\\
-\hat{\mu}_{k}	&=\left(\Sigma_{k}^{-1}+\frac{1}{\sigma^{2}}H^{T}H\right)^{-1}\left(H^{T}\frac{1}{\sigma^{2}}y+\Sigma_{k}^{-1}\mu_{k}\right)
+p(\theta|\mathcal{D})&\propto p(\mathcal{D},\theta)\\
+&= \prod_{i=1}^Np\left(y_i|\theta\right)p(\theta)\\
+&= \prod_{i=1}^N\sum_{k=1}^Kp\left(y_i|\theta\right)p(\theta,k)\\
 \end{align}
 $$
 
-This is essentially like fitting $K$ linear regressors with different priors and then weighing them according to their evidences (which is nice). 
+A natural way to understand this posterior is to see that for each of the $N$ datapoints, there are $K$ different centers which could have generated it. So the posterior distribution will also be a GMM, but will have $K^N$ modes. Yikes.
 
-Note that once again, if we want to find the MAP estimator, we fall into the same problem we had when trying to find the ML estimate for a GMM. In both of these cases we are trying to maximize a function that isn't convex. However, had we known the “real” Gaussian responsible for each data point, we would be able to solve this problem quite easily.
-
-{% details MMSE under a GMM prior %}
-
-The MMSE, on the other hand, is quite easy to calculate for a GMM prior:
-
-$$
-\begin{align}
-\hat{\theta}_{\text{MMSE}}&=\sum_{k=1}^{K}q_{k}\hat{\mu}_{k}\\
-&=\frac{\sum_{k=1}^{K}p\left(\mathcal{D}\vert k\right)\left(\Sigma_{k}^{-1}+\frac{1}{\sigma^{2}}H^{T}H\right)^{-1}\left(H^{T}\frac{1}{\sigma^{2}}y+\Sigma_{k}^{-1}\mu_{k}\right)}{\sum_{k'}p\left(\mathcal{D}\vert k'\right)}
-\end{align}
-$$
-
-However, the MMSE solution is in general less favorable for a GMM posterior, since if all of the centers in the GMM are very different from each other, then the MMSE result can have a very low density:
-
-<div class="fake-img l-page">
-<p align="center">
-<img  
-src="https://friedmanroy.github.io/assets/bml_figs/rec_13/bad_avg.png"  
-alt="Problems with MMSE under a GMM posterior"  
-style="display: inline-block; margin: 0 auto; ">
-</p>
-</div>
-<div class="caption">
-    Figure 3: When the posterior distribution is a GMM, the MMSE can fall in a low-density region of space. Here, a GMM posterior is depicted by the solid line. Because the distribution is very bi-modal, the mean (or MMSE, the blue dashed line) falls between the two peaks, in a region of space that has a very low density. On the other hand, the MAP (the red dashed line) has higher density.
-</div>
-
-So many times we may not want to use the MMSE estimator, since we may want something that gives us a better indication of the general behavior of the data.
-
-Using the MAP estimate is a bit better, since we at least use something with a higher density, but it could fall on a mode that is very narrow, as in the example above. In this case, because the region in space is so narrow, actually sampling a point in that region is relatively unlikely. So, sometimes the MAP estimate might not be typical.
-
-{% enddetails %}
+Once again, if we want to find the MAP estimator, we fall into the same problem we had when trying to find the ML estimate for a GMM. In both of these cases we are trying to maximize a function that isn't convex. However, had we known the “real” Gaussian responsible for each data point, we would be able to solve this problem quite easily.
 
 ## Difficulties with Complex Distributions
 
