@@ -14,7 +14,7 @@ toc:
   - name: Discussion
 ---
 
-<span style="float:left"><a href="https://friedmanroy.github.io/BML/12_generative_classification/">← Generative classification</a></span><span style="float:right"><a href=""> →</a></span>
+<span style="float:left"><a href="https://friedmanroy.github.io/BML/12_generative_classification/">← Generative classification</a></span><span style="float:right"><a href="https://friedmanroy.github.io/BML/14_sampling/">Benefits of Sampling →</a></span>
 <br>
 <br>
 >In all of the posts so far, we pretty much stayed with the Gaussian prior and likelihood, even though many times that might not make much sense. The reason we had to keep everything Gaussian is because anything beyond that complicates the mathematics considerably.
@@ -536,4 +536,4 @@ I briefly touched on why finding the average under a GMM posterior might be cons
 <br>
 
 ---
-<span style="float:left"><a href="https://friedmanroy.github.io/BML/12_generative_classification/">← Generative classification</a></span><span style="float:right"><a href=""> →</a></span>
+<span style="float:left"><a href="https://friedmanroy.github.io/BML/12_generative_classification/">← Generative classification</a></span><span style="float:right"><a href="https://friedmanroy.github.io/BML/14_sampling/">Benefits of Sampling →</a></span>
