@@ -2,7 +2,7 @@
 layout: distill
 comments: false
 title: Decision Theory and Bayes-Optimal Estimators
-description: An overview of Bayesian decision theory. As part of this post, we will look into estimation as well as proofs for the MLE, MMSE and MAP estimators.
+description: An overview of Bayesian decision theory. As part of this post, we will look into estimation as well as optimality proofs for the MLE, MMSE and MAP estimators.
 date: 2022-10-28
 authors:
   - name: Roy Friedman

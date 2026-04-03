@@ -2,7 +2,7 @@
 layout: distill
 comments: false
 title: More on Kernel Regression
-description: Having defined kernels, this post delves into how such kernels can be used in the context of linear regression. This results in an extremely powerful model, but also adds computational problems when confronted with vast amounts of data. To over come these problems, we briefly introduce the subset of methods, subset of regressors and random Fourier feature estimates for kernel machines.
+description: Having defined kernels, this post delves into how such kernels can be used in the context of linear regression. This results in an extremely powerful model, but also adds computational problems when confronted with vast amounts of data.
 date: 2024-02-06
 authors:
   - name: Roy Friedman

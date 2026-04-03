@@ -27,13 +27,13 @@ toc:
 
 While Bayesian statistics is our main interest in this thread of posts, many times it's easier to go over the frequentist version first, since it's less mathematically involved. Once we understand the ML solution, we will move on to the Bayesian treatment. Many times, this process reveals how the Bayesian and frequentist views are related to each other.
 
-The parameters of a Gaussian distribution are $\mu$ and $\Sigma$, so $\theta=\left\{ \mu,\Sigma\right\}$ . In the frequentist case we will estimate both, however the Bayesian treatment of $\Sigma$ is a bit more complex and doesn't teach much, so we will ignore it for now. 
+The parameters of a Gaussian distribution are $\mu$ and $\Sigma$, so $$\theta=\left\{ \mu,\Sigma\right\}$$ . In the frequentist case we will estimate both, however the Bayesian treatment of $\Sigma$ is a bit more complex and doesn't teach much, so we will ignore it for now. 
 
 <br>
 
 # ML Estimates
 
-The log-likelihood of a data set $\mathcal{D}=\left\{ x_{i}\right\} _{i=1}^{N}$ sampled from a Gaussian distribution is:
+The log-likelihood of a data set $$\mathcal{D}=\left\{ x_{i}\right\} _{i=1}^{N}$$ sampled from a Gaussian distribution is:
 
 $$
 \begin{equation}

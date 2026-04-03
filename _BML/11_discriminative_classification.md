@@ -2,7 +2,7 @@
 layout: distill
 comments: false
 title: Discriminative Classification
-description: In this post, we start talking about classification, finally moving on from the world of linear regression. It turns out that exchanging the continuous outputs for discrete ones nullifies all of the maths we saw in the world of linear regression.
+description: In this post, we start talking about classification, finally moving on from the world of linear regression.
 date: 2024-03-01
 authors:
   - name: Roy Friedman

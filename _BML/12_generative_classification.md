@@ -2,7 +2,7 @@
 layout: distill
 comments: false
 title: Generative Classification
-description: Discriminative classification, while being simple, is also quite hard to treat in the Bayesian framework. Generative classification is slightly more forgiving, and is the focus of this post.
+description: Generative classification turns prior distributions of different classes into a probabilistic classification approach.
 date: 2024-03-01
 authors:
   - name: Roy Friedman

@@ -2,7 +2,7 @@
 layout: distill
 comments: false
 title: The Benefits of Sampling
-description: When the posterior is complex, it is typically quite hard to get a sense for the full distribution. As such, it is common to represent the full distribution using samples from the posterior. In this post we will look at the benefits of doing so.
+description: In complex settings, it is typically quite hard to fully determine the nature of the posterior distribution. Instead, it is often represented by samples. In this post we will consider the benefits of this approach.
 date: 2025-10-20
 authors:
   - name: Roy Friedman
@@ -14,7 +14,7 @@ toc:
   - name: Discussion
 ---
 
-<span style="float:left"><a href="https://friedmanroy.github.io/BML/13_gmms/">← GMMs and EM</a></span><span style="float:right"><a href=""> →</a></span>
+<span style="float:left"><a href="https://friedmanroy.github.io/BML/13_gmms/">← GMMs and EM</a></span><span style="float:right"><a href="https://friedmanroy.github.io/BML/15_gibbs/">Gibbs sampling →</a></span>
 <br>
 <br>
 
@@ -186,8 +186,9 @@ This is still quite a simple scenario (and you could "fix" the MMSE in this spec
 ---
 # Discussion
 
-Hopefully the examples above provide the conceptual basis for why we would want (multiple) samples in order to describe the full posterior distribution, instead of one specific estimate. In the next few posts will be more mathematically involved, and we will delve into _how_ to sample from the posterior. The examples above, while quite simple, will be our motivation to do so.
+Hopefully the examples above provide the conceptual basis for why we would want (multiple) samples in order to describe the full posterior distribution, instead of one specific estimate. In the next few posts will be more mathematically involved, and we will delve into _how_ to sample from the posterior. The examples above, while quite simple, will serve as our motivation to do so.
 
 
 ---
-<span style="float:left"><a href="https://friedmanroy.github.io/BML/13_gmms/">← GMMs and EM</a></span><span style="float:right"><a href=""> →</a></span>
+<span style="float:left"><a href="https://friedmanroy.github.io/BML/13_gmms/">← GMMs and EM</a></span><span style="float:right"><a href="https://friedmanroy.github.io/BML/15_gibbs/">Gibbs sampling →</a></span>
+<br>
