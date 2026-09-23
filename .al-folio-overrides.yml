@@ -1,0 +1,10 @@
+---
+version: 1
+overrides:
+  _includes/distill/render.liquid:
+    owner: al_folio_distill
+    gem_version: 1.0.3
+    upstream_path: templates/distill/render.liquid
+    upstream_sha256: 78eb23499cb047a88b62bd981d918bebf33abb874e0cf266a2c3e17cdf47377c
+    local_sha256: 7f89b0f3d295cc0f938a1ed3113361c9e85bcc6c9b63d5b879eec49f62423cea
+    acknowledged_at: "2026-09-23"
