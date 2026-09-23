@@ -24,34 +24,34 @@ toc:
 <br>
 <br>
 
-> In the [previous post](https://friedmanroy.github.io/BML/1_philosophy/) we saw what the frequentist and Bayesian philosophies are, how they are different, and also a bit of how they are similar. In this post, we will take a look at the specific task of estimation and methods to analyze the optimality of estimators in both regimes.
+> In the [previous post](https://friedmanroy.github.io/BML/1_philosophy/) we saw what the frequentist and Bayesian philosophies are, how they differ, and a bit about their similarities. In this post, we will take a look at the specific task of estimation and methods to analyze the optimality of estimators in both regimes.
 
-Suppose we see some data $\mathcal{D}$ which we assume was generated according to some parameter $\theta$ . The task of estimation is to estimate $\theta$ given the observed data $\mathcal{D}$ . More precisely, in estimation we want to define a function which returns a guess for what $\theta$ could have been given the observed data. Many times, this algorithm is concisely notated as $\hat{\theta}(\mathcal{D})$ , where the   $\hat{}$   is to remember that it is an estimate.
+Suppose we see some data $\mathcal{D}$ which we assume was generated according to some parameter $\theta$. The task of estimation is to estimate $\theta$ given the observed data $\mathcal{D}$. More precisely, in estimation we want to define a function which returns a guess for what $\theta$ could have been given the observed data. Many times, this algorithm is concisely notated as $\hat{\theta}(\mathcal{D})$, where the   $\hat{}$   is to remember that it is an estimate.
 
 ---
 
 #### Example: Coin Toss
 
-The simplest of all examples is the parameter of a coin. We observe the data $\mathcal{D}=\\{1,1,0,\cdots, 0, 0, 1\\}$  , where a 1 is heads and a 0 is tails. The parameterization of this problem is:
+The simplest of all examples is the parameter of a coin. We observe the data $\mathcal{D}=\\{1,1,0,\cdots, 0, 0, 1\\}$ , where a 1 is heads and a 0 is tails. The parameterization of this problem is:
 
 $$
 \begin{equation}
 p(1\vert \theta)=\theta \Leftrightarrow p(0\vert \theta)=1-\theta 
 \end{equation}
 $$
-where $\theta \in [0,1]$ . That is, the probability for heads is $\theta$ . Given the dataset $\mathcal{D}$ , we want to find the original $\theta$ that generated this data.
+where $\theta \in [0,1]$. That is, the probability of heads is $\theta$. Given the dataset $\mathcal{D}$, we want to find the original $\theta$ that generated this data.
 
 ---
 
-What follows is a decision-theoretic approach for choosing how to estimate the parameters. This will allow us to give concrete guarantees regarding specific estimators and gives a general framework in order to determine when an estimator is optimal while also elucidating what it means for an estimator to be optimal. 
+What follows is a decision-theoretic approach for choosing how to estimate the parameters. This allows us to give concrete guarantees regarding specific estimators, provides a general framework to determine when an estimator is optimal, and elucidates what it means for an estimator to be optimal. 
 
 <br>
 
 # Frequentist Evaluation
 
-The classical approach to this would be to devise a _loss_ $\mathcal{L}(\hat{\theta},\theta^\star;\ \mathcal{D})$  <d-footnote>This notation for the loss function is not the typical notation that is used and is a bit cumbersome, but it is useful as it shows which information we assume that we have when calculating the loss.</d-footnote> which allows us to evaluate the estimator $\hat{\theta}(\mathcal{D})$ against the true parameter value $\theta^\star$ . Written this way, the estimator is _an algorithm_ that has as it's input the dataset $\mathcal{D}$ and outputs a guess of the true parameters. The function $\mathcal{L}(\cdot ,\theta^\star;\ \mathcal{D})$ tells us how much "we are losing" by using the estimator $\hat{\theta}(\mathcal{D})$ .
+The classical approach to this would be to devise a _loss_ $\mathcal{L}(\hat{\theta},\theta^\star;\ \mathcal{D})$ <d-footnote>This notation for the loss function is not typical and is cumbersome, but it shows which information we assume that we have when calculating the loss.</d-footnote> which allows us to evaluate the estimator $\hat{\theta}(\mathcal{D})$ against the true parameter value $\theta^\star$. Written this way, the estimator is _an algorithm_ that has as its input the dataset $\mathcal{D}$ and outputs a guess of the true parameters. The function $\mathcal{L}(\cdot ,\theta^\star;\ \mathcal{D})$ tells us how much "we are losing" by using the estimator $\hat{\theta}(\mathcal{D})$.
 
-Of course, we aren't only interested in how well our estimator performs on a specific dataset, but instead we want to evaluate the accuracy for any set of points. To do so, we can use the following function:
+Of course, we are not only interested in how well our estimator performs on a specific dataset, but instead we want to evaluate its accuracy for any set of points. To do so, we can use the following function:
 
 $$
 \begin{equation}
@@ -59,9 +59,9 @@ $$
 \end{equation}
 $$
 
-where the expectation with respect to $\mathcal{D}\sim p(\mathcal{D}\vert \theta^\star)$ means the expectation with respect to datasets generated from the ground truth parameter, $\theta^\star$ . The function $\mathcal{R}(\cdot\vert \theta^\star)$ is called the _risk_ of the estimator and it allows us to evaluate how good of an estimator $\hat{\theta}$ is on average; in different words, $\mathcal{R}(\hat{\theta}\vert \theta^\star)$ tells us how much (on average) we are risking by using the estimator $\hat{\theta}$ . 
+where the expectation with respect to $\mathcal{D}\sim p(\mathcal{D}\vert \theta^\star)$ means the expectation with respect to datasets generated from the ground truth parameter, $\theta^\star$. The function $\mathcal{R}(\cdot\vert \theta^\star)$ is called the _risk_ of the estimator and allows us to evaluate how good an estimator $\hat{\theta}$ is on average; in other words, $\mathcal{R}(\hat{\theta}\vert \theta^\star)$ tells us how much (on average) we risk by using the estimator $\hat{\theta}$. 
 
-As a particular example, one of the most common loss functions is the squared error function:
+As a particular example, one of the most common loss functions is the squared error function.
 
 $$
 \begin{equation}
@@ -73,18 +73,18 @@ in which case the corresponding risk function is called the _mean squared error_
 
 $$
 \begin{equation}
-\text{MSE}\left(\hat{\theta}\vert \theta^\star\right)\stackrel{\Delta}{=}\mathbb{E}_{\mathcal{D}\vert \theta^\star}\left[\vert \vert \theta^\star-\hat\theta(\mathcal{D})\vert \vert ^2\right]
+\text{MSE}(\hat{\theta}\vert \theta^\star)\stackrel{\Delta}{=}\mathbb{E}_{\mathcal{D}\vert \theta^\star}\left[\Vert \theta^\star-\hat\theta(\mathcal{D})\Vert ^2\right]
 \end{equation}
 $$
 
 
-Notice that this construction allows us to evaluate algorithms under specific values of $\theta^\star$ , but we can't use these in order to find an algorithm that is optimal under every possible parameterization, since they are all dependent on $\theta^\star$ .
+Notice that this construction allows us to evaluate algorithms under specific values of $\theta^\star$, but we cannot use these to find an algorithm that is optimal under every possible parameterization, because they are all dependent on $\theta^\star$.
 
 --- 
 
-We've made a couple of assumptions so far. First, we assumed that the data is truly generated by the parametric form we chose; that is, the data was really generated using a set of parameters $\theta^\star$. Second, we assumed that _there is one and only one true parameter_ $\theta^\star$ . Given these assumptions, the risk is an adequate evaluator for the algorithm $\hat{\theta}(\mathcal{D})$ .
+We’ve made a couple of assumptions so far. First, we assumed that the data is truly generated by the parametric form we chose; that is, the data was really generated using a set of parameters $\theta^\star$. Second, we assumed that there is one true parameter $\theta^\star$. Given these assumptions, the risk is an adequate evaluator for the algorithm $\hat{\theta}(\mathcal{D})$.
 
-Furthermore, this gives us a method to find "optimal" estimators. Finding an estimator $\hat{\theta}(\mathcal{D})$ that minimizes a specific risk function will give us an estimator that is optimal with respect to the corresponding loss function. Such an estimator will ensure that the loss is, on average, as small as possible.
+Furthermore, this gives us a method to find "optimal" estimators. Finding an estimator $\hat{\theta}(\mathcal{D})$ that minimizes a specific risk function yields an estimator optimal with respect to the corresponding loss function. Such an estimator ensures that the loss is, on average, as small as possible.
 
 
 ## Maximum Likelihood Estimation
@@ -97,7 +97,7 @@ $$
 \end{equation}
 $$
 
-Intuitively, using this estimator makes a lot of sense, right? The estimator $\hat{\theta}_{\text{ML}}$ is the one the gives the highest probability to the data, so it seems that it might be close to the true parameters that generated the data in some sense. We will see that this intuition turns out to be correct, assuming that there's one true parameter value $\theta^\star$ . In order to do so, we will define the appropriate loss function and the corresponding risk.
+Intuitively, using this estimator makes a lot of sense, right? The estimator $\hat{\theta}_{\text{ML}}$ is the one that gives the highest probability to the data, so it seems that it might be close to the true parameters that generated the data in some sense. We will see that this intuition turns out to be correct, assuming that there's a true parameter value $\theta^\star$. In order to do so, we will define the appropriate loss function and the corresponding risk.
 
 Notice that:
 
@@ -109,7 +109,7 @@ $$
 \end{align}
 $$
 
-That is, maximizing the likelihood is equivalent to minimizing the loss $\mathcal{L}_{\text{ML}}\left(\cdot,\cdot;\ \mathcal{D} \right)$ . The ML-risk is the following function:
+That is, maximizing the likelihood is equivalent to minimizing the loss $\mathcal{L}_{\text{ML}}\left(\cdot,\cdot;\ \mathcal{D} \right)$. The ML-risk is the following function:
 
 $$
 \begin{equation}\label{eq:KL-risk}
@@ -117,7 +117,7 @@ $$
 \end{equation}
 $$
 
-As it turns out, the function $D_{\text{KL}}(\theta^\star\vert \vert \theta)$ is a divergence between distributions; a measure of how different the two distributions are from each other. This divergence is called the [_Kullback-Leibler_ (KL-)divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence). For two distributions $\mathcal{P}$ and $\mathcal{Q}$ , this divergence has the two following (important) properties:
+As it turns out, the function $D_{\text{KL}}(\theta^\star\vert \vert \theta)$ is a divergence between distributions—a measure of how different the two distributions are. This divergence is called the [_Kullback-Leibler_ (KL-)divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence). For two distributions $\mathcal{P}$ and $\mathcal{Q}$, this divergence has the following two important properties:
 
 $$
 \begin{align}
@@ -126,14 +126,14 @@ D_{\text{KL}}(\mathcal{P}\vert \vert \mathcal{Q})=0 &\Leftrightarrow \mathcal{P}
 \end{align}
 $$
 
-That is, the smaller the KL-divergence, the closer the distributions are to each other and they are equal if and only if the KL-divergence is equal to 0. 
+That is, the smaller the KL-divergence, the closer the distributions are to each other; they are equal if and only if the KL-divergence is equal to 0. 
 
-So, minimizing the risk in equation \eqref{eq:KL-risk} is equivalent to finding the parameters $\theta$ under which the likelihood is closest to the likelihood under the true parameters $\theta^\star$ . However, the MLE we saw before doesn't exactly do this - there's the issue of the expectation, which isn't taken into account in the MLE. This leads us to the following theorem. 
+So, minimizing the risk in equation \eqref{eq:KL-risk} is equivalent to finding the parameters $\theta$ under which the likelihood is closest to the likelihood under the true parameters $\theta^\star$. However, the MLE we saw before doesn’t exactly do this—there's the issue of the expectation, which isn't accounted for in the MLE. This leads us to the following theorem. 
 
 
-> **Theorem**: Let $p(x\vert \theta)$ be some likelihood function over the random variable $x$ such that that for any two random variables $x_1$ and $x_2$ they are independent conditionally on $\theta$ , i.e. $p(x_1,x_2\vert \theta)=p(x_1\vert \theta)p(x_2\vert \theta)$ . 
+> **Theorem**: Let $p(x\vert \theta)$ be a likelihood function over the random variable $x$ such that for any two random variables $x_1$ and $x_2$, they are independent conditionally on $\theta$, i.e., $p(x_1,x_2\vert \theta)=p(x_1\vert \theta)p(x_2\vert \theta)$ . 
 > 
-> Given a dataset $\mathcal{D}=\{x_i\}_{i=1}^N$ , assume that there exists some true parameter $\theta^\star$ such that $\forall i\ \ x_i\sim p(x\vert \theta^\star)$ . Then, the MLE is optimal in terms of the ML-risk in equation \eqref{eq:KL-risk} when $N\rightarrow\infty$ .
+> Given a dataset $\mathcal{D}=\{x_i\}_{i=1}^N$, assume that there exists some true parameter $\theta^\star$ such that for all $i$, $x_i\sim p(x\vert \theta^\star)$. Then, the MLE is optimal in terms of the ML-risk in equation \eqref{eq:KL-risk} when $N\rightarrow\infty$.
 
 
 <br>
@@ -157,9 +157,9 @@ In other words, $\hat{\theta}_{\text{ML}}$ minimizes the KL-divergence to the tr
 
 # Bayesian Evaluation
 
-The assumption that the data is always generated from one specific parameter $\theta^\star$ is quite constricting. A more general assumption is that we have some distribution over which $\theta$'s we assume are more or less likely. This distribution is called the prior, $p(\theta)$ . In this setting, we assume that for each possible dataset a different parameter was chosen, and each of them was sampled from the prior.
+The assumption that the data is always generated from one specific parameter $\theta^\star$ is quite constraining. A more general assumption is that we have some distribution over which $\theta$'s we assume are more or less likely. This distribution is called the prior, $p(\theta)$. In this setting, we assume that for each possible dataset a different parameter was chosen, and each of them was sampled from the prior.
 
-In this case, low risk is not enough to guarantee that the algorithm we chose is good, since it takes into account only one parameter value. We want to make sure that the estimator is accurate _across all possible datasets_ and _for all possible choices of_ $\theta$ according to the prior. To do so, we will introduce a new way to evaluate estimators, called the _Bayesian risk_:
+In this case, low risk is not enough to guarantee that the algorithm we chose is good, since it takes into account only one parameter value. We want to make sure that the estimator is accurate across all possible datasets and for all possible choices of $\theta$ according to the prior. To do so, we will introduce a new way to evaluate estimators, called the _Bayesian risk_:
 $$
 \begin{equation}
 \mathcal{R}(\hat{\theta})=\mathbb{E}_{\theta}\left[\mathcal{R}\left(\hat{\theta}\vert \theta\right)\right]=\mathbb{E}_{\theta,\mathcal{D}}\left[\mathcal{L}\left(\hat{\theta},\theta;\ \mathcal{D}\right)\right]
@@ -179,16 +179,16 @@ $$
 \end{equation}
 $$
 
-Using this definition, we can find the estimator that is optimal in the BMSE sense; that is, the estimator that achieves the best MSE for any possible choice of parameter $\theta$ . This estimator is called the _minimum MSE_ (MMSE) estimator.
+Using this definition, we can find the estimator that is optimal in the BMSE sense—that is, the estimator that achieves the best MSE for any possible choice of parameter $\theta$. This estimator is called the _minimum MSE_ (MMSE) estimator.
 
-> **Theorem**: $\hat\theta(\mathcal{D})=\mathbb{E}[\theta\vert \mathcal{D}]$ is the MMSE estimator; that is, the optimal estimator in terms of the BMSE.
+**Theorem**: $\hat\theta(\mathcal{D})=\mathbb{E}[\theta\vert \mathcal{D}]$ is the MMSE estimator; that is, the optimal estimator in terms of the BMSE.
 
 
 <br>
 {%details Click here to see the proof%}
 #### Proof:
 
-Let's start with the definition of the BMSE:
+Let's start with the definition of the BMSE.
 
 $$
 \begin{align}
@@ -201,7 +201,7 @@ $$
 
 Where  $J(\theta\vert \mathcal{D})=\mathbb{E}_{\theta\vert \mathcal{D}}[\vert \vert \theta-\hat{\theta}\left(\mathcal{D}\right)\vert \vert ^{2}]$ . 
 
-Notice that if we find an estimator that minimizes $J(\theta\vert \mathcal{D})$ for every dataset $\mathcal{D}$ , then this estimator will also be the one that minimizes the BMSE. Since $J(\theta\vert \mathcal{D})$ is quadratic with respect to $\hat\theta(\mathcal{D})$, we can differentiate and equate to zero:
+Notice that if we find an estimator that minimizes $J(\theta\vert \mathcal{D})$ for every dataset $\mathcal{D}$, then this estimator will also minimize the BMSE. Since $J(\theta\vert \mathcal{D})$ is quadratic with respect to $\hat\theta(\mathcal{D})$, we can differentiate and equate to zero:
 
 $$
 \begin{align}
@@ -213,7 +213,7 @@ $$
 \end{align}
 $$
 
-Notice that this estimator is the best for every dataset, so it's also the one that minimizes the integral in the definition of the BMSE. In other words, the optimal estimator in terms of the BMSE is the posterior mean:
+Notice that this estimator is the best for every dataset, so it minimizes the integral in the definition of the BMSE. In other words, the optimal estimator in terms of the BMSE is the posterior mean.
 
 $$
 \begin{equation}
@@ -227,7 +227,7 @@ $$
 
 ## Other Bayes-Optimal Estimators
 
-The MMSE estimator is frequently used but in practice any loss function can be used in order to evaluate the estimator; the squared error loss is only one choice. For instance, we can exchange the $\ell_2$ norm into any other $p$ -norm in the loss function<d-footnote>The following notation is by no means the standard, I just made it up right now.</d-footnote>:
+The MMSE estimator is frequently used, but in practice, any loss function can be used to evaluate the estimator; the squared error loss is only one choice. For instance, we can exchange the $\ell_2$ norm into any other $p$-norm in the loss function<d-footnote>The following notation is by no means the standard, I just made it up right now.</d-footnote>:
 
 $$
 \begin{equation}
@@ -235,14 +235,14 @@ $$
 \end{equation}
 $$
 
-Under these risks, the MMSE will not be the optimal estimator. However, can again decompose the loss as we did in the proof for the MMSE:
+Under these risks, the MMSE will not be the optimal estimator. However, we can again decompose the loss as we did in the proof for the MMSE:
 
 $$
 \begin{equation}
 \mathcal{R}_p(\hat\theta)=\mathbb{E}_\mathcal{D}\left[J_p(\theta\vert \mathcal{D})\right]
 \end{equation}
 $$
-where $J_p(\theta\vert \mathcal{D})=\intop p(\theta\vert \mathcal{D})\vert \vert \theta-\hat\theta\vert \vert ^p_pd\theta$ . If this function is convex and we are able to find the minimum, then the same trick as used in the MMSE proof can be used for these losses as well.
+where $J_p(\theta\vert \mathcal{D})=\intop p(\theta\vert \mathcal{D})\vert \vert \theta-\hat\theta\vert \vert ^p_pd\theta$. If this function is convex and we are able to find the minimum, then the same trick used in the MMSE proof can be applied to these losses as well.
 
 
 ## The 0-1 Loss
@@ -270,12 +270,12 @@ Using an estimator that is optimal under this kind of loss is useful in classifi
 
 ### Maximum a-Posteriori Estimator
 
-> **Theorem**:  $\theta_{\text{MAP}}=\arg\max_\theta p(\theta\vert \mathcal{D})$  is the Bayes-optimal estimator in terms of the 0-1 loss<d-footnote>Under the assumption that $p(\theta\vert \mathcal{D})$ is smooth.</d-footnote>.
+> **Theorem**: $\theta_{\text{MAP}}=\arg\max_\theta p(\theta\vert \mathcal{D})$ is the Bayes-optimal estimator in terms of the 0-1 loss<d-footnote>Under the assumption that $p(\theta\vert \mathcal{D})$ is smooth.</d-footnote>.
 
 {%details Click here to see the proof%}
 #### Proof:
 
-First, let's define a relaxation of the 0-1 loss which will help us prove the theorem. Define the $\epsilon$ -ball around $\theta$ as:
+First, let’s define a relaxation of the 0-1 loss that will help us prove the theorem. Define the $\epsilon$-ball around $\theta$ as:
 
 $$
 \begin{equation}
@@ -283,7 +283,7 @@ $$
 \end{equation}
 $$
 
-This allows us to define the $\epsilon$ -relaxed version of the $\text{BBE}$:
+This allows us to define the $\epsilon$-relaxed version of the $\text{BBE}$:
 
 $$
 \begin{equation}
@@ -291,7 +291,7 @@ $$
 \end{equation}
 $$
 
-Note that at the limit $\epsilon\rightarrow 0$, $\text{BBE}$ and $\text{BBE}_\epsilon$ are equal.
+Note that at the limit $\epsilon\rightarrow 0$, $\text{BBE}$, and $\text{BBE}_\epsilon$ are equal.
 
 We will now use the same decomposition from the proof for the MMSE. In this case:
 
@@ -309,7 +309,7 @@ J_{\epsilon}\left(\theta\vert \mathcal{D}\right) & =\intop p\left(\theta\vert \m
 \end{align}
 $$
 
-As you remember, we want to find the $\hat\theta$  that minimizes $J_{\epsilon}\left(\theta\vert \mathcal{D}\right)$ for every possible $\theta$ and $\mathcal{D}$ , which is equivalent to maximizing the term in the integral. Assuming that $p(\theta\vert \mathcal{D})$ is smooth, there exists a small $\epsilon$ around the maximum in which the function can be approximated by the constant function. In this regime of $\epsilon$ s, the $\hat{\theta}$ that maximizes the integral is the maximum of the posterior. Let $\theta_{\text{max}}=\arg\max_\theta p(\theta\vert \mathcal{D})$ , then:
+As you remember, we want to find the $\hat\theta$ that minimizes $J_{\epsilon}\left(\theta\vert \mathcal{D}\right)$ for every possible $\theta$ and $\mathcal{D}$, which is equivalent to maximizing the term in the integral. Assuming that $p(\theta\vert \mathcal{D})$ is smooth, there exists a small $\epsilon$ around the maximum in which the function can be approximated by a constant function. In this regime of $\epsilon$s, the $\hat{\theta}$ that maximizes the integral is the maximum of the posterior. Let $\theta_{\text{max}}=\arg\max_\theta p(\theta\vert \mathcal{D})$, then:
 
 $$
 \begin{align}\min_{\hat{\theta}}J_{\epsilon}\left(\theta\vert \mathcal{D}\right) & =-\max_{\hat{\theta}}\intop p\left(\theta\vert \mathcal{D}\right)\delta_{\epsilon}\left(\hat{\theta}-\theta\right)d\theta\\
@@ -317,7 +317,7 @@ $$
 \end{align}
 $$
 
-Taking $\epsilon\rightarrow 0$  we get:
+Taking $\epsilon\rightarrow 0$ we get:
 
 $$
 \begin{equation}
@@ -325,7 +325,7 @@ $$
 \end{equation}
 $$
 
-In words - the 0-1 loss is minimized at the point $\hat{\theta}=\theta_\text{max}$ . This means that the Bayes-optimal estimator for the 0-1 loss is given by:
+In words, the 0-1 loss is minimized at the point $\hat{\theta}=\theta_\text{max}$. This means that the Bayes-optimal estimator for the 0-1 loss is given by:
 
 $$
 \begin{equation}
@@ -333,16 +333,16 @@ $$
 \end{equation}
 $$
 
-which is the maximum a-posteriori  (MAP) estimator.
+which is the maximum a-posteriori (MAP) estimator.
 <span style='float:right'> $\square$ </span>
 {% enddetails %}
 <br>
 
 # Discussion
 
-Notice that while we have shown some estimates that are optimal under different loss functions, this optimality was predicated on many assumptions. First, we assumed that the data was truly generated according to the likelihood function $p(\mathcal{D}\vert\theta)$ , which affects both Bayesian and non-Bayesian approaches. The second assumption was that we know the true prior $p(\theta)$ , which is possibly even more suspect than the first assumption.
+Notice that while we have shown some estimates that are optimal under different loss functions, this optimality was predicated on many assumptions. First, we assumed that the data were truly generated according to the likelihood function $p(\mathcal{D}\vert\theta)$, which affects both Bayesian and non-Bayesian approaches. The second assumption was that we know the true prior $p(\theta)$, which is possibly even more suspect than the first.
 
-It is important, in this case, to remember that in any modeling task the act of choosing the likelihood itself as well as the prior are subjective choices; in real life, nature probably didn't create data in the same process as any of our models. This casts the whole process of analyzing whether an estimate is optimal or not into question - what does it matter, if we can never be sure our assumptions are correct? While I think that this is definitely something to keep in mind, we would also always want to know that under _our specific assumptions_ at least our estimates are going to be the best they can be. For this reason alone, I believe that taking the time time to understand this decision-theoretic approach is worth it.
+It is important to remember that in any modeling task, choosing the likelihood and prior are subjective choices; nature probably didn't create data using the same process as our models. This casts the whole process of analyzing whether an estimate is optimal into question - what does it matter if we can never be sure our assumptions are correct? While I think this is something to keep in mind, we would always want to know that under our specific assumptions, at least our estimates will be the best they can be. For this reason alone, I believe taking the time to understand this decision-theoretic approach is worth it.
 
 In the following posts we will start to learn about distributions and tasks where we can take this information to extract useful estimates. The first step will be to define the most simple distribution that is actually useful - the Gaussian distribution.
 <br>

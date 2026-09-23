@@ -19,9 +19,9 @@ toc:
 <br>
 
 
-Throughout most of the previous posts, the focus was Gaussian priors and posteriors. The simplicity of the Gaussian distribution allowed us to directly characterize the full posterior distribution fairly easily - all we needed to describe the whole distribution was the mean (MMSE/MAP) and the covariance of the posterior. In those cases, trying to find the mean or maximum of the posterior makes a lot of sense, as it portrays most of the important aspects of the distribution. However, for more complex distributions, using a single estimate of the parameters (such as the MAP or MMSE) in order to describe the full posterior might not be the best approach.
+Throughout most previous posts, the focus was on Gaussian priors and posteriors. The simplicity of the Gaussian distribution allowed us to characterize the full posterior distribution fairly easily - just the mean (MMSE/MAP) and covariance were needed to describe the whole distribution. In those cases, finding the mean or maximum of the posterior made a lot of sense as it portrayed most of the important aspects of the distribution. However, for more complex distributions, using a single estimate of the parameters (such as the MAP or MMSE) to describe the full posterior might not be the best approach.
 
-In this post we will look at an alternative to point estimates (such as the MAP or MMSE), in the form of *sampling parameters from the posterior*.
+In this post, we'll look at an alternative to point estimates (such as the MAP or MMSE) in the form of sampling parameters from the posterior.
 
 ---
 # The Problem with Point Estimates
