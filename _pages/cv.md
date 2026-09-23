@@ -2,7 +2,7 @@
 layout: page
 title: CV
 nav: True
-nav_order: 4
+nav_order: 5
 redirect: assets/pdf/RoyFriedman_CV.pdf
 ---
 

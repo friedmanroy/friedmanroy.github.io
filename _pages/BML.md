@@ -3,7 +3,7 @@ layout: page
 title: Bayesian Machine Learning
 permalink: /BML/
 nav: true
-nav_order: 2
+nav_order: 3
 horizontal: false
 ---
 
