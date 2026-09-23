@@ -116,7 +116,7 @@ $$
 
 ## Predictions with Exact Observations
 
-Before moving on to the more general task of predicting new values when we know that our training has some added sample noise, let's look at the noiseless version. Suppose that we have, as our training set, the pairs $\\{ x_{i},f(x_{i})\\}\_{i=1}^{N}\stackrel{\Delta}{=}\\{ x_{i},f_{i}\\}\_{i=1}^{N}$ and we get a new point $x_{\*}$. We want to predict the value of $f\left(x_{\*}\right)\stackrel{\Delta}{=} f_{\*}$ given the training set $\left\{ x_{i},f_{i}\right\}\_{i=1}^{N}$. 
+Before moving on to the more general task of predicting new values when we know that our training has some added sample noise, let's look at the noiseless version. Suppose that we have, as our training set, the pairs $\\{ x_{i},f(x_{i})\\}\_{i=1}^{N}\stackrel{\Delta}{=}\\{ x_{i},f_{i}\\}\_{i=1}^{N}$ and we get a new point $x_{\*}$. We want to predict the value of $f\left(x_{\*}\right)\stackrel{\Delta}{=} f_{\*}$ given the training set $\left\\{ x_{i},f_{i}\right\\}\_{i=1}^{N}$. 
 
 Notice that, directly from the definition of a Gaussian process, we know that the finite set of points $f_{1},f_{2},\ldots,f_{N},f_{*}$ are jointly a Gaussian distribution given by:
 
@@ -334,7 +334,7 @@ f\sim\mathcal{GP}\left(\text{NN}_{\psi}\left(\cdot\right),\;k\left(\cdot,\cdot\r
 \end{equation}
 $$
 
-where $k\left(\cdot,\cdot\right)$ is some kernel of our choosing. Defining the GP in this way, we can think of the neural network as describing the overall behavior while the GP is added on top to fit the residuals, the data not well fit by the network. In fact, if we have the dataset $\mathcal{D}=\left\{ \left(x_{i},f\left(x_{i}\right)\right)\right\} _{i=1}^{N}$, then we can simply define:
+where $k\left(\cdot,\cdot\right)$ is some kernel of our choosing. Defining the GP in this way, we can think of the neural network as describing the overall behavior while the GP is added on top to fit the residuals, the data not well fit by the network. In fact, if we have the dataset $\mathcal{D}=\left\\{ \left(x_{i},f\left(x_{i}\right)\right)\right\\} _{i=1}^{N}$, then we can simply define:
 
 $$
 \begin{equation}

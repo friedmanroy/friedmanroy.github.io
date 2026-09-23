@@ -133,7 +133,7 @@ So, minimizing the risk in equation \eqref{eq:KL-risk} is equivalent to finding 
 
 > **Theorem**: Let $p(x\vert \theta)$ be a likelihood function over the random variable $x$ such that for any two random variables $x_1$ and $x_2$, they are independent conditionally on $\theta$, i.e., $p(x_1,x_2\vert \theta)=p(x_1\vert \theta)p(x_2\vert \theta)$ . 
 > 
-> Given a dataset $\mathcal{D}=\{x_i\}_{i=1}^N$, assume that there exists some true parameter $\theta^\star$ such that for all $i$, $x_i\sim p(x\vert \theta^\star)$. Then, the MLE is optimal in terms of the ML-risk in equation \eqref{eq:KL-risk} when $N\rightarrow\infty$.
+> Given a dataset $\mathcal{D}=\\{x_i\\}_{i=1}^N$, assume that there exists some true parameter $\theta^\star$ such that for all $i$, $x_i\sim p(x\vert \theta^\star)$. Then, the MLE is optimal in terms of the ML-risk in equation \eqref{eq:KL-risk} when $N\rightarrow\infty$.
 
 
 <br>

@@ -197,11 +197,11 @@ for any index $i$. Then, Gibbs sampling is the iterative algorithm that runs thr
 	1. For $i=1\ldots d$:
 		Sample $x_{i}^{\left(t\right)}\sim p\left(x_{i}\vert\ x_{1}^{\left(t\right)},\cdots,x_{i-1}^{\left(t\right)},x_{i+1}^{\left(t-1\right)},\cdots,x_{d}^{\left(t-1\right)}\right)$
 
-To ease notations a bit, we will use the notation $x_{-i}=\left\{ x_{1},\cdots,x_{i-1},x_{i+1},\cdots,x_{d}\right\}$ , so that $x_{-i}$ contains all of the variables except $x_{i}$. 
+To ease notations a bit, we will use the notation $x_{-i}=\left\\{ x_{1},\cdots,x_{i-1},x_{i+1},\cdots,x_{d}\right\\}$ , so that $x_{-i}$ contains all of the variables except $x_{i}$. 
 
 So, the Gibbs sampler for a joint distribution $p\left(x_{1},\cdots,x_{d}\right)$ is completely defined by all of the conditional distributions $p\left(x_{i}\vert\ x_{-i}\right)$.  So, we don't even need to know the exact form of the full distribution in order to sample, only conditionals from the distribution! 
 
-This sounds like a very synthetic scenario, where we have access to all of $p\left(x_{i}\vert\ x_{-i}\right)$ but not the joint. However, note that it is exactly the setting of robust regression from the start of the post. There, the distribution we want to sample from is $p\left(\theta,z_1,\cdots,z_N\vert\ \mathcal{D}\right)$ where $\theta$ are the regression parameters and $z_i\in\{0,1\}$ is a binary random variable which dictates if data point $i$ is an inlier ($z_i=0$) or an outlier ($z_i=1$). Note that, in that scenario, sampling $\theta$ given all the $z_i$s is simple (linear regression ignoring all outliers), and each $z_i$ is independent of $z_j$ once we have access to $\theta$. So, while it's difficult to sample from the full posterior, it's easy to sample from each of the conditional distributions, making Gibbs sampling particularly effective.
+This sounds like a very synthetic scenario, where we have access to all of $p\left(x_{i}\vert\ x_{-i}\right)$ but not the joint. However, note that it is exactly the setting of robust regression from the start of the post. There, the distribution we want to sample from is $p\left(\theta,z_1,\cdots,z_N\vert\ \mathcal{D}\right)$ where $\theta$ are the regression parameters and $z_i\in\\{0,1\\}$ is a binary random variable which dictates if data point $i$ is an inlier ($z_i=0$) or an outlier ($z_i=1$). Note that, in that scenario, sampling $\theta$ given all the $z_i$s is simple (linear regression ignoring all outliers), and each $z_i$ is independent of $z_j$ once we have access to $\theta$. So, while it's difficult to sample from the full posterior, it's easy to sample from each of the conditional distributions, making Gibbs sampling particularly effective.
 
 ### Simple Example: Bivariate Gaussian
 
@@ -309,7 +309,7 @@ X\neq Y & \frac{\epsilon}{2}
 \end{cases} 
 \end{equation}
 $$
-with $\epsilon>0$ and $X,Y\in\left\{ 0,1\right\}$ . The Gibbs sampling algorithm for this distribution is very simple:
+with $\epsilon>0$ and $X,Y\in\left\\{ 0,1\right\\}$ . The Gibbs sampling algorithm for this distribution is very simple:
 
 $$
 \begin{equation}

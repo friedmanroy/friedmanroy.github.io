@@ -166,7 +166,7 @@ p\left(\mu\right)=\mathcal{N}\left(\mu_{0},\sigma_{0}^{2}\right)
 \end{equation}
 $$
 
-Given a data set $\mathcal{D}=\left\{ x_{i}\right\} _{i=1}^{N}$, the likelihood is:
+Given a data set $\mathcal{D}=\left\\{ x_{i}\right\\} _{i=1}^{N}$, the likelihood is:
 
 $$
 \begin{align}
