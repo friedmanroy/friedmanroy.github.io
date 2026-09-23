@@ -33,7 +33,7 @@ toc:
 
 # Linear Algebra 
 
-Almost all of the relevant material in Bayesian machine learning happens in a high dimensional space. In order to be comfortable with operations in many dimensions, it's crucial to have a good understanding of linear algebra and the notation conventions. This is the purpose of this section.
+Almost all relevant applications of Bayesian machine learning require a high dimensional space. In order to be comfortable with operations in many dimensions, it's crucial to have a good understanding of linear algebra and high-dimensional calculus, and most importantly - with notation conventions. The purpose of this page is to get you comfortable with all of these things.
 
 ## Vectors
 
@@ -41,8 +41,9 @@ A vector is a list of numbers which define a point in space:
 $$
 x\in\mathbb{R}^{d}\qquad x=\left[x_{1},x_{2},...,x_{d}\right]^{T}
 $$
+Throughout all of the material in this website, vectors are _column_ vectors (meaning the numbers are stacked on top of each other); the $^T$ indicates that we need to rotate the presented list by 90 degrees (transpose it). Here the $\mathbb{R}$ indicates that all of the elements in the vector are real and the superscript $\mathbb{R}^d$ tells us that there are $d$ numbers in the vector. 
 
-Here the $\mathbb{R}$ indicates that all of the elements in the vector are real and the superscript $\mathbb{R}^d$ tells us that there are $d$ numbers in the vector. The inner product of two vectors is defined as:
+The inner product of two vectors is defined as:
 
 $$
 \begin{equation}
