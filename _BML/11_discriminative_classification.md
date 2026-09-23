@@ -43,7 +43,7 @@ $$
 
 The exponent ensures that the probabilities are positive, while the sum over exponents ensures that the all probabilities sum to one - this function is sometimes called the _softmax_ function.
 
-In binary classification (when there are only two classes), we can slightly simplify the above. Assuming that $y\in\left\{ 0,1\right\}$, the probability for a class given a sample is modeled as:
+In binary classification (when there are only two classes), we can slightly simplify the above. Assuming that $y\in\left\\{ 0,1\right\\}$, the probability for a class given a sample is modeled as:
 
 $$
 \begin{equation}

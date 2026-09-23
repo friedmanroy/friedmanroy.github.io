@@ -137,7 +137,7 @@ This trick is called the _kernel trick_ and the dual form of the solution that w
 Let's start by actually defining a kernel.
 
 > **Definition: Positive Semi-Definite (PSD) Kernels** 
-> A symmetric function $k:X\times X\rightarrow\mathbb{R}$ is called a PSD kernel on the set $X$ if the associated kernel matrix (also known as the Gram matrix) $K_{ij}=k\left(x_{i},x_{j}\right)$ is PSD for any set of distinct points $\left\{ x_{i}\right\} _{i=1}^{N}\subseteq X$
+> A symmetric function $k:X\times X\rightarrow\mathbb{R}$ is called a PSD kernel on the set $X$ if the associated kernel matrix (also known as the Gram matrix) $K_{ij}=k\left(x_{i},x_{j}\right)$ is PSD for any set of distinct points $\left\\{ x_{i}\right\\} _{i=1}^{N}\subseteq X$
 
 This definition alone already gives us some information on the type of functions that are valid kernels:
 
