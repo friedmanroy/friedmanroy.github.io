@@ -121,7 +121,9 @@
       </d-article>
     </div>
 
-    <!-- Local override: optional per-post appendix (set `include_appendix: true` and `appendix: <file>` in front matter; file lives in _includes/appendix/) -->
+    <!--
+      Local override: optional per-post appendix (set `include_appendix: true` and `appendix: <file>` in front matter; file lives in _includes/appendix/)
+    -->
     {% if page.include_appendix and page.appendix %}
       <d-appendix>
         {% capture appendix %}{% include appendix/{{ page.appendix }} %}{% endcapture %}

@@ -12,14 +12,13 @@
     - title: PhD
       institution: The Hebrew University of Jerusalem, Israel
       year: Since 2021
-      description:
-        Researching generative models under the supervision of prof. Yair Weiss
-        
+      description: Researching generative models under the supervision of prof. Yair Weiss
+
     - title: MSc in Computer Science
       institution: The Hebrew University of Jerusalem, Israel
       year: 2018-2021
       description: Thesis subject - posterior sampling for image restoration
-     
+
     - title: BSc in Physics and Computer Science
       institution: The Hebrew University of Jerusalem, Israel
       year: 2014-2018
@@ -35,9 +34,8 @@
   type: time_table
   contents:
     - year: 2021
-      items: 
-        - Dean's list for excellent TAs 
-
+      items:
+        - Dean's list for excellent TAs
 
 - title: Other Interests
   type: list
